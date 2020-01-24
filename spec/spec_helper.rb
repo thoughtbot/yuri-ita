@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "yuri/ita"
+require "yuriita"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
