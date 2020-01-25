@@ -16,6 +16,12 @@ module Yuriita
 
     production(:term) do
       clause(:WORD) { |w| w }
+      clause("QUOTE SPACE? .phrase SPACE? QUOTE") { |phrase| phrase.join(" ") }
+    end
+
+    production(:phrase) do
+      clause(:WORD) { |w| [w] }
+      clause(".phrase SPACE .WORD") { |phrase, word| phrase + [word] }
     end
 
     finalize

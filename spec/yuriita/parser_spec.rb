@@ -8,6 +8,34 @@ RSpec.describe Yuriita::Parser do
 
       expect(result).to eq(key: "is", value: "active")
     end
+
+    it "parses an expression with a quoted word" do
+      result = parse(tokens(
+        [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:QUOTE], [:EOS],
+      ))
+
+      expect(result).to eq(key: "label", value: "bug")
+    end
+
+    it "parses an expression with a quoted phrase" do
+      result = parse(tokens(
+        [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:SPACE],
+        [:WORD, "report"], [:QUOTE], [:EOS],
+      ))
+
+      expect(result).to eq(key: "label", value: "bug report")
+    end
+
+    it "parses an expression with a quoted phrase containing extra spaces" do
+      result = parse(tokens(
+        [:WORD, "label"], [:COLON],
+        [:QUOTE],
+        [:SPACE], [:WORD, "bug"], [:SPACE], [:WORD, "report"], [:SPACE],
+        [:QUOTE], [:EOS],
+      ))
+
+      expect(result).to eq(key: "label", value: "bug report")
+    end
   end
 
   def parse(tokens)
