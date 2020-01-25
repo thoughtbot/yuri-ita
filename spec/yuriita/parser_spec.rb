@@ -120,6 +120,6 @@ RSpec.describe Yuriita::Parser do
   end
 
   def negated_expression(qualifier, term)
-    Yuriita::Expression.new(qualifier: qualifier, term: term, negated: true)
+    Yuriita::NegatedExpression.new(qualifier: qualifier, term: term)
   end
 end

@@ -19,11 +19,11 @@ module Yuriita
 
     production(:expression) do
       clause(".qualifier COLON .term") do |qualifier, term|
-        Expression.new(
-          qualifier: qualifier.key,
-          term: term,
-          negated: qualifier.negated?,
-        )
+        if qualifier.negated?
+          NegatedExpression.new(qualifier: qualifier.key, term: term)
+        else
+          Expression.new(qualifier: qualifier.key, term: term)
+        end
       end
     end
 

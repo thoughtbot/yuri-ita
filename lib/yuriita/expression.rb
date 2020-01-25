@@ -1,22 +1,20 @@
 module Yuriita
   class Expression
-    attr_reader :qualifier, :term, :negated
+    attr_reader :qualifier, :term
 
-    def initialize(qualifier:, term:, negated: false)
+    def initialize(qualifier:, term:)
       @qualifier = qualifier
       @term = term
-      @negated = negated
     end
 
     def negated?
-      negated
+      false
     end
 
     def ==(other)
-      other.is_a?(self.class) &&
+      self.class == other.class &&
         qualifier == other.qualifier &&
-        term == other.term &&
-        negated? == other.negated?
+        term == other.term
     end
   end
 end
