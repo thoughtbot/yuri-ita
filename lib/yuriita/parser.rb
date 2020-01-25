@@ -1,10 +1,13 @@
 require "rltk/parser"
 require "yuriita/qualifier"
+require "yuriita/expression"
 
 module Yuriita
   class Parser < RLTK::Parser
     production(:query) do
-      clause("SPACE? .expressions SPACE?") { |e| e }
+      clause("SPACE? .expressions SPACE?") do |expressions|
+        Query.new(expressions)
+      end
     end
 
     production(:expressions) do
@@ -16,11 +19,11 @@ module Yuriita
 
     production(:expression) do
       clause(".qualifier COLON .term") do |qualifier, term|
-        if qualifier.negated?
-          { key: qualifier.key, value: term, negated: true }
-        else
-          { key: qualifier.key, value: term }
-        end
+        Expression.new(
+          qualifier: qualifier.key,
+          term: term,
+          negated: qualifier.negated?,
+        )
       end
     end
 
