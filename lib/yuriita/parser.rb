@@ -1,5 +1,4 @@
 require "rltk/parser"
-require "yuriita/qualifier"
 require "yuriita/expression"
 
 module Yuriita
@@ -19,17 +18,15 @@ module Yuriita
 
     production(:expression) do
       clause(".qualifier COLON .term") do |qualifier, term|
-        if qualifier.negated?
-          NegatedExpression.new(qualifier: qualifier.key, term: term)
-        else
-          Expression.new(qualifier: qualifier.key, term: term)
-        end
+        Expression.new(qualifier: qualifier, term: term)
+      end
+      clause("NEGATION .qualifier COLON .term") do |qualifier, term|
+        NegatedExpression.new(qualifier: qualifier, term: term)
       end
     end
 
     production(:qualifier) do
-      clause(:WORD) { |word| Qualifier.new(key: word, negated: false) }
-      clause("NEGATION .WORD") { |word| Qualifier.new(key: word, negated: true) }
+      clause(:WORD) { |word| word }
     end
 
     production(:term) do
