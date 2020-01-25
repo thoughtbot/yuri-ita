@@ -1,6 +1,8 @@
 module Yuriita
   class Query
-    def initialize(expressions)
+    def initialize(keywords: [], expressions: [])
+      @keywords = keywords
+      @expressions = expressions
     end
   end
 end

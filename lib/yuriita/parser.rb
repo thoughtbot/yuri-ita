@@ -1,16 +1,44 @@
 require "rltk/parser"
 require "yuriita/expression"
+require "yuriita/fragment"
+require "yuriita/query"
 
 module Yuriita
   class Parser < RLTK::Parser
     production(:query) do
-      clause("SPACE? .expressions SPACE?") do |expressions|
-        Query.new(expressions)
+      clause("SPACE? .fragment SPACE?") do |fragment|
+        Query.new(
+          keywords: fragment.keywords,
+          expressions: fragment.expressions,
+        )
       end
     end
 
+    production(:fragment) do
+      clause(".keywords") do |keywords|
+        Fragment.new(keywords: keywords)
+      end
+      clause(".expressions") do |expressions|
+        Fragment.new(expressions: expressions)
+      end
+      clause(".fragment SPACE .fragment") do |head, tail|
+        head.merge(tail)
+      end
+    end
+
+    production(:keywords) do
+      clause(:keyword) { |keyword| [keyword] }
+      clause(".keywords SPACE .keyword") do |list, keyword|
+        list + [keyword]
+      end
+    end
+
+    production(:keyword) do
+      clause(:WORD) { |word| word }
+    end
+
     production(:expressions) do
-      clause("expression") { |expression| [expression] }
+      clause(:expression) { |expression| [expression] }
       clause(".expressions SPACE .expression") do |list, expression|
         list + [expression]
       end
