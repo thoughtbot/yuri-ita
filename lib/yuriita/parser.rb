@@ -10,7 +10,7 @@ module Yuriita
     end
 
     production(:expressions) do
-      clause(".expression") { |e| [e] }
+      clause("expression") { |expression| [expression] }
       clause(".expressions SPACE .expression") do |list, expression|
         list + [expression]
       end
@@ -30,12 +30,12 @@ module Yuriita
     end
 
     production(:term) do
-      clause(:WORD) { |w| w }
+      clause(:WORD) { |word| word }
       clause("QUOTE SPACE? .phrase SPACE? QUOTE") { |phrase| phrase.join(" ") }
     end
 
     production(:phrase) do
-      clause(:WORD) { |w| [w] }
+      clause(:WORD) { |word| [word] }
       clause(".phrase SPACE .WORD") { |phrase, word| phrase + [word] }
     end
 
