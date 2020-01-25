@@ -1,4 +1,5 @@
 require "rltk/parser"
+require "yuriita/qualifier"
 
 module Yuriita
   class Parser < RLTK::Parser
@@ -14,11 +15,18 @@ module Yuriita
     end
 
     production(:expression) do
-      clause(".qualifier COLON .term") { |key, value| {key: key, value: value} }
+      clause(".qualifier COLON .term") do |qualifier, term|
+        if qualifier.negated?
+          { key: qualifier.key, value: term, negated: true }
+        else
+          { key: qualifier.key, value: term }
+        end
+      end
     end
 
     production(:qualifier) do
-      clause(:WORD) { |w| w }
+      clause(:WORD) { |word| Qualifier.new(key: word, negated: false) }
+      clause("NEGATION .WORD") { |word| Qualifier.new(key: word, negated: true) }
     end
 
     production(:term) do

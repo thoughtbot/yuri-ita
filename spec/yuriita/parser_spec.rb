@@ -50,6 +50,26 @@ RSpec.describe Yuriita::Parser do
         { key: "author", value: "eebs" },
       ]
     end
+
+    it "parses a negated qualifier" do
+      result = parse(tokens(
+        [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:EOS],
+      ))
+
+      expect(result).to eq [{ key: "label", value: "bug", negated: true }]
+    end
+
+    it "parses a negated qualifier with a non-negated qualifier" do
+      result = parse(tokens(
+        [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:SPACE],
+        [:WORD, "label"], [:COLON], [:WORD, "security"], [:EOS],
+      ))
+
+      expect(result).to eq [
+        { key: "label", value: "bug", negated: true },
+        { key: "label", value: "security" },
+      ]
+    end
   end
 
   def parse(tokens)
