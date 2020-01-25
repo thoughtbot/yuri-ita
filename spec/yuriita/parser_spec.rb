@@ -6,7 +6,7 @@ RSpec.describe Yuriita::Parser do
     it "parses an expression" do
       result = parse(tokens([:WORD, "is"], [:COLON], [:WORD, "active"], [:EOS]))
 
-      expect(result).to eq(key: "is", value: "active")
+      expect(result).to eq [{ key: "is", value: "active" }]
     end
 
     it "parses an expression with a quoted word" do
@@ -14,7 +14,7 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:QUOTE], [:EOS],
       ))
 
-      expect(result).to eq(key: "label", value: "bug")
+      expect(result).to eq [{ key: "label", value: "bug" }]
     end
 
     it "parses an expression with a quoted phrase" do
@@ -23,7 +23,7 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "report"], [:QUOTE], [:EOS],
       ))
 
-      expect(result).to eq(key: "label", value: "bug report")
+      expect(result).to eq [{ key: "label", value: "bug report" }]
     end
 
     it "parses an expression with a quoted phrase containing extra spaces" do
@@ -34,7 +34,21 @@ RSpec.describe Yuriita::Parser do
         [:QUOTE], [:EOS],
       ))
 
-      expect(result).to eq(key: "label", value: "bug report")
+      expect(result).to eq [{ key: "label", value: "bug report" }]
+    end
+
+    it "parses a list of expressions" do
+      result = parse(tokens(
+        [:WORD, "label"], [:COLON], [:WORD, "bug"], [:SPACE],
+        [:WORD, "label"], [:COLON], [:WORD, "security"], [:SPACE],
+        [:WORD, "author"], [:COLON], [:WORD, "eebs"], [:EOS],
+      ))
+
+      expect(result).to eq [
+        { key: "label", value: "bug" },
+        { key: "label", value: "security" },
+        { key: "author", value: "eebs" },
+      ]
     end
   end
 

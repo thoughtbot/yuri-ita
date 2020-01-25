@@ -3,7 +3,14 @@ require "rltk/parser"
 module Yuriita
   class Parser < RLTK::Parser
     production(:query) do
-      clause("SPACE? .expression SPACE?") { |e| e }
+      clause("SPACE? .expressions SPACE?") { |e| e }
+    end
+
+    production(:expressions) do
+      clause(".expression") { |e| [e] }
+      clause(".expressions SPACE .expression") do |list, expression|
+        list + [expression]
+      end
     end
 
     production(:expression) do
