@@ -1,8 +1,5 @@
 require "spec_helper"
 require "yuriita/parser"
-require "yuriita/query"
-require "yuriita/expression"
-require "yuriita/negated_expression"
 
 RSpec.describe Yuriita::Parser do
   describe '#parse' do

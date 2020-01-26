@@ -1,5 +1,6 @@
 require "rltk/parser"
 require "yuriita/expression"
+require "yuriita/negated_expression"
 require "yuriita/fragment"
 require "yuriita/query"
 
