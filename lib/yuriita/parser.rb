@@ -15,33 +15,19 @@ module Yuriita
     end
 
     production(:fragment) do
-      clause(".keywords") do |keywords|
-        Fragment.new(keywords: keywords)
+      clause(".keyword") do |keyword|
+        Fragment.new(keywords: [keyword])
       end
-      clause(".expressions") do |expressions|
-        Fragment.new(expressions: expressions)
+      clause(".expression") do |expression|
+        Fragment.new(expressions: [expression])
       end
       clause(".fragment SPACE .fragment") do |head, tail|
         head.merge(tail)
       end
     end
 
-    production(:keywords) do
-      clause(:keyword) { |keyword| [keyword] }
-      clause(".keywords SPACE .keyword") do |list, keyword|
-        list + [keyword]
-      end
-    end
-
     production(:keyword) do
       clause(:WORD) { |word| word }
-    end
-
-    production(:expressions) do
-      clause(:expression) { |expression| [expression] }
-      clause(".expressions SPACE .expression") do |list, expression|
-        list + [expression]
-      end
     end
 
     production(:expression) do

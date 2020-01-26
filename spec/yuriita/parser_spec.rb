@@ -51,7 +51,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: ["hello", "world"],
         expressions: [expression("label", "bug")],
-      )
+      ).at_least(1).time
     end
 
     it "parses interspersed keywords and expressions" do
@@ -75,7 +75,7 @@ RSpec.describe Yuriita::Parser do
           expression("label", "bug"),
           expression("label", "security"),
         ],
-      )
+      ).at_least(1).time
     end
 
     it "parses a complex mix of keywords and expression" do
@@ -106,8 +106,9 @@ RSpec.describe Yuriita::Parser do
           expression("label", "blue"),
           expression("label", "green"),
         ],
-      )
+      ).at_least(1).time
     end
+
     it "parses an expression" do
       query = stub_query
 
@@ -183,7 +184,7 @@ RSpec.describe Yuriita::Parser do
           expression("label", "security"),
           expression("author", "eebs"),
         ],
-      )
+      ).at_least(1).time
     end
 
     it "parses a negated qualifier" do
