@@ -5,6 +5,8 @@ require "yuriita/query"
 
 module Yuriita
   class Parser < RLTK::Parser
+    left :SPACE
+
     production(:query) do
       clause("SPACE? .fragment SPACE?") do |fragment|
         Query.new(
