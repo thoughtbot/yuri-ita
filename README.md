@@ -46,6 +46,21 @@ There are a few steps needed to get started.
 
 ### Defining a Query Definition
 
+```ruby
+Yuriita::Query::Definition.new(
+  filters: [
+    Yuriita::Filters::Static.new(
+      expressions: [["is", "open"], ["state", "open"]],
+      conditions: { state: :open },
+    ),
+    Yuriita::Filters::Value.new(
+      qualifiers: [:user],
+      column: :username,
+    ),
+  ]
+)
+```
+
 #### Static Filters
 
 #### Value Filters
