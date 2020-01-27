@@ -1,34 +1,43 @@
 require "spec_helper"
 require "yuriita/runner"
+require "yuriita/query/definition"
+require "yuriita/filters/static"
 
 RSpec.describe Yuriita::Runner do
   describe "#run" do
     it "parses and executes the query" do
-      filtered_result = double(:filtered_result, successful?: true)
-      executor = double(:executor, run: filtered_result)
-      query = double(:query, apply: executor)
-      parser = double(:parser, parse: query)
-      lexer = double(:lexer, lex: tokens)
-      relation = double(:relation)
-      definition = double(:definition)
-
-      input = "is:active"
-      runner = described_class.new(
-        relation: relation,
-        definition: definition,
-        lexer: lexer,
-        parser: parser,
+      relation = spy(:relation)
+      definition = Yuriita::Query::Definition.new(
+        filters: [
+          Yuriita::Filters::Static.new(
+            expressions: [["is", "active"]],
+            conditions: { active: true },
+          ),
+        ],
       )
-      result = runner.run(input)
+
+      runner = described_class.new(relation: relation, definition: definition)
+      result = runner.run("is:active")
 
       expect(result).to be_successful
-      expect(lexer).to have_received(:lex).with(input)
-      expect(parser).to have_received(:parse).with(tokens)
-      expect(executor).to have_received(:run).with(relation)
+      expect(relation).to have_received(:where).with(active: true)
     end
 
     it "returns an error result for invalid queries" do
+      relation = spy(:relation)
+      definition = Yuriita::Query::Definition.new(
+        filters: [
+          Yuriita::Filters::Static.new(
+            expressions: [["is", "active"]],
+            conditions: { active: true },
+          ),
+        ],
+      )
 
+      runner = described_class.new(relation: relation, definition: definition)
+      result = runner.run("invalid:")
+
+      expect(result).not_to be_successful
     end
   end
 end

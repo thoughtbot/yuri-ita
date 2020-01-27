@@ -1,16 +1,21 @@
 require "spec_helper"
 
 RSpec.describe Yuriita::Query do
-  describe "#apply" do
-    it "extracts matching clauses from the definition" do
-      clauses = double(:clauses)
-      executor = spy(:executor)
-      definition = double(:definition, extract: clauses)
-      query = described_class.new
+  describe "#keywords" do
+    it "returns the initialized keywords" do
+      keywords = double(:keywords)
+      query = described_class.new(keywords: keywords)
 
-      query.apply(definition, executor: executor)
+      expect(query.keywords).to eq keywords
+    end
+  end
 
-      expect(executor).to have_received(:new).with(clauses: clauses)
+  describe "#expressions" do
+    it "returns the initialized expressions" do
+      expressions = double(:expressions)
+      query = described_class.new(expressions: expressions)
+
+      expect(query.expressions).to eq expressions
     end
   end
 end
