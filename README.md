@@ -1,8 +1,12 @@
-# Yuri::Ita
+# Yuri-Ita
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/yuri/ita`. To experiment with that code, run `bin/console` for an interactive prompt.
+The yuri-ita (揺り板), Japanese for "rocking plate" is a traditional wooden gold
+pan used in Japan.
 
-TODO: Delete this and the text above, and describe your gem
+## Introduction
+
+The goal of this library is to provide developers with a powerful set of tools
+to build expressive user interfaces for filtering, searching, and sorting data.
 
 ## Installation
 
@@ -22,14 +26,40 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+There are a few steps needed to get started.
+
+- Define a [Query Definition][1] with Filters
+- Call `Yuriita.filter` passing an initial relation, the query string, and the
+  query definition
+
+  ```ruby
+  result = Yuriita.filter(
+    Post.all,
+    'ruby author:eebs is:published label:"good code"',
+    query_definition: definition,
+  )
+  ```
+- Check if the [Result][2] a is success or an error
+
+[1]: #defining-a-query-definition
+[2]: #result-object
+
+### Defining a Query Definition
+
+#### Static Filters
+
+#### Value Filters
+
+### Query Input
+
+### Result object
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/yuri-ita.
+Bug reports and pull requests are welcome on GitHub at https://github.com/eebs/yuri-ita.
