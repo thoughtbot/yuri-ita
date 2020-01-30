@@ -16,17 +16,6 @@ RSpec.describe Yuriita::Filters::CustomCondition do
       expect(result).to eq Yuriita::Clauses::Where.new(joined: { key: "eebs" })
     end
 
-    it "matches symbol qualifiers" do
-      filter = described_class.new(qualifiers: [:abc]) do |value|
-        { key: value }
-      end
-      expression = Yuriita::Expression.new(qualifier: "abc", term: "eebs")
-
-      result = filter.apply(expression)
-
-      expect(result).to eq Yuriita::Clauses::Where.new(key: "eebs")
-    end
-
     it "returns a WhereNot if the expression is negative" do
       filter = described_class.new(qualifiers: ["author"]) do |value|
         { joined: { key: value } }

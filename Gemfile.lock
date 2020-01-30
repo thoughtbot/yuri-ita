@@ -2,14 +2,25 @@ PATH
   remote: .
   specs:
     yuri-ita (0.1.0)
+      activesupport (>= 4.2)
       rltk
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (6.0.2.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+      zeitwerk (~> 2.2)
+    concurrent-ruby (1.1.5)
     diff-lcs (1.3)
     ffi (1.12.1)
     filigree (0.4.1)
+    i18n (1.7.0)
+      concurrent-ruby (~> 1.0)
+    minitest (5.13.0)
     rake (10.5.0)
     rltk (3.0.1)
       ffi (>= 1.0.0)
@@ -27,6 +38,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+    thread_safe (0.3.6)
+    tzinfo (1.2.5)
+      thread_safe (~> 0.1)
+    zeitwerk (2.2.2)
 
 PLATFORMS
   ruby
@@ -38,4 +53,4 @@ DEPENDENCIES
   yuri-ita!
 
 BUNDLED WITH
-   2.0.2
+   2.1.2

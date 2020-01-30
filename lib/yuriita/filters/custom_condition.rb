@@ -6,7 +6,7 @@ module Yuriita
   module Filters
     class CustomCondition
       def initialize(qualifiers:, &block)
-        @qualifiers = qualifiers.map(&:to_s)
+        @qualifiers = qualifiers
         @block = block
       end
 
