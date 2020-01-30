@@ -2,7 +2,7 @@ require "yuriita/version"
 require "yuriita/filter_methods"
 
 require "yuriita/query"
-require "yuriita/query/definition"
+require "yuriita/query_definition"
 
 require "yuriita/filters/fixed_condition"
 require "yuriita/filters/value_condition"

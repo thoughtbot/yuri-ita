@@ -1,13 +1,13 @@
 require "spec_helper"
 require "yuriita/runner"
-require "yuriita/query/definition"
+require "yuriita/query_definition"
 require "yuriita/filters/fixed_condition"
 
 RSpec.describe Yuriita::Runner do
   describe "#run" do
     it "parses and executes the query" do
       relation = spy(:relation)
-      definition = Yuriita::Query::Definition.new(
+      definition = Yuriita::QueryDefinition.new(
         filters: [
           Yuriita::Filters::FixedCondition.new(
             expressions: [["is", "active"]],
@@ -25,7 +25,7 @@ RSpec.describe Yuriita::Runner do
 
     it "returns an error result for invalid queries" do
       relation = spy(:relation)
-      definition = Yuriita::Query::Definition.new(
+      definition = Yuriita::QueryDefinition.new(
         filters: [
           Yuriita::Filters::FixedCondition.new(
             expressions: [["is", "active"]],

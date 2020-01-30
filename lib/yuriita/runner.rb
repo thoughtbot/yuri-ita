@@ -2,6 +2,7 @@ require "yuriita/parser"
 require "yuriita/lexer"
 require "yuriita/result"
 require "yuriita/executor"
+require "yuriita/assembler"
 
 module Yuriita
   class Runner
@@ -11,11 +12,12 @@ module Yuriita
       @parser = options.fetch(:parser, Parser)
       @lexer = options.fetch(:lexer, Lexer)
       @executor = options.fetch(:executor, Executor)
+      @assembler = options.fetch(:assembler, Assembler)
     end
 
     def run(input)
       query = build_query(input)
-      clauses = definition.extract(query.expressions)
+      clauses = assembler.new(definition).build(query.expressions)
       filtered = filtered_relation(clauses)
 
       Result.success(filtered)
@@ -25,7 +27,7 @@ module Yuriita
 
     private
 
-    attr_reader :lexer, :parser, :executor, :definition, :relation
+    attr_reader :lexer, :parser, :executor, :definition, :relation, :assembler
 
     def build_query(input)
       tokens = lexer.lex(input)

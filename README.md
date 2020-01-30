@@ -47,7 +47,7 @@ There are a few steps needed to get started.
 ### Defining a Query Definition
 
 ```ruby
-Yuriita::Query::Definition.new(
+Yuriita::QueryDefinition.new(
   filters: [
     Yuriita::Filters::FixedCondition.new(
       expressions: [["is", "open"], ["state", "open"]],
