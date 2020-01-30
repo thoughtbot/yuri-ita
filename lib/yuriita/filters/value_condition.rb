@@ -4,7 +4,7 @@ require "yuriita/clauses/noop"
 
 module Yuriita
   module Filters
-    class Value
+    class ValueCondition
       def initialize(qualifiers:, column:)
         @qualifiers = qualifiers
         @column = column

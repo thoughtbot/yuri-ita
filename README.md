@@ -49,11 +49,11 @@ There are a few steps needed to get started.
 ```ruby
 Yuriita::Query::Definition.new(
   filters: [
-    Yuriita::Filters::Static.new(
+    Yuriita::Filters::FixedCondition.new(
       expressions: [["is", "open"], ["state", "open"]],
       conditions: { state: :open },
     ),
-    Yuriita::Filters::Value.new(
+    Yuriita::Filters::ValueCondition.new(
       qualifiers: [:user],
       column: :username,
     ),
@@ -61,9 +61,9 @@ Yuriita::Query::Definition.new(
 )
 ```
 
-#### Static Filters
+#### Fixed Condition Filters
 
-#### Value Filters
+#### Value Condition Filters
 
 ### Query Input
 

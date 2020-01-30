@@ -4,8 +4,8 @@ require "yuriita/filter_methods"
 require "yuriita/query"
 require "yuriita/query/definition"
 
-require "yuriita/filters/static"
-require "yuriita/filters/value"
+require "yuriita/filters/fixed_condition"
+require "yuriita/filters/value_condition"
 
 require "yuriita/clauses/where"
 require "yuriita/clauses/where_not"

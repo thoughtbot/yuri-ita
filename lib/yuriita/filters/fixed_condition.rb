@@ -4,7 +4,7 @@ require "yuriita/clauses/noop"
 
 module Yuriita
   module Filters
-    class Static
+    class FixedCondition
       def initialize(expressions:, conditions:)
         @expressions = expressions
         @conditions = conditions

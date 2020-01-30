@@ -1,12 +1,12 @@
 require "spec_helper"
-require "yuriita/filters/value"
+require "yuriita/filters/value_condition"
 require "yuriita/expression"
 require "yuriita/negated_expression"
 
-RSpec.describe Yuriita::Filters::Value do
+RSpec.describe Yuriita::Filters::ValueCondition do
   describe "#apply" do
     it "matches any qualifier" do
-      filter = Yuriita::Filters::Value.new(
+      filter = described_class.new(
         qualifiers: ["author"],
         column: :author,
       )
@@ -18,7 +18,7 @@ RSpec.describe Yuriita::Filters::Value do
     end
 
     it "returns a WhereNot if the expression is negative" do
-      filter = Yuriita::Filters::Value.new(
+      filter = described_class.new(
         qualifiers: ["author"],
         column: :author,
       )
@@ -33,7 +33,7 @@ RSpec.describe Yuriita::Filters::Value do
     end
 
     it "returns a no-op if it does not match the expression" do
-      filter = Yuriita::Filters::Value.new(
+      filter = described_class.new(
         qualifiers: ["author"],
         column: :author,
       )

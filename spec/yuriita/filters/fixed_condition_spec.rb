@@ -1,9 +1,10 @@
 require "spec_helper"
-require "yuriita/filters/static"
+
+require "yuriita/filters/fixed_condition"
 require "yuriita/expression"
 require "yuriita/negated_expression"
 
-RSpec.describe Yuriita::Filters::Static do
+RSpec.describe Yuriita::Filters::FixedCondition do
   describe "#apply" do
     it "matches on qualifier and term when it has exactly one" do
       conditions = double(:conditions)

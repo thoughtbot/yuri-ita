@@ -1,7 +1,7 @@
 require "spec_helper"
 require "yuriita/runner"
 require "yuriita/query/definition"
-require "yuriita/filters/static"
+require "yuriita/filters/fixed_condition"
 
 RSpec.describe Yuriita::Runner do
   describe "#run" do
@@ -9,7 +9,7 @@ RSpec.describe Yuriita::Runner do
       relation = spy(:relation)
       definition = Yuriita::Query::Definition.new(
         filters: [
-          Yuriita::Filters::Static.new(
+          Yuriita::Filters::FixedCondition.new(
             expressions: [["is", "active"]],
             conditions: { active: true },
           ),
@@ -27,7 +27,7 @@ RSpec.describe Yuriita::Runner do
       relation = spy(:relation)
       definition = Yuriita::Query::Definition.new(
         filters: [
-          Yuriita::Filters::Static.new(
+          Yuriita::Filters::FixedCondition.new(
             expressions: [["is", "active"]],
             conditions: { active: true },
           ),
