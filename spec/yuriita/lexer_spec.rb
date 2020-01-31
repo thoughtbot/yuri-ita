@@ -58,5 +58,27 @@ RSpec.describe Yuriita::Lexer do
         ]
       )
     end
+
+    it "recognizes 'in'" do
+      expect("in:body").to produce_tokens(
+        [
+          "IN",
+          "COLON",
+          "WORD(body)",
+          "EOS",
+        ]
+      )
+    end
+
+    it "does not recognize 'in' within other words" do
+      expect("interrupt:gum").to produce_tokens(
+        [
+          "WORD(interrupt)",
+          "COLON",
+          "WORD(gum)",
+          "EOS",
+        ]
+      )
+    end
   end
 end

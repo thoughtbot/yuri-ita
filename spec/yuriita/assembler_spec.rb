@@ -7,7 +7,7 @@ require "yuriita/expression"
 require "yuriita/definition/expression"
 
 RSpec.describe Yuriita::Assembler do
-  describe "#extract" do
+  describe "#build" do
     it "applies each filter to each expression" do
       conditions = {}
       active_filter = Yuriita::Filters::FixedCondition.new(

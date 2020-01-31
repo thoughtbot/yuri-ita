@@ -13,6 +13,7 @@ module Yuriita
         Query.new(
           keywords: fragment.keywords,
           expressions: fragment.expressions,
+          scopes: fragment.scopes,
         )
       end
     end
@@ -20,6 +21,9 @@ module Yuriita
     production(:fragment) do
       clause(".keyword") do |keyword|
         Fragment.new(keywords: [keyword])
+      end
+      clause(".keyword_scope") do |scope|
+        Fragment.new(scopes: [scope])
       end
       clause(".expression") do |expression|
         Fragment.new(expressions: [expression])
@@ -40,6 +44,14 @@ module Yuriita
       clause("NEGATION .qualifier COLON .term") do |qualifier, term|
         NegatedExpression.new(qualifier: qualifier, term: term)
       end
+    end
+
+    production(:keyword_scope) do
+      clause("IN COLON .scope") { |scope| { scope: scope } }
+    end
+
+    production(:scope) do
+      clause(:WORD) { |word| word }
     end
 
     production(:qualifier) do

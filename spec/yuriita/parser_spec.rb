@@ -12,6 +12,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: ["hello"],
         expressions: [],
+        scopes: [],
       )
     end
 
@@ -29,6 +30,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: ["hello"],
         expressions: [expression("label", "bug")],
+        scopes: [],
       )
     end
 
@@ -48,6 +50,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: ["hello", "world"],
         expressions: [expression("label", "bug")],
+        scopes: [],
       )
     end
 
@@ -72,6 +75,7 @@ RSpec.describe Yuriita::Parser do
           expression("label", "bug"),
           expression("label", "security"),
         ],
+        scopes: [],
       )
     end
 
@@ -103,6 +107,7 @@ RSpec.describe Yuriita::Parser do
           expression("label", "blue"),
           expression("label", "green"),
         ],
+        scopes: [],
       )
     end
 
@@ -115,6 +120,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: [],
         expressions: [expression("is", "active")],
+        scopes: [],
       )
     end
 
@@ -129,6 +135,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: [],
         expressions: [expression("label", "bug")],
+        scopes: [],
       )
     end
 
@@ -144,6 +151,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: [],
         expressions: [expression("label", "bug report")],
+        scopes: [],
       )
     end
 
@@ -161,6 +169,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: [],
         expressions: [expression("label", "bug report")],
+        scopes: [],
       )
     end
 
@@ -181,6 +190,7 @@ RSpec.describe Yuriita::Parser do
           expression("label", "security"),
           expression("author", "eebs"),
         ],
+        scopes: [],
       )
     end
 
@@ -195,6 +205,7 @@ RSpec.describe Yuriita::Parser do
       expect(Yuriita::Query).to have_received(:new).with(
         keywords: [],
         expressions: [negated_expression("label", "bug")],
+        scopes: [],
       )
     end
 
@@ -213,6 +224,44 @@ RSpec.describe Yuriita::Parser do
           negated_expression("label", "bug"),
           expression("label", "security"),
         ],
+        scopes: [],
+      )
+    end
+
+    it "parses a keyword scope" do
+      query = stub_query
+
+      result = parse(tokens(
+        [:IN], [:COLON], [:WORD, "title"], [:EOS],
+      ))
+
+      expect(result).to eq query
+      expect(Yuriita::Query).to have_received(:new).with(
+        keywords: [],
+        expressions: [],
+        scopes: [ { scope: "title" } ],
+      )
+    end
+
+    it "parses a keyword scope with keywords" do
+      query = stub_query
+
+      result = parse(tokens(
+        [:WORD, "awesome"],
+        [:SPACE],
+        [:IN],
+        [:COLON],
+        [:WORD, "title"],
+        [:SPACE],
+        [:WORD, "ideas"],
+        [:EOS],
+      ))
+
+      expect(result).to eq query
+      expect(Yuriita::Query).to have_received(:new).with(
+        keywords: ["awesome", "ideas"],
+        expressions: [],
+        scopes: [ { scope: "title" } ],
       )
     end
   end
