@@ -4,17 +4,18 @@ require "yuriita/query_definition"
 require "yuriita/filters/fixed_condition"
 require "yuriita/filters/value_condition"
 require "yuriita/expression"
+require "yuriita/definition/expression"
 
 RSpec.describe Yuriita::Assembler do
   describe "#extract" do
     it "applies each filter to each expression" do
       conditions = {}
       active_filter = Yuriita::Filters::FixedCondition.new(
-        expressions: [["is", "active"]],
+        expressions: [expression("is:active")],
         conditions: { active: true },
       )
       state_filter = Yuriita::Filters::FixedCondition.new(
-        expressions: [["state", "open"], ["is", "open"]],
+        expressions: [expression("state:open"), expression("is:open")],
         conditions: { state: :open },
       )
       definition = build_definition([active_filter, state_filter])
@@ -37,7 +38,7 @@ RSpec.describe Yuriita::Assembler do
 
     it "applies fixed condition filters" do
       state_filter = Yuriita::Filters::FixedCondition.new(
-        expressions: [["is", "open"]],
+        expressions: [expression("is:open")],
         conditions: { state: :open },
       )
       definition = build_definition([state_filter])
@@ -68,5 +69,9 @@ RSpec.describe Yuriita::Assembler do
 
   def build_definition(filters)
     Yuriita::QueryDefinition.new(filters: filters)
+  end
+
+  def expression(string)
+    Yuriita::Definition::Expression.new(string)
   end
 end

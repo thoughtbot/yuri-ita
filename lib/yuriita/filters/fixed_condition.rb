@@ -24,8 +24,7 @@ module Yuriita
 
       def matches?(candidate)
         expressions.any? do |expression|
-          expression.first == candidate.qualifier &&
-            expression.last == candidate.term
+          expression.match?(candidate)
         end
       end
 

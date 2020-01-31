@@ -12,7 +12,10 @@ RSpec.describe Yuriita::Definition::FixedConditionBuilder do
 
       expect(result).to eq [filter]
       expect(Yuriita::Filters::FixedCondition).to have_received(:new).with(
-        expressions: [["is", "open"], ["state", "open"]],
+        expressions: [
+          expression("is:open"),
+          expression("state:open"),
+        ],
         conditions: { state: :open },
       )
     end
@@ -24,5 +27,9 @@ RSpec.describe Yuriita::Definition::FixedConditionBuilder do
         receive(:new).and_return(filter),
       )
     end
+  end
+
+  def expression(string)
+    Yuriita::Definition::Expression.new(string)
   end
 end

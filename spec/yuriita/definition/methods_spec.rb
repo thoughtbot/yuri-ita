@@ -17,7 +17,10 @@ RSpec.describe Yuriita::Definition::Methods do
       definition = klass.to_definition
 
       expect(Yuriita::Filters::FixedCondition).to have_received(:new).with(
-        expressions: [["is", "open"], ["state", "open"]],
+        expressions: [
+          expression("is:open"),
+          expression("state:open"),
+        ],
         conditions: { active: true },
       )
       expect(Yuriita::QueryDefinition).to have_received(:new).with(
@@ -97,5 +100,9 @@ RSpec.describe Yuriita::Definition::Methods do
     double(:filter).tap do |filter|
       allow(Yuriita::Filters::CustomCondition).to receive(:new).and_return(filter)
     end
+  end
+
+  def expression(string)
+    Yuriita::Definition::Expression.new(string)
   end
 end

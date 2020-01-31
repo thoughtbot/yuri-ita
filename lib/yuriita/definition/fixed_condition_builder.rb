@@ -1,11 +1,12 @@
 require "yuriita/filters/fixed_condition"
+require "yuriita/definition/expression"
 
 module Yuriita
   module Definition
     class FixedConditionBuilder
       def initialize(*args)
         @conditions = args.extract_options!
-        @expressions = args.map { |value| value.split ":" }
+        @expressions = args.map { |value| Definition::Expression.new(value) }
       end
 
       def build

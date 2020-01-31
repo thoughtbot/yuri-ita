@@ -2,6 +2,7 @@ require "spec_helper"
 require "yuriita/runner"
 require "yuriita/query_definition"
 require "yuriita/filters/fixed_condition"
+require "yuriita/definition/expression"
 
 RSpec.describe Yuriita::Runner do
   describe "#run" do
@@ -10,7 +11,7 @@ RSpec.describe Yuriita::Runner do
       definition = Yuriita::QueryDefinition.new(
         filters: [
           Yuriita::Filters::FixedCondition.new(
-            expressions: [["is", "active"]],
+            expressions: [expression("is:active")],
             conditions: { active: true },
           ),
         ],
@@ -39,5 +40,9 @@ RSpec.describe Yuriita::Runner do
 
       expect(result).not_to be_successful
     end
+  end
+
+  def expression(string)
+    Yuriita::Definition::Expression.new(string)
   end
 end
