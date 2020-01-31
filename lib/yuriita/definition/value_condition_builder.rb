@@ -4,9 +4,8 @@ require "yuriita/filters/value_condition"
 module Yuriita
   module Definition
     class ValueConditionBuilder
-      def initialize(*args)
-        options = args.extract_options!
-        @column = options.fetch(:column)
+      def initialize(*args, column:)
+        @column = column
         @qualifiers = args.map(&:to_s)
       end
 

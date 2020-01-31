@@ -2,6 +2,7 @@ require "active_support/concern"
 require "active_support/core_ext/class/attribute"
 
 require "yuriita/definition/fixed_condition_builder"
+require "yuriita/definition/value_condition_builder"
 require "yuriita/definition/custom_condition_builder"
 
 require "yuriita/query_definition"
