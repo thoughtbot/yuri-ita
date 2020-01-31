@@ -1,0 +1,43 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7.0
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - yuriita-bundle-{{ checksum "Gemfile.lock" }}
+          - yuriita-bundle-
+
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: yuriita-bundle-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: RSpec
+          command: |
+            bundle exec rspec \
+              --format RspecJunitFormatter \
+              --out test_results/rspec.xml \
+              --format progress \
+              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      - store_test_results:
+          path: test_results
+
+      - store_artifacts:
+          path: test_results
+          destination: test_results
