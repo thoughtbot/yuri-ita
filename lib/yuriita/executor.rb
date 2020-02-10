@@ -1,6 +1,6 @@
 module Yuriita
   class Executor
-    def initialize(clauses:)
+    def initialize(clauses)
       @clauses = clauses
     end
 

@@ -18,7 +18,7 @@ module Yuriita
     def run(input)
       query = build_query(input)
       clauses = assembler.new(definition).build(query.expressions)
-      filtered = filtered_relation(clauses)
+      filtered = executor.new(clauses).run(relation)
 
       Result.success(filtered)
     rescue RLTK::LexingError, RLTK::NotInLanguage, RLTK::BadToken, EOFError => e
@@ -32,10 +32,6 @@ module Yuriita
     def build_query(input)
       tokens = lexer.lex(input)
       parser.parse(tokens)
-    end
-
-    def filtered_relation(clauses)
-      executor.new(clauses: clauses).run(relation)
     end
   end
 end
