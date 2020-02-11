@@ -80,5 +80,27 @@ RSpec.describe Yuriita::Lexer do
         ]
       )
     end
+
+    it "recognizes 'sort'" do
+      expect("sort:body").to produce_tokens(
+        [
+          "SORT",
+          "COLON",
+          "WORD(body)",
+          "EOS",
+        ]
+      )
+    end
+
+    it "does not recognize 'sort' within other words" do
+      expect("sorta:gum").to produce_tokens(
+        [
+          "WORD(sorta)",
+          "COLON",
+          "WORD(gum)",
+          "EOS",
+        ]
+      )
+    end
   end
 end
