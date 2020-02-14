@@ -32,6 +32,10 @@ jobs:
           paths:
             - vendor/bundle
           key: yuriita-bundle-{{ checksum "Gemfile.lock" }}
+      
+      - run:
+          name: Database Setup
+          command: bundle exec rake db:setup
 
       - run:
           name: Wait for DB
