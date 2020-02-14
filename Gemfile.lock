@@ -173,7 +173,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 2.0)
+  bundler (~> 1.17)
   factory_bot_rails
   pg
   rails
@@ -184,4 +184,4 @@ DEPENDENCIES
   yuri-ita!
 
 BUNDLED WITH
-   2.0.2
+   1.17.2
