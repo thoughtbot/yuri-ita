@@ -3,11 +3,18 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.0
+      - image: circleci/ruby:2.6.5
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:11.4-alpine
+        environment:
+          POSTGRES_DB: test
+          POSTGRES_USER: root
 
     steps:
       - checkout
@@ -25,6 +32,10 @@ jobs:
           paths:
             - vendor/bundle
           key: yuriita-bundle-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
           name: RSpec
