@@ -18,7 +18,9 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello"]
-      expect(query.expressions).to eq [expression("label", "bug")]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug")
+      )
     end
 
     it "parses a search terms with an expression between them" do
@@ -32,7 +34,9 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello", "world"]
-      expect(query.expressions).to eq [expression("label", "bug")]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug")
+      )
     end
 
     it "parses interspersed keywords and expressions" do
@@ -49,11 +53,9 @@ RSpec.describe Yuriita::Parser do
 
 
       expect(query.keywords).to eq ["hello", "world"]
-      expect(query.expressions).to eq(
-        [
-          expression("label", "bug"),
-          expression("label", "security"),
-        ]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug"),
+        an_input_matching("label", "security")
       )
     end
 
@@ -76,19 +78,19 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello", "world", "search", "term"]
-      expect(query.expressions).to eq(
-        [
-          expression("label", "red"),
-          expression("label", "blue"),
-          expression("label", "green"),
-        ]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "red"),
+        an_input_matching("label", "blue"),
+        an_input_matching("label", "green"),
       )
     end
 
     it "parses an expression" do
       query = parse(tokens([:WORD, "is"], [:COLON], [:WORD, "active"], [:EOS]))
 
-      expect(query.expressions).to eq [expression("is", "active")]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("is", "active"),
+      )
     end
 
     it "parses an expression with a quoted word" do
@@ -96,7 +98,9 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:QUOTE], [:EOS],
       ))
 
-      expect(query.expressions).to eq [expression("label", "bug")]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug"),
+      )
     end
 
     it "parses an expression with a quoted phrase" do
@@ -105,7 +109,9 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "report"], [:QUOTE], [:EOS],
       ))
 
-      expect(query.expressions).to eq [expression("label", "bug report")]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug report"),
+      )
     end
 
     it "parses an expression with a quoted phrase containing extra spaces" do
@@ -116,7 +122,9 @@ RSpec.describe Yuriita::Parser do
         [:QUOTE], [:EOS],
       ))
 
-      expect(query.expressions).to eq [expression("label", "bug report")]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug report"),
+      )
     end
 
     it "parses a list of expressions" do
@@ -126,12 +134,10 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "author"], [:COLON], [:WORD, "eebs"], [:EOS],
       ))
 
-      expect(query.expressions).to eq(
-        [
-          expression("label", "bug"),
-          expression("label", "security"),
-          expression("author", "eebs"),
-        ]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug"),
+        an_input_matching("label", "security"),
+        an_input_matching("author", "eebs"),
       )
     end
 
@@ -140,7 +146,9 @@ RSpec.describe Yuriita::Parser do
         [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:EOS],
       ))
 
-      expect(query.expressions).to eq [negated_expression("label", "bug")]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug").negated,
+      )
     end
 
     it "parses a negated qualifier with a non-negated qualifier" do
@@ -149,11 +157,9 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON], [:WORD, "security"], [:EOS],
       ))
 
-      expect(query.expressions).to eq(
-        [
-          negated_expression("label", "bug"),
-          expression("label", "security"),
-        ]
+      expect(query.expressions).to contain_exactly(
+        an_input_matching("label", "bug").negated,
+        an_input_matching("label", "security")
       )
     end
 
@@ -162,7 +168,9 @@ RSpec.describe Yuriita::Parser do
         [:IN], [:COLON], [:WORD, "title"], [:EOS],
       ))
 
-      expect(query.scopes).to eq [ { scope: "title" } ]
+      expect(query.scopes).to contain_exactly(
+        an_input_matching("in", "title")
+      )
     end
 
     it "parses a keyword scope with keywords" do
@@ -178,19 +186,13 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["awesome", "ideas"]
-      expect(query.scopes).to eq [ { scope: "title" } ]
+      expect(query.scopes).to contain_exactly(
+        an_input_matching("in", "title")
+      )
     end
   end
 
   def parse(tokens)
     described_class.new.parse(tokens)
-  end
-
-  def expression(qualifier, term)
-    Yuriita::Expression.new(qualifier: qualifier, term: term)
-  end
-
-  def negated_expression(qualifier, term)
-    Yuriita::NegatedExpression.new(qualifier: qualifier, term: term)
   end
 end

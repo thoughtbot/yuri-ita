@@ -1,9 +1,9 @@
 require "spec_helper"
 require "yuriita/assembler"
 require "yuriita/query_definition"
+require "yuriita/query/input"
 require "yuriita/filters/fixed_condition"
 require "yuriita/filters/value_condition"
-require "yuriita/expression"
 require "yuriita/definition/expression"
 
 RSpec.describe Yuriita::Assembler do
@@ -20,11 +20,11 @@ RSpec.describe Yuriita::Assembler do
       )
       definition = build_definition([active_filter, state_filter])
       expressions = [
-        Yuriita::Expression.new(qualifier: "is", term: "active"),
-        Yuriita::Expression.new(qualifier: "state", term: "open"),
-        Yuriita::Expression.new(qualifier: "is", term: "open"),
-        Yuriita::Expression.new(qualifier: "author", term: "eebs"),
-        Yuriita::Expression.new(qualifier: "is", term: "complete"),
+        Yuriita::Query::Input.new(qualifier: "is", term: "active"),
+        Yuriita::Query::Input.new(qualifier: "state", term: "open"),
+        Yuriita::Query::Input.new(qualifier: "is", term: "open"),
+        Yuriita::Query::Input.new(qualifier: "author", term: "eebs"),
+        Yuriita::Query::Input.new(qualifier: "is", term: "complete"),
       ]
 
       result = described_class.new(definition).build(expressions)
@@ -42,7 +42,7 @@ RSpec.describe Yuriita::Assembler do
         conditions: { state: :open },
       )
       definition = build_definition([state_filter])
-      expression = Yuriita::Expression.new(qualifier: "is", term: "open")
+      expression = Yuriita::Query::Input.new(qualifier: "is", term: "open")
 
       result = described_class.new(definition).build([expression])
 
@@ -57,7 +57,7 @@ RSpec.describe Yuriita::Assembler do
         column: :author,
       )
       definition = build_definition([author_filter])
-      expression = Yuriita::Expression.new(qualifier: "author", term: "eebs")
+      expression = Yuriita::Query::Input.new(qualifier: "author", term: "eebs")
 
       result = described_class.new(definition).build([expression])
 

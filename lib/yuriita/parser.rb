@@ -1,8 +1,7 @@
 require "rltk/parser"
-require "yuriita/expression"
-require "yuriita/negated_expression"
 require "yuriita/fragment"
 require "yuriita/query"
+require "yuriita/query/input"
 
 module Yuriita
   class Parser < RLTK::Parser
@@ -39,15 +38,17 @@ module Yuriita
 
     production(:expression) do
       clause(".qualifier COLON .term") do |qualifier, term|
-        Expression.new(qualifier: qualifier, term: term)
+        Query::Input.new(qualifier: qualifier, term: term)
       end
       clause("NEGATION .qualifier COLON .term") do |qualifier, term|
-        NegatedExpression.new(qualifier: qualifier, term: term)
+        Query::Input.new(qualifier: qualifier, term: term, negated: true)
       end
     end
 
     production(:keyword_scope) do
-      clause("IN COLON .scope") { |scope| { scope: scope } }
+      clause("IN COLON .scope") do |scope|
+        Query::Input.new(qualifier: "in", term: scope)
+      end
     end
 
     production(:scope) do
