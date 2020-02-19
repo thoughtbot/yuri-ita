@@ -4,40 +4,25 @@ require "yuriita/parser"
 RSpec.describe Yuriita::Parser do
   describe '#parse' do
     it "parses search terms" do
-      query = stub_query
+      query = parse(tokens([:WORD, "hello"], [:EOS]))
 
-      result = parse(tokens([:WORD, "hello"], [:EOS]))
-
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: ["hello"],
-        expressions: [],
-        scopes: [],
-      )
+      expect(query.keywords).to eq ["hello"]
     end
 
     it "parses a search term with an expression" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "hello"],
         [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "bug"],
         [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: ["hello"],
-        expressions: [expression("label", "bug")],
-        scopes: [],
-      )
+      expect(query.keywords).to eq ["hello"]
+      expect(query.expressions).to eq [expression("label", "bug")]
     end
 
     it "parses a search terms with an expression between them" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "hello"],
         [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "bug"],
@@ -46,18 +31,12 @@ RSpec.describe Yuriita::Parser do
         [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: ["hello", "world"],
-        expressions: [expression("label", "bug")],
-        scopes: [],
-      )
+      expect(query.keywords).to eq ["hello", "world"]
+      expect(query.expressions).to eq [expression("label", "bug")]
     end
 
     it "parses interspersed keywords and expressions" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "hello"],
         [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "bug"],
@@ -68,21 +47,18 @@ RSpec.describe Yuriita::Parser do
         [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: ["hello", "world"],
-        expressions: [
+
+      expect(query.keywords).to eq ["hello", "world"]
+      expect(query.expressions).to eq(
+        [
           expression("label", "bug"),
           expression("label", "security"),
-        ],
-        scopes: [],
+        ]
       )
     end
 
     it "parses a complex mix of keywords and expression" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "hello"],
         [:SPACE],
         [:WORD, "world"],
@@ -99,154 +75,98 @@ RSpec.describe Yuriita::Parser do
         [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: ["hello", "world", "search", "term"],
-        expressions: [
+      expect(query.keywords).to eq ["hello", "world", "search", "term"]
+      expect(query.expressions).to eq(
+        [
           expression("label", "red"),
           expression("label", "blue"),
           expression("label", "green"),
-        ],
-        scopes: [],
+        ]
       )
     end
 
     it "parses an expression" do
-      query = stub_query
+      query = parse(tokens([:WORD, "is"], [:COLON], [:WORD, "active"], [:EOS]))
 
-      result = parse(tokens([:WORD, "is"], [:COLON], [:WORD, "active"], [:EOS]))
-
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: [],
-        expressions: [expression("is", "active")],
-        scopes: [],
-      )
+      expect(query.expressions).to eq [expression("is", "active")]
     end
 
     it "parses an expression with a quoted word" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:QUOTE], [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: [],
-        expressions: [expression("label", "bug")],
-        scopes: [],
-      )
+      expect(query.expressions).to eq [expression("label", "bug")]
     end
 
     it "parses an expression with a quoted phrase" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:SPACE],
         [:WORD, "report"], [:QUOTE], [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: [],
-        expressions: [expression("label", "bug report")],
-        scopes: [],
-      )
+      expect(query.expressions).to eq [expression("label", "bug report")]
     end
 
     it "parses an expression with a quoted phrase containing extra spaces" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "label"], [:COLON],
         [:QUOTE],
         [:SPACE], [:WORD, "bug"], [:SPACE], [:WORD, "report"], [:SPACE],
         [:QUOTE], [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: [],
-        expressions: [expression("label", "bug report")],
-        scopes: [],
-      )
+      expect(query.expressions).to eq [expression("label", "bug report")]
     end
 
     it "parses a list of expressions" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "label"], [:COLON], [:WORD, "bug"], [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "security"], [:SPACE],
         [:WORD, "author"], [:COLON], [:WORD, "eebs"], [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: [],
-        expressions: [
+      expect(query.expressions).to eq(
+        [
           expression("label", "bug"),
           expression("label", "security"),
           expression("author", "eebs"),
-        ],
-        scopes: [],
+        ]
       )
     end
 
     it "parses a negated qualifier" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: [],
-        expressions: [negated_expression("label", "bug")],
-        scopes: [],
-      )
+      expect(query.expressions).to eq [negated_expression("label", "bug")]
     end
 
     it "parses a negated qualifier with a non-negated qualifier" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "security"], [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: [],
-        expressions: [
+      expect(query.expressions).to eq(
+        [
           negated_expression("label", "bug"),
           expression("label", "security"),
-        ],
-        scopes: [],
+        ]
       )
     end
 
     it "parses a keyword scope" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:IN], [:COLON], [:WORD, "title"], [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: [],
-        expressions: [],
-        scopes: [ { scope: "title" } ],
-      )
+      expect(query.scopes).to eq [ { scope: "title" } ]
     end
 
     it "parses a keyword scope with keywords" do
-      query = stub_query
-
-      result = parse(tokens(
+      query = parse(tokens(
         [:WORD, "awesome"],
         [:SPACE],
         [:IN],
@@ -257,18 +177,8 @@ RSpec.describe Yuriita::Parser do
         [:EOS],
       ))
 
-      expect(result).to eq query
-      expect(Yuriita::Query).to have_received(:new).with(
-        keywords: ["awesome", "ideas"],
-        expressions: [],
-        scopes: [ { scope: "title" } ],
-      )
-    end
-  end
-
-  def stub_query
-    double(:query).tap do |query|
-      allow(Yuriita::Query).to receive(:new).and_return(query)
+      expect(query.keywords).to eq ["awesome", "ideas"]
+      expect(query.scopes).to eq [ { scope: "title" } ]
     end
   end
 
