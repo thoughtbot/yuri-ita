@@ -44,26 +44,8 @@ There are a few steps needed to get started.
 [1]: #defining-a-query-definition
 [2]: #result-object
 
-### Defining a Query Definition
 
-```ruby
-Yuriita::QueryDefinition.new(
-  filters: [
-    Yuriita::Filters::FixedCondition.new(
-      expressions: [["is", "open"], ["state", "open"]],
-      conditions: { state: :open },
-    ),
-    Yuriita::Filters::ValueCondition.new(
-      qualifiers: [:user],
-      column: :username,
-    ),
-  ]
-)
-```
-
-#### Fixed Condition Filters
-
-#### Value Condition Filters
+#### Expression Fiters
 
 ### Query Input
 

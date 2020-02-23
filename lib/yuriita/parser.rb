@@ -1,6 +1,6 @@
 require "rltk/parser"
-require "yuriita/fragment"
 require "yuriita/query"
+require "yuriita/query/fragment"
 require "yuriita/query/input"
 
 module Yuriita
@@ -19,13 +19,13 @@ module Yuriita
 
     production(:fragment) do
       clause(".keyword") do |keyword|
-        Fragment.new(keywords: [keyword])
+        Query::Fragment.new(keywords: [keyword])
       end
       clause(".keyword_scope") do |scope|
-        Fragment.new(scopes: [scope])
+        Query::Fragment.new(scopes: [scope])
       end
       clause(".expression") do |expression|
-        Fragment.new(expressions: [expression])
+        Query::Fragment.new(expressions: [expression])
       end
       clause(".fragment SPACE .fragment") do |head, tail|
         head.merge(tail)
