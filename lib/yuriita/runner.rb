@@ -17,7 +17,7 @@ module Yuriita
 
     def run(input)
       query = build_query(input)
-      clauses = assembler.new(definition).build(query.expressions)
+      clauses = assembler.new(definition).build(query)
       filtered = executor.new(clauses).run(relation)
 
       Result.success(filtered)

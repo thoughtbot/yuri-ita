@@ -6,6 +6,7 @@ RSpec.describe Yuriita::Assembler do
   describe "#build" do
     it "apples the expressions to each filter" do
       expressions = [ double(:expression) ]
+      query = double(:query, expressions: expressions)
       first_result = double(:result)
       second_result = double(:result)
       first_filter = double(:filter, apply: first_result)
@@ -13,7 +14,7 @@ RSpec.describe Yuriita::Assembler do
       definition = Yuriita::Query::Definition.new(
         filters: [first_filter, second_filter],
       )
-      result = described_class.new(definition).build(expressions)
+      result = described_class.new(definition).build(query)
 
       expect(result).to eq [first_result, second_result]
       expect(first_filter).to have_received(:apply).with(expressions)
