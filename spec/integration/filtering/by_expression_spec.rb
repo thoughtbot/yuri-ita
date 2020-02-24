@@ -8,7 +8,7 @@ RSpec.describe "filtering by expression" do
   it "returns results matching an expression" do
     published = create(:post, published: true)
     not_published = create(:post, published: false)
-    filter = and_filter(expression_macther("is", "published")) do |value|
+    filter = and_filter(expression_macther("is", "published")) do
       { published: true }
     end
     definition = build_definition(filters: [filter])
