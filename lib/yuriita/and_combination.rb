@@ -6,7 +6,7 @@ module Yuriita
 
     def combine
       relations.reduce do |chain, relation|
-        chain.where(relation)
+        chain.merge(relation)
       end
     end
 

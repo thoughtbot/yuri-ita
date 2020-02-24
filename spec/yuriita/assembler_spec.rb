@@ -6,7 +6,7 @@ RSpec.describe Yuriita::Assembler do
   describe "#build" do
     it "apples the expressions to each filter" do
       expressions = [ double(:expression) ]
-      query = double(:query, expressions: expressions)
+      query = double(:query, expressions: expressions, keywords: [], scopes: [])
       first_result = double(:result)
       second_result = double(:result)
       first_filter = double(:filter, apply: first_result)
