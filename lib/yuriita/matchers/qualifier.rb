@@ -5,8 +5,8 @@ module Yuriita
         @qualifier = qualifier
       end
 
-      def match?(expression)
-        expression.qualifier == qualifier
+      def match?(input)
+        input.qualifier == qualifier
       end
 
       private

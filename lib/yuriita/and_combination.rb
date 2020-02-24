@@ -5,8 +5,8 @@ module Yuriita
     end
 
     def combine
-      relations.reduce do |chain, clause|
-        chain.where(clause)
+      relations.reduce do |chain, relation|
+        chain.where(relation)
       end
     end
 

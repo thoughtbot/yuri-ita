@@ -6,9 +6,9 @@ module Yuriita
         @term = term
       end
 
-      def match?(expression)
-        expression.qualifier == qualifier &&
-          expression.term == term
+      def match?(input)
+        input.qualifier == qualifier &&
+          input.term == term
       end
 
       private
