@@ -1,12 +1,14 @@
 # Yuri-Ita
 
-The yuri-ita (揺り板), Japanese for "rocking plate" is a traditional wooden gold
-pan used in Japan.
-
-## Introduction
-
 The goal of this library is to provide developers with a powerful set of tools
 to build expressive user interfaces for filtering, searching, and sorting data.
+
+TODO: What problem are we solving
+
+TODO: How does this library solve that problem
+
+The yuri-ita (揺り板), Japanese for "rocking plate" is a traditional wooden gold
+pan used in Japan.
 
 ## Installation
 
@@ -26,37 +28,33 @@ Or install it yourself as:
 
 ## Usage
 
-There are a few steps needed to get started.
-
-- Define a [Query Definition][1] with Filters
-- Call `Yuriita.filter` passing an initial relation, the query string, and the
-  query definition
-
-  ```ruby
-  result = Yuriita.filter(
-    Post.all,
-    'ruby author:eebs is:published label:"good code"',
-    query_definition: definition,
-  )
-  ```
-- Check if the [Result][2] a is success or an error
-
-[1]: #defining-a-query-definition
-[2]: #result-object
-
-
-#### Expression Fiters
-
-### Query Input
-
-### Result object
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`.
+TODO: Give examples!
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/eebs/yuri-ita.
+See the [CONTRIBUTING] document. Thank you, [contributors]!
+
+  [CONTRIBUTING]: CONTRIBUTING.md
+  [contributors]: https://github.com/thoughtbot/yuri-ita/graphs/contributors
+
+## License
+
+Open source templates are Copyright (c) 2020 thoughtbot, inc.
+It contains free software that may be redistributed
+under the terms specified in the [LICENSE] file.
+
+[LICENSE]: /LICENSE
+
+## About
+
+![thoughtbot](http://presskit.thoughtbot.com/images/thoughtbot-logo-for-readmes.svg)
+
+Yuri-ita is maintained and funded by thoughtbot, inc.
+The names and logos for thoughtbot are trademarks of thoughtbot, inc.
+
+We love open source software!
+See [our other projects][community]
+or [hire us][hire] to help build your product.
+
+  [community]: https://thoughtbot.com/community?utm_source=github
+  [hire]: https://thoughtbot.com/hire-us?utm_source=github
