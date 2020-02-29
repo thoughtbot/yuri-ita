@@ -126,7 +126,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
-    rake (10.5.0)
+    rake (13.0.1)
     rltk (3.0.1)
       ffi (>= 1.0.0)
       filigree (>= 0.2.0)
@@ -177,7 +177,7 @@ DEPENDENCIES
   factory_bot_rails
   pg
   rails
-  rake (~> 10.0)
+  rake (~> 13.0)
   rspec (~> 3.0)
   rspec-rails
   rspec_junit_formatter (~> 0.4)
