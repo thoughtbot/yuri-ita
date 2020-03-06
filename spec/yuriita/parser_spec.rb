@@ -3,13 +3,13 @@ require "yuriita/parser"
 
 RSpec.describe Yuriita::Parser do
   describe '#parse' do
-    it "parses search terms" do
+    it "parses keywords" do
       query = parse(tokens([:WORD, "hello"], [:EOS]))
 
       expect(query.keywords).to eq ["hello"]
     end
 
-    it "parses a search term with an expression" do
+    it "parses a keyword with an expression_input" do
       query = parse(tokens(
         [:WORD, "hello"],
         [:SPACE],
@@ -18,12 +18,12 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello"]
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug")
       )
     end
 
-    it "parses a search terms with an expression between them" do
+    it "parses keywords with an expression_input between them" do
       query = parse(tokens(
         [:WORD, "hello"],
         [:SPACE],
@@ -34,12 +34,12 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello", "world"]
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug")
       )
     end
 
-    it "parses interspersed keywords and expressions" do
+    it "parses interspersed keywords and expression inputs" do
       query = parse(tokens(
         [:WORD, "hello"],
         [:SPACE],
@@ -53,13 +53,13 @@ RSpec.describe Yuriita::Parser do
 
 
       expect(query.keywords).to eq ["hello", "world"]
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug"),
         an_input_matching("label", "security")
       )
     end
 
-    it "parses a complex mix of keywords and expression" do
+    it "parses a complex mix of keywords and expression inputs" do
       query = parse(tokens(
         [:WORD, "hello"],
         [:SPACE],
@@ -78,43 +78,43 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello", "world", "search", "term"]
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "red"),
         an_input_matching("label", "blue"),
         an_input_matching("label", "green"),
       )
     end
 
-    it "parses an expression" do
+    it "parses an expression input" do
       query = parse(tokens([:WORD, "is"], [:COLON], [:WORD, "active"], [:EOS]))
 
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("is", "active"),
       )
     end
 
-    it "parses an expression with a quoted word" do
+    it "parses an expression input with a quoted word" do
       query = parse(tokens(
         [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:QUOTE], [:EOS],
       ))
 
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug"),
       )
     end
 
-    it "parses an expression with a quoted phrase" do
+    it "parses an expression input with a quoted phrase" do
       query = parse(tokens(
         [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:SPACE],
         [:WORD, "report"], [:QUOTE], [:EOS],
       ))
 
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug report"),
       )
     end
 
-    it "parses an expression with a quoted phrase containing extra spaces" do
+    it "parses an expression input with a quoted phrase containing extra spaces" do
       query = parse(tokens(
         [:WORD, "label"], [:COLON],
         [:QUOTE],
@@ -122,19 +122,19 @@ RSpec.describe Yuriita::Parser do
         [:QUOTE], [:EOS],
       ))
 
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug report"),
       )
     end
 
-    it "parses a list of expressions" do
+    it "parses a list of expression inputs" do
       query = parse(tokens(
         [:WORD, "label"], [:COLON], [:WORD, "bug"], [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "security"], [:SPACE],
         [:WORD, "author"], [:COLON], [:WORD, "eebs"], [:EOS],
       ))
 
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug"),
         an_input_matching("label", "security"),
         an_input_matching("author", "eebs"),
@@ -146,7 +146,7 @@ RSpec.describe Yuriita::Parser do
         [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:EOS],
       ))
 
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug").negated,
       )
     end
@@ -157,23 +157,23 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON], [:WORD, "security"], [:EOS],
       ))
 
-      expect(query.expressions).to contain_exactly(
+      expect(query.expression_inputs).to contain_exactly(
         an_input_matching("label", "bug").negated,
         an_input_matching("label", "security")
       )
     end
 
-    it "parses a keyword scope" do
+    it "parses a scope input" do
       query = parse(tokens(
         [:IN], [:COLON], [:WORD, "title"], [:EOS],
       ))
 
-      expect(query.scopes).to contain_exactly(
+      expect(query.scope_inputs).to contain_exactly(
         an_input_matching("in", "title")
       )
     end
 
-    it "parses a keyword scope with keywords" do
+    it "parses a scope_input with keywords" do
       query = parse(tokens(
         [:WORD, "awesome"],
         [:SPACE],
@@ -186,7 +186,7 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["awesome", "ideas"]
-      expect(query.scopes).to contain_exactly(
+      expect(query.scope_inputs).to contain_exactly(
         an_input_matching("in", "title")
       )
     end

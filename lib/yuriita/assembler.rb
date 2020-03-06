@@ -1,40 +1,40 @@
-require "yuriita/search_assembler"
+require "yuriita/keyword_filter_assembler"
 
 module Yuriita
   class Assembler
-    def initialize(definition, search_assembler: SearchAssembler)
+    def initialize(definition, keyword_filter_assembler: KeywordFilterAssembler)
       @definition = definition
-      @search_assembler = search_assembler
+      @keyword_filter_assembler = keyword_filter_assembler
     end
 
     def build(query)
-      filter_clauses(query.expressions) + keyword_search_clauses(query)
+      expression_filter_clauses(query.expression_inputs) + keyword_filter_clauses(query)
     end
 
     private
 
-    attr_reader :definition, :search_assembler
+    attr_reader :definition, :keyword_filter_assembler
 
-    def filter_clauses(expressions)
-      filters.flat_map do |filter|
-        filter.apply(expressions)
+    def expression_filter_clauses(expression_inputs)
+      expression_filters.flat_map do |expression_filter|
+        expression_filter.apply(expression_inputs)
       end
     end
 
-    def keyword_search_clauses(query)
-      search_assembler.new(
-        keyword_searches: keyword_searches,
+    def keyword_filter_clauses(query)
+      keyword_filter_assembler.new(
+        keyword_filters: keyword_filters,
         keywords: query.keywords,
-        scopes: query.scopes,
+        scope_inputs: query.scope_inputs,
       ).assemble
     end
 
-    def filters
-      definition.filters
+    def expression_filters
+      definition.expression_filters
     end
 
-    def keyword_searches
-      definition.searches
+    def keyword_filters
+      definition.keyword_filters
     end
   end
 end

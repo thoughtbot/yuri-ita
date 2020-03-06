@@ -1,9 +1,9 @@
 require "yuriita/runner"
 
 module Yuriita
-  module FilterMethods
+  module Sift
 
-    def filter(relation, query, options = {})
+    def sift(relation, query, options = {})
       definition = options.fetch(:definition)
 
       runner = Runner.new(

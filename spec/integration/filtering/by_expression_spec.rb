@@ -8,12 +8,12 @@ RSpec.describe "filtering by expression" do
   it "returns results matching an expression" do
     published = create(:post, published: true)
     not_published = create(:post, published: false)
-    filter = and_filter(expression_matcher("is", "published")) do
+    expression_filter = and_filter(expression_matcher("is", "published")) do
       { published: true }
     end
-    definition = build_definition(filters: [filter])
+    definition = build_definition(expression_filters: [expression_filter])
 
-    result = Yuriita.filter(
+    result = Yuriita.sift(
       Post.all,
       "is:published",
       definition: definition,
@@ -29,12 +29,12 @@ RSpec.describe "filtering by expression" do
     cat_post = create(:post, categories: [cat_category])
     pig_post = create(:post, categories: [pig_category])
     duck_post = create(:post, categories: [duck_category])
-    filter = or_filter(qualifier_matcher("category")) do |value|
+    expression_filter = or_filter(qualifier_matcher("category")) do |value|
       { categories: { name: value } }
     end
-    definition = build_definition(filters: [filter])
+    definition = build_definition(expression_filters: [expression_filter])
 
-    result = Yuriita.filter(
+    result = Yuriita.sift(
       Post.all.joins(:categories),
       "category:cats category:ducks",
       definition: definition,
@@ -43,8 +43,8 @@ RSpec.describe "filtering by expression" do
     expect(result.relation).to contain_exactly(cat_post, duck_post)
   end
 
-  def build_definition(filters:)
-    Yuriita::Query::Definition.new(filters: filters)
+  def build_definition(expression_filters:)
+    Yuriita::Query::Definition.new(expression_filters: expression_filters)
   end
 
   def qualifier_matcher(qualifier)
