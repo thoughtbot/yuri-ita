@@ -15,7 +15,7 @@ module Yuriita
       @exception = exception
 
       if @relation.nil? && @exception.nil?
-        raise ArgumentError, "Must provide a relation or an expression"
+        raise ArgumentError, "Must provide a relation or an exception"
       end
     end
 
