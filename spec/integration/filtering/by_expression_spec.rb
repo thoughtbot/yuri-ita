@@ -16,7 +16,7 @@ RSpec.describe "filtering by expression" do
     result = Yuriita.filter(
       Post.all,
       "is:published",
-      query_definition: definition,
+      definition: definition,
     )
 
     expect(result.relation).to contain_exactly(published)
@@ -37,7 +37,7 @@ RSpec.describe "filtering by expression" do
     result = Yuriita.filter(
       Post.all.joins(:categories),
       "category:cats category:ducks",
-      query_definition: definition,
+      definition: definition,
     )
 
     expect(result.relation).to contain_exactly(cat_post, duck_post)

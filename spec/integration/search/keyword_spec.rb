@@ -13,7 +13,7 @@ RSpec.describe "searching by keyword" do
     result = Yuriita.filter(
       Post.all,
       "cats",
-      query_definition: definition,
+      definition: definition,
     )
 
     expect(result.relation).to contain_exactly(cat_post)
@@ -40,7 +40,7 @@ RSpec.describe "searching by keyword" do
     result = Yuriita.filter(
       Post.all,
       "cats pigs",
-      query_definition: definition,
+      definition: definition,
     )
 
     expect(result.relation).to contain_exactly(cat_post, pig_post)
@@ -68,7 +68,7 @@ RSpec.describe "searching by keyword" do
     result = Yuriita.filter(
       Post.all,
       "cats pigs in:title in:body",
-      query_definition: definition,
+      definition: definition,
     )
 
     expect(result.relation).to contain_exactly(cat_post, pig_post)

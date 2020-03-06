@@ -4,11 +4,11 @@ module Yuriita
   module FilterMethods
 
     def filter(relation, query, options = {})
-      query_definition = options.fetch(:query_definition)
+      definition = options.fetch(:definition)
 
       runner = Runner.new(
         relation: relation,
-        definition: query_definition,
+        definition: definition,
       )
 
       runner.run(query)
