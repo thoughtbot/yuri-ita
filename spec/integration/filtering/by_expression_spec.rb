@@ -8,7 +8,7 @@ RSpec.describe "filtering by expression" do
   it "returns results matching an expression" do
     published = create(:post, published: true)
     not_published = create(:post, published: false)
-    filter = and_filter(expression_macther("is", "published")) do
+    filter = and_filter(expression_matcher("is", "published")) do
       { published: true }
     end
     definition = build_definition(filters: [filter])
@@ -51,7 +51,7 @@ RSpec.describe "filtering by expression" do
     Yuriita::Matchers::Qualifier.new(qualifier: qualifier)
   end
 
-  def expression_macther(qualifier, term)
+  def expression_matcher(qualifier, term)
     Yuriita::Matchers::Expression.new(qualifier: qualifier, term: term)
   end
 
