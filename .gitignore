@@ -11,3 +11,5 @@
 .rspec_status
 
 spec/example_app/log/*
+spec/example_app/tmp/*
+spec/example_app/public/assets

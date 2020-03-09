@@ -1,15 +1,29 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in yuri-ita.gemspec
+# Specify your gem"s dependencies in yuri-ita.gemspec
 gemspec
 
-gem "rails"
-gem "pg"
+ruby "2.6.5"
 
-group :test do
-  gem "rspec-rails"
-end
+gem "rails"
+
+gem "bootsnap", ">= 1.4.4", require: false
+gem "pg", ">= 0.18", "< 2.0"
+gem "puma", "~> 4.1"
+gem "sass-rails", ">= 6"
 
 group :test, :development do
+  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
+end
+
+group :development do
+  gem "web-console", ">= 3.3.0"
+  gem "listen", ">= 3.0.5", "< 3.2"
+end
+
+group :test do
+  gem "capybara", ">= 3.26"
+  gem "rspec-rails"
+  gem "webdrivers"
 end
