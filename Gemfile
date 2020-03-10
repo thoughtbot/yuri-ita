@@ -15,6 +15,7 @@ gem "sass-rails", ">= 6"
 group :test, :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
+  gem "rspec-rails"
 end
 
 group :development do
@@ -24,6 +25,5 @@ end
 
 group :test do
   gem "capybara", ">= 3.26"
-  gem "rspec-rails"
   gem "webdrivers"
 end
