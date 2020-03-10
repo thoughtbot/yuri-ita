@@ -9,7 +9,7 @@ gem "rails"
 
 gem "bootsnap", ">= 1.4.4", require: false
 gem "pg", ">= 0.18", "< 2.0"
-gem "puma", "~> 4.1"
+gem "puma", "~> 4.3"
 gem "sass-rails", ">= 6"
 
 group :test, :development do
