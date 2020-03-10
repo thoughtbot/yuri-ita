@@ -11,6 +11,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.3"
 gem "sass-rails", ">= 6"
+gem "sentry-raven"
 
 group :test, :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
