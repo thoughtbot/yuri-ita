@@ -23,9 +23,5 @@ module ExampleApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-
-    config.factory_bot.definition_file_paths = [
-      File.expand_path("../../factories", __dir__)
-    ]
   end
 end
