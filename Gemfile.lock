@@ -99,10 +99,9 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
+    listen (3.2.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -189,7 +188,6 @@ GEM
     rspec-support (3.9.2)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
-    ruby_dep (1.5.0)
     rubyzip (2.0.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -243,7 +241,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   factory_bot_rails
-  listen (>= 3.0.5, < 3.2)
+  listen (>= 3.0.5, < 3.3)
   pg (>= 0.18, < 2.0)
   pry-rails
   puma (~> 4.3)
