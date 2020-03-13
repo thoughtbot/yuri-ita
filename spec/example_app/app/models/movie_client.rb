@@ -30,8 +30,18 @@ class MovieClient
 
   def data
     pages.reduce([]) do |list, page|
-      list + Tmdb::Movie.top_rated(page: page).results
+      list + movies_for(page)
     end
+  end
+
+  def movies_for(page)
+    movie_ids_on_page(page).map do |tmdb_id|
+      Tmdb::Movie.detail(tmdb_id)
+    end
+  end
+
+  def movie_ids_on_page(page)
+    Tmdb::Movie.top_rated(page: page).results.map(&:id)
   end
 
   def pages
