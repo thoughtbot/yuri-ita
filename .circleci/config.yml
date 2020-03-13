@@ -13,7 +13,7 @@ jobs:
           PGUSER: root
       - image: circleci/postgres:11.4-alpine
         environment:
-          POSTGRES_DB: test
+          POSTGRES_DB: example_app_test
           POSTGRES_USER: root
 
     steps:
@@ -32,10 +32,10 @@ jobs:
           paths:
             - vendor/bundle
           key: yuriita-bundle-{{ checksum "Gemfile.lock" }}
-      
+
       - run:
           name: Database Setup
-          command: bundle exec rake db:setup
+          command: bundle exec rails db:schema:load --trace
 
       - run:
           name: Wait for DB
