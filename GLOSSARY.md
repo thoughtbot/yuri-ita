@@ -14,6 +14,8 @@
 
 - **Scope input**:  An expression input whose qualifier is "in" which is used to scope the keyword search to an attribute of the relation
 
+- **Sort input**: An expression input whose qualifier is "sort" which is used to sort the relation.
+
 # Developer
 
 - **Definition**:  a list of expression filters and keyword filters that define how to apply a query object to a relation
@@ -23,6 +25,8 @@
     - **Expression filter**:  A filter that can be applied to a list of expression inputs 
 
     - **Keyword filter**:  A filter that can be applied to a list of keywords and optional scope inputs
+
+    - **Sorter**: A filter that can be applied to a sort input.
 
 - **Matcher**:  A test for whether to apply a given filter or keyword search to a given expression input or scope input
 
@@ -41,4 +45,4 @@
 
 - **Runner**:  Builds a query using the query input, lexer, and parser.  Creates an assembler using the query and definition. Applies clauses to the relation using the executor. Returns a result, which is either success or failure. We'd really prefer that it return a relation. There should be error handling?
 
-- **Result**:  Either a relation or an exception, produced by Filter(v)
+- **Result**:  Either a relation or an exception, produced by Sift

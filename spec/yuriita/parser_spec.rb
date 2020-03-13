@@ -163,6 +163,15 @@ RSpec.describe Yuriita::Parser do
       )
     end
 
+    it "parses a sort input" do
+      query = parse(tokens(
+        [:SORT], [:COLON], [:WORD, "title"], [:EOS],
+      ))
+      expect(query.sort_inputs).to contain_exactly(
+        an_input_matching("sort", "title")
+      )
+    end
+
     it "parses a scope input" do
       query = parse(tokens(
         [:IN], [:COLON], [:WORD, "title"], [:EOS],

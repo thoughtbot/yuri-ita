@@ -13,6 +13,7 @@ module Yuriita
           keywords: fragment.keywords,
           expression_inputs: fragment.expression_inputs,
           scope_inputs: fragment.scope_inputs,
+          sort_inputs: fragment.sort_inputs,
         )
       end
     end
@@ -26,6 +27,9 @@ module Yuriita
       end
       clause(".expression_input") do |expression_input|
         Query::Fragment.new(expression_inputs: [expression_input])
+      end
+      clause(".sort_input") do |sort_input|
+        Query::Fragment.new(sort_inputs: [sort_input])
       end
       clause(".fragment SPACE .fragment") do |head, tail|
         head.merge(tail)
@@ -51,11 +55,21 @@ module Yuriita
       end
     end
 
+    production(:sort_input) do
+      clause("SORT COLON .order") do |order|
+        Query::Input.new(qualifier: "sort", term: order)
+      end
+    end
+
     production(:scope) do
       clause(:WORD) { |word| word }
     end
 
     production(:qualifier) do
+      clause(:WORD) { |word| word }
+    end
+
+    production(:order) do
       clause(:WORD) { |word| word }
     end
 
