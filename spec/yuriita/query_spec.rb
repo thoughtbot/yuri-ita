@@ -18,4 +18,13 @@ RSpec.describe Yuriita::Query do
       expect(query.expression_inputs).to eq expression_inputs
     end
   end
+
+  describe "#sort_inputs" do
+    it "returns the initialized sort_inputs" do
+      sort_inputs = double(:sort_inputs)
+      query = described_class.new(sort_inputs: sort_inputs)
+
+      expect(query.sort_inputs).to eq sort_inputs
+    end
+  end
 end

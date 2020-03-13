@@ -8,7 +8,9 @@ module Yuriita
     end
 
     def build(query)
-      expression_filter_clauses(query.expression_inputs) + keyword_filter_clauses(query)
+      expression_filter_clauses(query.expression_inputs) +
+        keyword_filter_clauses(query) +
+        sorter_clauses(query.sort_inputs)
     end
 
     private
@@ -29,12 +31,22 @@ module Yuriita
       ).assemble
     end
 
+    def sorter_clauses(sort_inputs)
+      sorters.flat_map do |sorter|
+        sorter.apply(sort_inputs)
+      end
+    end
+
     def expression_filters
       definition.expression_filters
     end
 
     def keyword_filters
       definition.keyword_filters
+    end
+
+    def sorters
+      definition.sorters
     end
   end
 end
