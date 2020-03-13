@@ -1,19 +1,19 @@
 module Yuriita
   class Query
     class Fragment
-      attr_reader :keywords, :expressions, :scopes
+      attr_reader :keywords, :expression_inputs, :scope_inputs
 
-      def initialize(keywords: [], expressions: [], scopes: [])
+      def initialize(keywords: [], expression_inputs: [], scope_inputs: [])
         @keywords = keywords
-        @expressions = expressions
-        @scopes = scopes
+        @expression_inputs = expression_inputs
+        @scope_inputs = scope_inputs
       end
 
       def merge(other)
         Fragment.new(
           keywords: keywords + other.keywords,
-          expressions: expressions + other.expressions,
-          scopes: scopes + other.scopes,
+          expression_inputs: expression_inputs + other.expression_inputs,
+          scope_inputs: scope_inputs + other.scope_inputs,
         )
       end
     end

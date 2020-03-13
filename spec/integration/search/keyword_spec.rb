@@ -8,9 +8,9 @@ RSpec.describe "searching by keyword" do
     title_search = and_search(term_matcher("title")) do |value|
       ["title ILIKE :value", value: "%#{value}%"]
     end
-    definition = Yuriita::Query::Definition.new(searches: [title_search])
+    definition = Yuriita::Query::Definition.new(keyword_filters: [title_search])
 
-    result = Yuriita.filter(
+    result = Yuriita.sift(
       Post.all,
       "cats",
       definition: definition,
@@ -19,7 +19,7 @@ RSpec.describe "searching by keyword" do
     expect(result.relation).to contain_exactly(cat_post)
   end
 
-  it "returns results with all keywords when no scopes are given" do
+  it "returns results with all keywords when no scope inputs are given" do
     cat_post = create(:post, title: "Cats", body: "Cats are not pigs")
     pig_post = create(:post, title: "Pigs are not cats", body: "Pigs")
     pig_title_post = create(:post, title: "Pigs")
@@ -34,10 +34,10 @@ RSpec.describe "searching by keyword" do
       ["description ILIKE :value", value: "%#{value}%"]
     end
     definition = Yuriita::Query::Definition.new(
-      searches: [title_search, body_search, description_search],
+      keyword_filters: [title_search, body_search, description_search],
     )
 
-    result = Yuriita.filter(
+    result = Yuriita.sift(
       Post.all,
       "cats pigs",
       definition: definition,
@@ -46,7 +46,7 @@ RSpec.describe "searching by keyword" do
     expect(result.relation).to contain_exactly(cat_post, pig_post)
   end
 
-  it "returns results with all keywords in any of the given scopes" do
+  it "returns results with all keywords in any of the given scope inputs" do
     cat_post = create(:post, title: "Cats", body: "Cats are not pigs")
     pig_post = create(:post, title: "Pigs are not cats", body: "Pigs")
     pig_title_post = create(:post, title: "Pigs")
@@ -62,10 +62,10 @@ RSpec.describe "searching by keyword" do
       ["description ILIKE :value", value: "%#{value}%"]
     end
     definition = Yuriita::Query::Definition.new(
-      searches: [title_search, body_search, description_search],
+      keyword_filters: [title_search, body_search, description_search],
     )
 
-    result = Yuriita.filter(
+    result = Yuriita.sift(
       Post.all,
       "cats pigs in:title in:body",
       definition: definition,
@@ -79,7 +79,7 @@ RSpec.describe "searching by keyword" do
   end
 
   def and_search(*matchers, &block)
-    Yuriita::KeywordSearch.new(
+    Yuriita::KeywordFilter.new(
       matchers: matchers,
       combination: Yuriita::AndCombination,
       &block

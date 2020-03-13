@@ -1,11 +1,11 @@
 module Yuriita
   class Query
     class Definition
-      attr_reader :filters, :searches
+      attr_reader :expression_filters, :keyword_filters
 
-      def initialize(filters: [], searches: [])
-        @filters = filters
-        @searches = searches
+      def initialize(expression_filters: [], keyword_filters: [])
+        @expression_filters = expression_filters
+        @keyword_filters = keyword_filters
       end
     end
   end
