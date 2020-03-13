@@ -1,5 +1,12 @@
-<h1>Movies</h1>
+<div class="container">
+  <h1>Movies</h1>
 
-<ul>
-  <%= render movies %>
-</ul>
+  <div class="index-table">
+    <div class="index-table__header u-justify-space-between u-align-center">
+    </div>
+
+    <ul>
+      <%= render(movies) || render("empty_index") %>
+    </ul>
+  </div>
+</div>

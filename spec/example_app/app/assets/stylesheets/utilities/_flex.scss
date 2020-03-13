@@ -1,0 +1,26 @@
+@for $i from 1 through 9 {
+  .u-flex-#{$i} {
+    flex: $i !important;
+  }
+}
+
+.u-justify-start {
+  justify-content: flex-start !important;
+}
+
+.u-justify-end {
+  justify-content: flex-end !important;
+}
+
+.u-justify-space-between {
+  justify-content: space-between !important;
+}
+
+.u-align-baseline {
+  align-items: baseline !important;
+}
+
+.u-align-center {
+  align-items: center !important;
+}
+

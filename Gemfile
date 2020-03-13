@@ -8,6 +8,7 @@ ruby "2.6.5"
 gem "rails"
 
 gem "bootsnap", ">= 1.4.4", require: false
+gem "bourbon"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.3"
 gem "sass-rails", ">= 6"

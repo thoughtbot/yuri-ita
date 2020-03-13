@@ -70,6 +70,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
+    bourbon (7.0.0)
+      thor (~> 1.0)
     builder (3.2.4)
     byebug (11.1.1)
     capybara (3.31.0)
@@ -237,6 +239,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
+  bourbon
   bundler (~> 1.17)
   byebug
   capybara (>= 3.26)

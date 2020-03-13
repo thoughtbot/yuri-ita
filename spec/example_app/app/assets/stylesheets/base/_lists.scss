@@ -1,0 +1,37 @@
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  margin: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+/* stylelint-disable */
+// unexpected qualifying type selector: selector-no-qualifying-type
+ul.default {
+  /* stylelint-enable */
+  list-style-type: initial;
+  margin: initial;
+  padding-left: 1.5em;
+}
+
+/* stylelint-disable */
+// unexpected qualifying type selector: selector-no-qualifying-type
+ol.default {
+  /* stylelint-enable */
+  list-style-type: decimal;
+  margin: initial;
+  padding-left: 1.5em;
+}
+

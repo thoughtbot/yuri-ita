@@ -1,0 +1,31 @@
+.index-table {
+  border: $base-border;
+  display: block;
+}
+
+.index-table__header {
+  background-color: $gray-100;
+  border-bottom: $base-border;
+  display: flex;
+  padding: $spacing-sm;
+}
+
+.index-table__header-title {
+  font-size: $font-size-medium;
+  font-weight: $font-weight-semibold;
+  margin: 0;
+}
+
+.index-table__item {
+  display: flex;
+  justify-content: space-between;
+  padding: $spacing-sm;
+
+  &:hover {
+    background-color: $background-color-alt;
+  }
+
+  &:not(:last-child) {
+    border-bottom: $base-border;
+  }
+}
