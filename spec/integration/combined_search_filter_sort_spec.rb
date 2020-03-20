@@ -1,5 +1,4 @@
 require "rails_helper"
-require "yuriita/matchers/term"
 require "yuriita/or_combination"
 require "yuriita/and_combination"
 require "yuriita/matchers/expression"
@@ -11,10 +10,10 @@ RSpec.describe "combining expressions, search, and sort" do
     duck_post = create(:post, title: "Ducks are great, too", published: true)
     frog_post = create(:post, title: "Frogs are just ok", published: true)
 
-    title_search = and_search(term_matcher("title")) do |value|
+    title_search = and_search(expression_matcher("sort", "title")) do |value|
       ["title ILIKE :value", value: "%#{value}%"]
     end
-    title_sort= Yuriita::Sorter.new(matcher: term_matcher("title")) do
+    title_sort= Yuriita::Sorter.new(matcher: expression_matcher("sort", "title")) do
       { title: :asc }
     end
     published_filter = and_filter(expression_matcher("is", "published")) do
@@ -30,10 +29,6 @@ RSpec.describe "combining expressions, search, and sort" do
     )
 
     expect(result.relation).to eq([duck_post, elephant_post])
-  end
-
-  def term_matcher(term)
-    Yuriita::Matchers::Term.new(term: term)
   end
 
   def expression_matcher(qualifier, term)
