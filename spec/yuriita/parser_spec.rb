@@ -27,6 +27,17 @@ RSpec.describe Yuriita::Parser do
       )
     end
 
+    it "parses quoted keyword phrases" do
+      query = parse(tokens(
+        [:QUOTE],
+        [:WORD, "hello"], [:SPACE], [:WORD, "world"],
+        [:QUOTE],
+        [:EOS],
+      ))
+
+      expect(query.keywords).to eq ["hello world"]
+    end
+
     it "parses keywords with an expression_input between them" do
       query = parse(tokens(
         [:WORD, "hello"],

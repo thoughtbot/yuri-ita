@@ -34,6 +34,7 @@ module Yuriita
 
     production(:keyword) do
       clause(:WORD) { |word| word }
+      clause("QUOTE SPACE? .phrase SPACE? QUOTE") { |phrase| phrase.join(" ") }
     end
 
     production(:expression_input) do
