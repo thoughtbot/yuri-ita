@@ -6,7 +6,7 @@ module Yuriita
     rule(/:/) { :COLON }
     rule(/in/) { :IN }
     rule(/sort/) { :SORT }
-    rule(/[a-zA-Z_]+/) { |t| [:WORD, t] }
+    rule(/[a-zA-Z_-]+/) { |t| [:WORD, t] }
     rule(/"/) { :QUOTE }
   end
 end

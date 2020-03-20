@@ -33,6 +33,17 @@ RSpec.describe Yuriita::Lexer do
       )
     end
 
+    it "recognizes words with hyphens" do
+      expect("sort:created-desc").to produce_tokens(
+        [
+          "SORT",
+          "COLON",
+          "WORD(created-desc)",
+          "EOS",
+        ]
+      )
+    end
+
     it "recognizes quoted words" do
       expect("\"quoted words\"").to produce_tokens(
         [
