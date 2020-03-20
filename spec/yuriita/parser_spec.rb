@@ -3,6 +3,13 @@ require "yuriita/parser"
 
 RSpec.describe Yuriita::Parser do
   describe '#parse' do
+    it "parses an empty string" do
+      query = parse(tokens([:EOS]))
+
+      expect(query.keywords).to eq []
+      expect(query.inputs).to eq []
+    end
+
     it "parses keywords" do
       query = parse(tokens([:WORD, "hello"], [:EOS]))
 

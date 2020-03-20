@@ -14,6 +14,7 @@ module Yuriita
           inputs: fragment.inputs,
         )
       end
+      clause("SPACE?") { |_| Query.new }
     end
 
     production(:fragment) do
