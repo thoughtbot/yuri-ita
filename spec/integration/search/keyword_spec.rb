@@ -78,9 +78,9 @@ RSpec.describe "searching by keyword" do
     Yuriita::Matchers::Term.new(term: term)
   end
 
-  def and_search(*matchers, &block)
+  def and_search(matcher, &block)
     Yuriita::KeywordFilter.new(
-      matchers: matchers,
+      matcher: matcher,
       combination: Yuriita::AndCombination,
       &block
     )

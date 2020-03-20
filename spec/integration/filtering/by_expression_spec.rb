@@ -55,17 +55,17 @@ RSpec.describe "filtering by expression" do
     Yuriita::Matchers::Expression.new(qualifier: qualifier, term: term)
   end
 
-  def and_filter(*matchers, &block)
+  def and_filter(matcher, &block)
     Yuriita::ExpressionFilter.new(
-      matchers: matchers,
+      matcher: matcher,
       combination: Yuriita::AndCombination,
       &block
     )
   end
 
-  def or_filter(*matchers, &block)
+  def or_filter(matcher, &block)
     Yuriita::ExpressionFilter.new(
-      matchers: matchers,
+      matcher: matcher,
       combination: Yuriita::OrCombination,
       &block
     )

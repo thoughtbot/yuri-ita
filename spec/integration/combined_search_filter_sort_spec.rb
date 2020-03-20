@@ -14,7 +14,7 @@ RSpec.describe "combining expressions, search, and sort" do
     title_search = and_search(term_matcher("title")) do |value|
       ["title ILIKE :value", value: "%#{value}%"]
     end
-    title_sort= Yuriita::Sorter.new(matchers: [term_matcher("title")]) do
+    title_sort= Yuriita::Sorter.new(matcher: term_matcher("title")) do
       { title: :asc }
     end
     published_filter = and_filter(expression_matcher("is", "published")) do
@@ -41,7 +41,7 @@ RSpec.describe "combining expressions, search, and sort" do
     title_search = and_search(term_matcher("title")) do |value|
       ["title ILIKE :value", value: "%#{value}%"]
     end
-    title_sort= Yuriita::Sorter.new(matchers: [term_matcher("title")]) do
+    title_sort= Yuriita::Sorter.new(matcher: term_matcher("title")) do
       { title: :asc }
     end
     published_filter = and_filter(expression_matcher("is", "published")) do
@@ -67,17 +67,17 @@ RSpec.describe "combining expressions, search, and sort" do
     Yuriita::Matchers::Expression.new(qualifier: qualifier, term: term)
   end
 
-  def and_filter(*matchers, &block)
+  def and_filter(matcher, &block)
     Yuriita::ExpressionFilter.new(
-      matchers: matchers,
+      matcher: matcher,
       combination: Yuriita::AndCombination,
       &block
     )
   end
 
-  def and_search(*matchers, &block)
+  def and_search(matcher, &block)
     Yuriita::KeywordFilter.new(
-      matchers: matchers,
+      matcher: matcher,
       combination: Yuriita::AndCombination,
       &block
     )

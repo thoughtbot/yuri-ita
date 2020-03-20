@@ -2,8 +2,8 @@ require "yuriita/clauses/merge"
 
 module Yuriita
   class Sorter
-    def initialize(matchers:, &block)
-      @matchers = matchers
+    def initialize(matcher:, &block)
+      @matcher = matcher
       @block = block
     end
 
@@ -21,13 +21,12 @@ module Yuriita
 
     private
 
-    attr_reader :matchers, :block
+    attr_reader :matcher, :block
 
     def matches?(input)
-      matchers.any? do |matcher|
-        matcher.match?(input)
-      end
+      matcher.match?(input)
     end
+
     def build_merge(matching_inputs)
       clauses = build_clauses(matching_inputs)
       Clauses::Merge.new(clauses: clauses, combination: Yuriita::AndCombination)

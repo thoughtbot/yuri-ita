@@ -2,8 +2,8 @@ require "yuriita/clauses/merge"
 
 module Yuriita
   class ExpressionFilter
-    def initialize(matchers:, combination:, &block)
-      @matchers = matchers
+    def initialize(matcher:, combination:, &block)
+      @matcher = matcher
       @combination = combination
       @block = block
     end
@@ -22,12 +22,10 @@ module Yuriita
 
     private
 
-    attr_reader :matchers, :combination, :block
+    attr_reader :matcher, :combination, :block
 
     def matches?(input)
-      matchers.any? do |matcher|
-        matcher.match?(input)
-      end
+      matcher.match?(input)
     end
 
     def build_merge(matching_inputs)

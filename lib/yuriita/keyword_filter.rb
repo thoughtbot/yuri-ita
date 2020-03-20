@@ -2,8 +2,8 @@ require "yuriita/clauses/merge"
 
 module Yuriita
   class KeywordFilter
-    def initialize(matchers:, combination:, &block)
-      @matchers = matchers
+    def initialize(matcher:, combination:, &block)
+      @matcher = matcher
       @combination = combination
       @block = block
     end
@@ -19,16 +19,14 @@ module Yuriita
 
     private
 
-    attr_reader :matchers, :combination, :block
+    attr_reader :matcher, :combination, :block
 
     def matches?(scopes)
       if scopes.empty?
         true
       else
-        matchers.any? do |matcher|
-          scopes.any? do |scope|
-            matcher.match?(scope)
-          end
+        scopes.any? do |scope|
+          matcher.match?(scope)
         end
       end
     end
