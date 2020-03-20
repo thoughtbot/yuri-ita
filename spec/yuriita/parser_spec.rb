@@ -148,28 +148,6 @@ RSpec.describe Yuriita::Parser do
       )
     end
 
-    it "parses a negated qualifier" do
-      query = parse(tokens(
-        [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:EOS],
-      ))
-
-      expect(query.inputs).to contain_exactly(
-        an_input_matching("label", "bug").negated,
-      )
-    end
-
-    it "parses a negated qualifier with a non-negated qualifier" do
-      query = parse(tokens(
-        [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:SPACE],
-        [:WORD, "label"], [:COLON], [:WORD, "security"], [:EOS],
-      ))
-
-      expect(query.inputs).to contain_exactly(
-        an_input_matching("label", "bug").negated,
-        an_input_matching("label", "security")
-      )
-    end
-
     it "parses a sort input" do
       query = parse(tokens(
         [:SORT], [:COLON], [:WORD, "title"], [:EOS],

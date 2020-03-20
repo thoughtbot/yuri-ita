@@ -32,33 +32,6 @@ RSpec.describe "combining expressions, search, and sort" do
     expect(result.relation).to eq([duck_post, elephant_post])
   end
 
-  it "returns keyword results, negated expression results,  and sorted results" do
-    cat_post = create(:post, title: "Cats are great", published: true)
-    elephant_post = create(:post, title: "Elephants are great", published: false)
-    duck_post = create(:post, title: "Ducks are great, too", published: false)
-    frog_post = create(:post, title: "Frogs are just ok", published: false)
-
-    title_search = and_search(term_matcher("title")) do |value|
-      ["title ILIKE :value", value: "%#{value}%"]
-    end
-    title_sort= Yuriita::Sorter.new(matcher: term_matcher("title")) do
-      { title: :asc }
-    end
-    published_filter = and_filter(expression_matcher("is", "published")) do
-      { published: true }
-    end
-
-    definition = Yuriita::Query::Definition.new(keyword_filters: [title_search], sorters: [title_sort], expression_filters: [published_filter])
-
-    result = Yuriita.filter(
-      Post.all,
-      "sort:title great -is:published",
-      definition,
-    )
-
-    expect(result.relation).to eq([duck_post, elephant_post])
-  end
-
   def term_matcher(term)
     Yuriita::Matchers::Term.new(term: term)
   end

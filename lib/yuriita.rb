@@ -15,7 +15,6 @@ require "yuriita/keyword_filter"
 require "yuriita/sorter"
 
 require "yuriita/clauses/where"
-require "yuriita/clauses/where_not"
 require "yuriita/clauses/order"
 
 module Yuriita

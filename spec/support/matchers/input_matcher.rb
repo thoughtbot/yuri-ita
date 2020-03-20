@@ -17,17 +17,11 @@ module Yuriita
         @term = term
         @expected = Yuriita::Query::Input.new(qualifier: qualifier, term: term)
         @mismatched_kind = false
-        @negated = false
       end
 
       def matches?(actual)
         @actual = actual
         match
-      end
-
-      def negated
-        @negated = true
-        self
       end
 
       def description
@@ -61,8 +55,7 @@ module Yuriita
 
       def attributes_match?
         expected.qualifier == actual.qualifier &&
-          expected.term == actual.term &&
-          @negated == actual.negated?
+          expected.term == actual.term
       end
     end
   end

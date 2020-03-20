@@ -43,9 +43,6 @@ module Yuriita
       clause(".qualifier COLON .term") do |qualifier, term|
         Query::Input.new(qualifier: qualifier, term: term)
       end
-      clause("NEGATION .qualifier COLON .term") do |qualifier, term|
-        Query::Input.new(qualifier: qualifier, term: term, negated: true)
-      end
     end
 
     production(:search_input) do

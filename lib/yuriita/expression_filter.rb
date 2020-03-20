@@ -35,11 +35,7 @@ module Yuriita
 
     def build_clauses(inputs)
       inputs.map do |input|
-        if input.negated?
-          Clauses::WhereNot.new(block.call(input.term))
-        else
-          Clauses::Where.new(block.call(input.term))
-        end
+        Clauses::Where.new(block.call(input.term))
       end
     end
   end

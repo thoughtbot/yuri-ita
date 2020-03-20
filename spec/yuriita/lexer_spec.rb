@@ -49,16 +49,6 @@ RSpec.describe Yuriita::Lexer do
       )
     end
 
-    it "recognizes negation" do
-      expect("-word").to produce_tokens(
-        [
-          "NEGATION",
-          "WORD(word)",
-          "EOS",
-        ]
-      )
-    end
-
     it "recognizes 'in'" do
       expect("in:body").to produce_tokens(
         [

@@ -8,6 +8,5 @@ module Yuriita
     rule(/sort/) { :SORT }
     rule(/[a-zA-Z_]+/) { |t| [:WORD, t] }
     rule(/"/) { :QUOTE }
-    rule(/-/) { :NEGATION }
   end
 end
