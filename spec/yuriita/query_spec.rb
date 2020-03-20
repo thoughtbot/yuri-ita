@@ -10,21 +10,12 @@ RSpec.describe Yuriita::Query do
     end
   end
 
-  describe "#expression_inputs" do
-    it "returns the initialized expression_inputs" do
-      expression_inputs = double(:expression_inputs)
-      query = described_class.new(expression_inputs: expression_inputs)
+  describe "#inputs" do
+    it "returns the initialized" do
+      inputs = double(:inputs)
+      query = described_class.new(inputs: inputs)
 
-      expect(query.expression_inputs).to eq expression_inputs
-    end
-  end
-
-  describe "#sort_inputs" do
-    it "returns the initialized sort_inputs" do
-      sort_inputs = double(:sort_inputs)
-      query = described_class.new(sort_inputs: sort_inputs)
-
-      expect(query.sort_inputs).to eq sort_inputs
+      expect(query.inputs).to eq inputs
     end
   end
 end

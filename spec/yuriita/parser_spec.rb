@@ -18,7 +18,7 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello"]
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug")
       )
     end
@@ -34,7 +34,7 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello", "world"]
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug")
       )
     end
@@ -53,7 +53,7 @@ RSpec.describe Yuriita::Parser do
 
 
       expect(query.keywords).to eq ["hello", "world"]
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug"),
         an_input_matching("label", "security")
       )
@@ -78,7 +78,7 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["hello", "world", "search", "term"]
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "red"),
         an_input_matching("label", "blue"),
         an_input_matching("label", "green"),
@@ -88,7 +88,7 @@ RSpec.describe Yuriita::Parser do
     it "parses an expression input" do
       query = parse(tokens([:WORD, "is"], [:COLON], [:WORD, "active"], [:EOS]))
 
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("is", "active"),
       )
     end
@@ -98,7 +98,7 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:QUOTE], [:EOS],
       ))
 
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug"),
       )
     end
@@ -109,7 +109,7 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "report"], [:QUOTE], [:EOS],
       ))
 
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug report"),
       )
     end
@@ -122,7 +122,7 @@ RSpec.describe Yuriita::Parser do
         [:QUOTE], [:EOS],
       ))
 
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug report"),
       )
     end
@@ -134,7 +134,7 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "author"], [:COLON], [:WORD, "eebs"], [:EOS],
       ))
 
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug"),
         an_input_matching("label", "security"),
         an_input_matching("author", "eebs"),
@@ -146,7 +146,7 @@ RSpec.describe Yuriita::Parser do
         [:NEGATION], [:WORD, "label"], [:COLON], [:WORD, "bug"], [:EOS],
       ))
 
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug").negated,
       )
     end
@@ -157,7 +157,7 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON], [:WORD, "security"], [:EOS],
       ))
 
-      expect(query.expression_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("label", "bug").negated,
         an_input_matching("label", "security")
       )
@@ -167,7 +167,7 @@ RSpec.describe Yuriita::Parser do
       query = parse(tokens(
         [:SORT], [:COLON], [:WORD, "title"], [:EOS],
       ))
-      expect(query.sort_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("sort", "title")
       )
     end
@@ -177,7 +177,7 @@ RSpec.describe Yuriita::Parser do
         [:IN], [:COLON], [:WORD, "title"], [:EOS],
       ))
 
-      expect(query.scope_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("in", "title")
       )
     end
@@ -195,7 +195,7 @@ RSpec.describe Yuriita::Parser do
       ))
 
       expect(query.keywords).to eq ["awesome", "ideas"]
-      expect(query.scope_inputs).to contain_exactly(
+      expect(query.inputs).to contain_exactly(
         an_input_matching("in", "title")
       )
     end

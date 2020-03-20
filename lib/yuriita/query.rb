@@ -1,12 +1,10 @@
 module Yuriita
   class Query
-    attr_reader :keywords, :expression_inputs, :scope_inputs, :sort_inputs
+    attr_reader :keywords, :inputs
 
-    def initialize(keywords: [], expression_inputs: [], scope_inputs: [], sort_inputs: [])
+    def initialize(keywords: [], inputs: [])
       @keywords = keywords
-      @expression_inputs = expression_inputs
-      @scope_inputs = scope_inputs
-      @sort_inputs = sort_inputs
+      @inputs = inputs
     end
   end
 end

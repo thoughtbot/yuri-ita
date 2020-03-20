@@ -11,9 +11,7 @@ module Yuriita
       clause("SPACE? .fragment SPACE?") do |fragment|
         Query.new(
           keywords: fragment.keywords,
-          expression_inputs: fragment.expression_inputs,
-          scope_inputs: fragment.scope_inputs,
-          sort_inputs: fragment.sort_inputs,
+          inputs: fragment.inputs,
         )
       end
     end
@@ -22,14 +20,14 @@ module Yuriita
       clause(".keyword") do |keyword|
         Query::Fragment.new(keywords: [keyword])
       end
-      clause(".scope_input") do |scope_input|
-        Query::Fragment.new(scope_inputs: [scope_input])
+      clause(".search_input") do |search_input|
+        Query::Fragment.new(inputs: [search_input])
       end
       clause(".expression_input") do |expression_input|
-        Query::Fragment.new(expression_inputs: [expression_input])
+        Query::Fragment.new(inputs: [expression_input])
       end
       clause(".sort_input") do |sort_input|
-        Query::Fragment.new(sort_inputs: [sort_input])
+        Query::Fragment.new(inputs: [sort_input])
       end
       clause(".fragment SPACE .fragment") do |head, tail|
         head.merge(tail)
@@ -49,7 +47,7 @@ module Yuriita
       end
     end
 
-    production(:scope_input) do
+    production(:search_input) do
       clause("IN COLON .scope") do |scope|
         Query::Input.new(qualifier: "in", term: scope)
       end

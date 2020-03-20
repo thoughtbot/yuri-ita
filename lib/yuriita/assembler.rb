@@ -8,9 +8,9 @@ module Yuriita
     end
 
     def build(query)
-      expression_filter_clauses(query.expression_inputs) +
+      expression_filter_clauses(query.inputs) +
         keyword_filter_clauses(query) +
-        sorter_clauses(query.sort_inputs)
+        sorter_clauses(query.inputs)
     end
 
     private
@@ -27,7 +27,7 @@ module Yuriita
       keyword_filter_assembler.new(
         keyword_filters: keyword_filters,
         keywords: query.keywords,
-        scope_inputs: query.scope_inputs,
+        scope_inputs: query.inputs,
       ).assemble
     end
 
