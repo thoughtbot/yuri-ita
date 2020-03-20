@@ -1,5 +1,3 @@
-require "spec_helper"
-
 RSpec.describe Yuriita::Query do
   describe "#keywords" do
     it "returns the initialized keywords" do

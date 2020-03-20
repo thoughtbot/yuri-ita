@@ -1,7 +1,3 @@
-require "spec_helper"
-require "yuriita/assembler"
-require "yuriita/query/definition"
-
 RSpec.describe Yuriita::Assembler do
   describe "#build" do
     it "apples the expression_inputs to each filter" do

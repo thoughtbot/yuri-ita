@@ -1,6 +1,3 @@
-require "yuriita/or_combination"
-require "yuriita/clauses/merge"
-
 module Yuriita
   class KeywordFilterAssembler
     def initialize(keyword_filters:, keywords:, scope_inputs:, combination: OrCombination)

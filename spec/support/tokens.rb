@@ -1,5 +1,3 @@
-require "rltk"
-
 module Tokens
   def tokens(*tokens)
     tokens.map.with_index do |token, i|

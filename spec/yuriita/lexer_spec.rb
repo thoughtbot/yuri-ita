@@ -1,6 +1,3 @@
-require 'spec_helper'
-require 'yuriita/lexer'
-
 RSpec.describe Yuriita::Lexer do
   describe ".lex" do
     it "recognizes colon separated words" do

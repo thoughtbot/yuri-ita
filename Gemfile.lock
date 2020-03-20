@@ -6,6 +6,7 @@ PATH
       activerecord (>= 4.2)
       activesupport (>= 4.2)
       rltk
+      zeitwerk
 
 GEM
   remote: https://rubygems.org/

@@ -1,5 +1,3 @@
-require "yuriita/query/input"
-
 RSpec.describe Yuriita::Query::Input do
   describe "#qualifier" do
     it "returns the provided qualifier" do

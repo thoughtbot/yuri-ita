@@ -1,7 +1,4 @@
 require "rails_helper"
-require "yuriita/or_combination"
-require "yuriita/and_combination"
-require "yuriita/matchers/expression"
 
 RSpec.describe "combining expressions, search, and sort" do
   it "returns keyword results, expression results, and sorted results" do

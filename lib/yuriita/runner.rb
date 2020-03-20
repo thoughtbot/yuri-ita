@@ -1,9 +1,3 @@
-require "yuriita/parser"
-require "yuriita/lexer"
-require "yuriita/result"
-require "yuriita/executor"
-require "yuriita/assembler"
-
 module Yuriita
   class Runner
     def initialize(relation:, definition:, **options)

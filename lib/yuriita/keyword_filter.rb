@@ -1,5 +1,3 @@
-require "yuriita/clauses/merge"
-
 module Yuriita
   class KeywordFilter
     def initialize(matcher:, combination:, &block)

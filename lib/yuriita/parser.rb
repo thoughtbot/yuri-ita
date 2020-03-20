@@ -1,7 +1,4 @@
 require "rltk/parser"
-require "yuriita/query"
-require "yuriita/query/fragment"
-require "yuriita/query/input"
 
 module Yuriita
   class Parser < RLTK::Parser

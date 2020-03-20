@@ -1,6 +1,3 @@
-require "spec_helper"
-require "yuriita/parser"
-
 RSpec.describe Yuriita::Parser do
   describe '#parse' do
     it "parses an empty string" do

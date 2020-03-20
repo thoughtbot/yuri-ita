@@ -1,7 +1,4 @@
 require "rails_helper"
-require "yuriita/or_combination"
-require "yuriita/and_combination"
-require "yuriita/matchers/expression"
 
 RSpec.describe "filtering by expression" do
   it "returns results matching an expression" do

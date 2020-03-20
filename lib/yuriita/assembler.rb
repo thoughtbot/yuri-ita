@@ -1,5 +1,3 @@
-require "yuriita/keyword_filter_assembler"
-
 module Yuriita
   class Assembler
     def initialize(definition, keyword_filter_assembler: KeywordFilterAssembler)

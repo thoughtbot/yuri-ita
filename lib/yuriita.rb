@@ -1,21 +1,8 @@
-require "yuriita/version"
-require "yuriita/errors"
-
-require "yuriita/runner"
-require "yuriita/query_builder"
-
-require "yuriita/query"
-require "yuriita/query/definition"
-
-require "yuriita/or_combination"
-require "yuriita/and_combination"
-
-require "yuriita/expression_filter"
-require "yuriita/keyword_filter"
-require "yuriita/sorter"
-
-require "yuriita/clauses/where"
-require "yuriita/clauses/order"
+require "zeitwerk"
+loader = Zeitwerk::Loader.for_gem
+loader.ignore("#{__dir__}/yuri-ita.rb")
+loader.collapse("#{__dir__}/yuriita/errors")
+loader.setup
 
 module Yuriita
   def self.filter(relation, input, definition)
@@ -30,3 +17,5 @@ module Yuriita
     QueryBuilder.build(input)
   end
 end
+
+loader.eager_load
