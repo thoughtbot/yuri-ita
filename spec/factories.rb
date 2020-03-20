@@ -2,6 +2,14 @@ FactoryBot.define do
   factory :post do
     title { "A title" }
     body { "A body" }
+
+    trait :published do
+      published { true }
+    end
+
+    trait :draft do
+      published { false }
+    end
   end
 
   factory :category do
@@ -25,5 +33,21 @@ FactoryBot.define do
     vote_average { 8.4 }
     popularity { 34.117 }
     release_date { "1999-10-12" }
+
+    trait :rumored do
+      status { Movie::Status::RUMORED }
+    end
+
+    trait :post_production do
+      status { Movie::Status::POST_PRODUCTION }
+    end
+
+    trait :released do
+      status { Movie::Status::RELEASED }
+    end
+
+    trait :cancelled do
+      status { Movie::Status::CANCELLED }
+    end
   end
 end
