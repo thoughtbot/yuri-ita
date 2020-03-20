@@ -10,10 +10,10 @@ RSpec.describe "searching by keyword" do
     end
     definition = Yuriita::Query::Definition.new(keyword_filters: [title_search])
 
-    result = Yuriita.sift(
+    result = Yuriita.filter(
       Post.all,
       "cats",
-      definition: definition,
+      definition,
     )
 
     expect(result.relation).to contain_exactly(cat_post)
@@ -37,10 +37,10 @@ RSpec.describe "searching by keyword" do
       keyword_filters: [title_search, body_search, description_search],
     )
 
-    result = Yuriita.sift(
+    result = Yuriita.filter(
       Post.all,
       "cats pigs",
-      definition: definition,
+      definition,
     )
 
     expect(result.relation).to contain_exactly(cat_post, pig_post)
@@ -65,10 +65,10 @@ RSpec.describe "searching by keyword" do
       keyword_filters: [title_search, body_search, description_search],
     )
 
-    result = Yuriita.sift(
+    result = Yuriita.filter(
       Post.all,
       "cats pigs in:title in:body",
-      definition: definition,
+      definition,
     )
 
     expect(result.relation).to contain_exactly(cat_post, pig_post)

@@ -9,29 +9,17 @@ module Yuriita
     def initialize(relation:, definition:, **options)
       @relation = relation
       @definition = definition
-      @parser = options.fetch(:parser, Parser)
-      @lexer = options.fetch(:lexer, Lexer)
       @executor = options.fetch(:executor, Executor)
       @assembler = options.fetch(:assembler, Assembler)
     end
 
-    def run(input)
-      query = build_query(input)
+    def run(query)
       clauses = assembler.new(definition).build(query)
-      filtered = executor.new(clauses).run(relation)
-
-      Result.success(filtered)
-    rescue RLTK::LexingError, RLTK::NotInLanguage, RLTK::BadToken, EOFError => e
-      Result.error(e)
+      executor.new(clauses).run(relation)
     end
 
     private
 
-    attr_reader :lexer, :parser, :executor, :definition, :relation, :assembler
-
-    def build_query(input)
-      tokens = lexer.lex(input)
-      parser.parse(tokens)
-    end
+    attr_reader :relation, :definition, :executor, :assembler
   end
 end

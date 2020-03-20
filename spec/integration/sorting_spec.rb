@@ -11,10 +11,10 @@ RSpec.describe "sorting" do
     end
     definition = Yuriita::Query::Definition.new(sorters: [title_sort])
 
-    result = Yuriita.sift(
+    result = Yuriita.filter(
       Post.all,
       "sort:title",
-      definition: definition,
+      definition,
     )
 
     expect(result.relation).to eq([elephant_post, duck_post, cat_post])

@@ -1,5 +1,8 @@
 require "yuriita/version"
-require "yuriita/sift"
+require "yuriita/errors"
+
+require "yuriita/runner"
+require "yuriita/query_builder"
 
 require "yuriita/query"
 require "yuriita/query/definition"
@@ -16,7 +19,15 @@ require "yuriita/clauses/where_not"
 require "yuriita/clauses/order"
 
 module Yuriita
-  class Error < StandardError; end
+  def self.filter(relation, input, definition)
+    query = build_query(input)
+    relation = Runner.new(relation: relation, definition: definition).run(query)
+    Result.success(relation)
+  rescue ParseError => exception
+    Result.error(exception)
+  end
 
-  extend Sift
+  def self.build_query(input)
+    QueryBuilder.build(input)
+  end
 end

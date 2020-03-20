@@ -1,9 +1,5 @@
 RSpec.describe Yuriita do
-  it "has a version number" do
-    expect(Yuriita::VERSION).not_to be nil
-  end
-
-  describe ".filter" do
+  describe "#build" do
     it "returns an error result when the input could not be parsed" do
       relation = double(:relation)
       definition = double(:definition)

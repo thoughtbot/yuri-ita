@@ -10,7 +10,7 @@ RSpec.describe "combining expressions, search, and sort" do
     elephant_post = create(:post, title: "Elephants are great", published: true)
     duck_post = create(:post, title: "Ducks are great, too", published: true)
     frog_post = create(:post, title: "Frogs are just ok", published: true)
-    
+
     title_search = and_search(term_matcher("title")) do |value|
       ["title ILIKE :value", value: "%#{value}%"]
     end
@@ -23,10 +23,10 @@ RSpec.describe "combining expressions, search, and sort" do
 
     definition = Yuriita::Query::Definition.new(keyword_filters: [title_search], sorters: [title_sort], expression_filters: [published_filter])
 
-    result = Yuriita.sift(
+    result = Yuriita.filter(
       Post.all,
       "sort:title is:published great",
-      definition: definition,
+      definition,
     )
 
     expect(result.relation).to eq([duck_post, elephant_post])
@@ -37,7 +37,7 @@ RSpec.describe "combining expressions, search, and sort" do
     elephant_post = create(:post, title: "Elephants are great", published: false)
     duck_post = create(:post, title: "Ducks are great, too", published: false)
     frog_post = create(:post, title: "Frogs are just ok", published: false)
-    
+
     title_search = and_search(term_matcher("title")) do |value|
       ["title ILIKE :value", value: "%#{value}%"]
     end
@@ -50,10 +50,10 @@ RSpec.describe "combining expressions, search, and sort" do
 
     definition = Yuriita::Query::Definition.new(keyword_filters: [title_search], sorters: [title_sort], expression_filters: [published_filter])
 
-    result = Yuriita.sift(
+    result = Yuriita.filter(
       Post.all,
       "sort:title great -is:published",
-      definition: definition,
+      definition,
     )
 
     expect(result.relation).to eq([duck_post, elephant_post])
