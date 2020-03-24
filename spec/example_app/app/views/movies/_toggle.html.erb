@@ -1,0 +1,9 @@
+<div class="toggle-group">
+  <% options.each do |option| %>
+    <% classes = option.selected? ? ["toggle-group__option", "active"] : ["toggle-group__option"] %>
+    <%= link_to movies_path(option.params), class: classes do %>
+      <span><%= option.name %></span>
+    <% end %>
+  <% end %>
+</div>
+

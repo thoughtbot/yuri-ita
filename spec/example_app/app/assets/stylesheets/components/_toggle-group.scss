@@ -1,0 +1,32 @@
+.toggle-group {
+  display: flex;
+}
+
+.toggle-group__option {
+  align-items: center;
+  border: $base-border;
+  color: inherit;
+  display: flex;
+  font-weight: $font-weight-semibold;
+  padding: $spacing-xs $spacing-sm;
+  text-decoration: none;
+
+  & > svg {
+    margin-right: $spacing-xs;
+  }
+
+  &.active {
+    background-color: $gray-400;
+    border-color: $gray-400;
+    box-shadow: $input-box-shadow;
+    color: #FFF;
+  }
+
+  &:first-child {
+    border-radius: $base-border-radius 0 0 $base-border-radius;
+  }
+
+  &:last-child {
+    border-radius: 0 $base-border-radius $base-border-radius 0;
+  }
+}

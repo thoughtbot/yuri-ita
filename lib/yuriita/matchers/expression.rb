@@ -11,6 +11,10 @@ module Yuriita
           input.term == term
       end
 
+      def build_input
+        Query::Input.new(qualifier: qualifier, term: term)
+      end
+
       private
 
       attr_reader :qualifier, :term

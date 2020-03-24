@@ -1,50 +1,27 @@
 module Yuriita
   class Assembler
-    def initialize(definition, keyword_filter_assembler: KeywordFilterAssembler)
-      @definition = definition
-      @keyword_filter_assembler = keyword_filter_assembler
+    def initialize(configuration)
+      @configuration = configuration
     end
 
     def build(query)
-      expression_filter_clauses(query.inputs) +
-        keyword_filter_clauses(query) +
-        sorter_clauses(query.inputs)
+      expression_clauses(query) + search_clauses(query)
     end
 
     private
 
-    attr_reader :definition, :keyword_filter_assembler
+    attr_reader :configuration
 
-    def expression_filter_clauses(expression_inputs)
-      expression_filters.flat_map do |expression_filter|
-        expression_filter.apply(expression_inputs)
+    def expression_clauses(query)
+      configuration.definitions.each_value.map do |definition|
+        definition.apply(query: query)
       end
     end
 
-    def keyword_filter_clauses(query)
-      keyword_filter_assembler.new(
-        keyword_filters: keyword_filters,
-        keywords: query.keywords,
-        scope_inputs: query.inputs,
-      ).assemble
-    end
-
-    def sorter_clauses(sort_inputs)
-      sorters.flat_map do |sorter|
-        sorter.apply(sort_inputs)
+    def search_clauses(query)
+      configuration.scopes.each_value.map do |collection|
+        collection.apply(query: query)
       end
-    end
-
-    def expression_filters
-      definition.expression_filters
-    end
-
-    def keyword_filters
-      definition.keyword_filters
-    end
-
-    def sorters
-      definition.sorters
     end
   end
 end

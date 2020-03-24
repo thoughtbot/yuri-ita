@@ -7,6 +7,10 @@ module Yuriita
         @qualifier = qualifier
         @term = term
       end
+
+      def to_s
+        "#{qualifier}:#{term}"
+      end
     end
   end
 end

@@ -5,9 +5,9 @@ loader.collapse("#{__dir__}/yuriita/errors")
 loader.setup
 
 module Yuriita
-  def self.filter(relation, input, definition)
+  def self.filter(relation, input, configuration)
     query = build_query(input)
-    relation = Runner.new(relation: relation, definition: definition).run(query)
+    relation = Runner.new(relation: relation, configuration: configuration).run(query)
     Result.success(relation)
   rescue ParseError => exception
     Result.error(exception)

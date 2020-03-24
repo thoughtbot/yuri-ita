@@ -12,4 +12,16 @@ RSpec.describe "user views the movies page" do
     expect(page).to have_content("The Prestige")
     expect(page).to have_content("Pretty Woman")
   end
+
+  scenario "views a list of movies with a selected option" do
+    fight_club = create(:movie, :released, title: "Fight Club")
+    the_prestige = create(:movie, :rumored, title: "The Prestige")
+    pretty_woman = create(:movie, :cancelled, title: "Pretty Woman")
+
+    visit movies_path(q: "is:released")
+
+    expect(page).to have_content("Fight Club")
+    expect(page).not_to have_content("The Prestige")
+    expect(page).not_to have_content("Pretty Woman")
+  end
 end

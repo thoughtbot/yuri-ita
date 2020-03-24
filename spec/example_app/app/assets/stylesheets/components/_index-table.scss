@@ -6,14 +6,16 @@
 .index-table__header {
   background-color: $gray-100;
   border-bottom: $base-border;
-  display: flex;
   padding: $spacing-sm;
 }
 
-.index-table__header-title {
-  font-size: $font-size-medium;
-  font-weight: $font-weight-semibold;
-  margin: 0;
+.index-table__header-input {
+
+}
+
+.index-table__header-collections {
+  display: flex;
+  justify-content: space-between;
 }
 
 .index-table__item {

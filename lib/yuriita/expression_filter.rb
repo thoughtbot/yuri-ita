@@ -1,40 +1,30 @@
 module Yuriita
   class ExpressionFilter
-    def initialize(matcher:, combination:, &block)
+    def initialize(matcher:, &block)
       @matcher = matcher
-      @combination = combination
       @block = block
     end
 
-    def apply(inputs)
-      matching_inputs = inputs.select do |input|
-        matches?(input)
+    def matches?(inputs)
+      inputs.any? do |input|
+        matches_input?(input)
       end
+    end
 
-      if matching_inputs.any?
-        [build_merge(matching_inputs)]
-      else
-        []
-      end
+    def apply(relation)
+      block.call(relation)
+    end
+
+    def build_input
+      matcher.build_input
     end
 
     private
 
-    attr_reader :matcher, :combination, :block
+    attr_reader :matcher, :block
 
-    def matches?(input)
+    def matches_input?(input)
       matcher.match?(input)
-    end
-
-    def build_merge(matching_inputs)
-      clauses = build_clauses(matching_inputs)
-      Clauses::Merge.new(clauses: clauses, combination: combination)
-    end
-
-    def build_clauses(inputs)
-      inputs.map do |input|
-        Clauses::Where.new(block.call(input.term))
-      end
     end
   end
 end

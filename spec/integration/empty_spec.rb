@@ -7,7 +7,7 @@ RSpec.describe "an empty input string" do
     result = Yuriita.filter(
       Post.all,
       "",
-      Yuriita::Query::Definition.new,
+      PostDefinition.build,
     )
 
     expect(result.relation).to match_array(Post.all)

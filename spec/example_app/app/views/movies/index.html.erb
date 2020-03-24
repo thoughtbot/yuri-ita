@@ -1,12 +1,23 @@
 <div class="container">
   <h1>Movies</h1>
 
+  <div class="index-search">
+    <%= form_tag movies_path, method: :get do %>
+      <%= text_field_tag :q, table.q, size: 50, autocomplete: "off" %>
+    <% end %>
+  </div>
+
   <div class="index-table">
-    <div class="index-table__header u-justify-space-between u-align-center">
+    <div class="index-table__header">
+      <div class="index-table__header-collections">
+        <%= render "toggle", options: table.options_for(:status) %>
+        <%= render "toggle", options: table.options_for(:adult) %>
+        <%= render "toggle", options: table.options_for(:sort) %>
+      </div>
     </div>
 
     <ul>
-      <%= render(movies) || render("empty_index") %>
+      <%= render(table.items) || render("empty_index") %>
     </ul>
   </div>
 </div>
