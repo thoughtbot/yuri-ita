@@ -42,4 +42,17 @@ RSpec.describe "searching by keyword" do
 
     expect(result.relation).to contain_exactly(cat_post, pig_post)
   end
+
+  it "does nothing when only a scope is provided" do
+    cat_post = create(:post, title: "Cats", body: "Cats are not pigs")
+    pig_post = create(:post, title: "Pigs are not cats", body: "Pigs")
+
+    result = Yuriita.filter(
+      Post.all,
+      "in:title",
+      PostDefinition.build,
+    )
+
+    expect(result.relation).to contain_exactly(cat_post, pig_post)
+  end
 end
