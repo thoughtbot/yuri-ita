@@ -50,4 +50,13 @@ FactoryBot.define do
       status { Movie::Status::CANCELLED }
     end
   end
+
+  factory :input, class: "Yuriita::Query::Input" do
+    skip_create
+
+    qualifier { "is" }
+    term { "published" }
+
+    initialize_with { new(attributes) }
+  end
 end
