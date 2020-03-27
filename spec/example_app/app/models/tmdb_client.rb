@@ -1,4 +1,4 @@
-class MovieClient
+class TmdbClient
   def initialize
     Tmdb::Api.key(ENV["TMDB_API_KEY"])
   end
@@ -26,11 +26,46 @@ class MovieClient
     end
   end
 
+  def genres
+    genre_data.map do |genre|
+      {
+        tmdb_id: genre.id,
+        name: genre.name,
+        created_at: Time.now,
+        updated_at: Time.now,
+      }
+    end
+  end
+
+  def movie_genres
+    data.map do |movie|
+      movie_id = Movie.find_by(tmdb_id: movie.id).id
+      genres_for(movie).map do |genre|
+        {
+          movie_id: movie_id,
+          genre_id: genre,
+          created_at: Time.now,
+          updated_at: Time.now,
+        }
+      end
+    end.flatten
+  end
+
   private
 
   def data
-    pages.reduce([]) do |list, page|
+    @data ||= pages.reduce([]) do |list, page|
       list + movies_for(page)
+    end
+  end
+
+  def genre_data
+    Tmdb::Genre.movie_list
+  end
+
+  def genres_for(movie)
+    movie.genres.map do |genre|
+      Genre.find_by(tmdb_id: genre.id).id
     end
   end
 
