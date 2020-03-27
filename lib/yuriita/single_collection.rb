@@ -7,11 +7,9 @@ module Yuriita
     end
 
     def apply(relation)
-      if selected_option.present?
-        selected_option.filter.apply(relation)
-      else
-        relation
-      end
+      return relation if active_filter.nil?
+
+      active_filter.apply(relation)
     end
 
     def view_options
@@ -35,8 +33,8 @@ module Yuriita
     end
 
     def selected?(option)
-      if selected_option.present?
-        selected_option == option
+      if active_option.present?
+        active_option == option
       else
         false
       end
@@ -62,7 +60,13 @@ module Yuriita
       end
     end
 
-    def selected_option
+    def active_filter
+      if active_option.present?
+        active_option.filter
+      end
+    end
+
+    def active_option
       input = last_matching_input
       if input.present?
         option_for(input)

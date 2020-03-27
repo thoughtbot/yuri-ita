@@ -38,7 +38,7 @@ module Yuriita
     end
 
     def selected?(option)
-      selected_options.include?(option)
+      active_options.include?(option)
     end
 
     def params(option)
@@ -56,10 +56,10 @@ module Yuriita
     end
 
     def active_filters
-      selected_options.map(&:filter)
+      active_options.map(&:filter)
     end
 
-    def selected_options
+    def active_options
       options.select do |option|
         query.include?(option.input)
       end

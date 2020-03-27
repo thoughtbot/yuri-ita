@@ -62,10 +62,10 @@ module Yuriita
     end
 
     def active_option
-      selected_option || default_option
+      chosen_option || default_option
     end
 
-    def selected_option
+    def chosen_option
       input = last_matching_input
       if input.present?
         option_for(input)
