@@ -5,7 +5,7 @@ class MovieClient
 
   def top_rated
     data.map do |movie_data|
-      Movie.new(
+      {
         tmdb_id: movie_data.id,
         title: movie_data.title,
         original_title: movie_data.original_title,
@@ -22,7 +22,7 @@ class MovieClient
         release_date: movie_data.release_date,
         created_at: Time.now,
         updated_at: Time.now,
-      )
+      }
     end
   end
 

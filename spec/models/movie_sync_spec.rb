@@ -3,13 +3,13 @@ require "rails_helper"
 RSpec.describe MovieSync do
   describe "#run" do
     it "fetches the top 100 movies from TMDB and inserts them into the DB" do
-      fight_club = build(
+      fight_club = attributes_for(
         :movie,
         title: "Fight Club",
         created_at: Time.now,
         updated_at: Time.now,
       )
-      the_prestige = build(
+      the_prestige = attributes_for(
         :movie,
         title: "The Prestige",
         created_at: Time.now,

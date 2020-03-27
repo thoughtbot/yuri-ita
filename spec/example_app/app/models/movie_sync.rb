@@ -20,10 +20,7 @@ class MovieSync
   end
 
   def movie_data
-    movies = client.top_rated
-    movies.map do |movie|
-      movie.attributes.slice(*insert_attributes)
-    end
+    client.top_rated
   end
 
   def insert_attributes
