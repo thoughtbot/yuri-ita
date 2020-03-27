@@ -15,7 +15,7 @@ RSpec.describe MovieSync do
         created_at: Time.now,
         updated_at: Time.now,
       )
-      client = double(:client, top_rated: [fight_club, the_prestige])
+      client = double(:client, top_rated: [fight_club, the_prestige], movie_genres: [])
 
       MovieSync.new(client: client).run
 

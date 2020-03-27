@@ -9,6 +9,7 @@ class MovieSync
 
   def run
     insert_or_update_movies
+    insert_or_update_movie_genres
   end
 
   private
@@ -19,28 +20,17 @@ class MovieSync
     Movie.upsert_all(movie_data, unique_by: :tmdb_id)
   end
 
+  def insert_or_update_movie_genres
+    unless movie_genre_data.empty?
+      MovieGenre.upsert_all(movie_genre_data, unique_by: [:movie_id, :genre_id])
+    end
+  end
+
   def movie_data
     client.top_rated
   end
 
-  def insert_attributes
-    [
-      "tmdb_id",
-      "title",
-      "original_title",
-      "tagline",
-      "overview",
-      "adult",
-      "status",
-      "revenue",
-      "runtime",
-      "vote_count",
-      "budget",
-      "vote_average",
-      "popularity",
-      "release_date",
-      "created_at",
-      "updated_at",
-    ]
+  def movie_genre_data
+    client.movie_genres
   end
 end

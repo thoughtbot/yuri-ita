@@ -59,4 +59,9 @@ FactoryBot.define do
 
     initialize_with { new(attributes) }
   end
+
+  factory :genre do
+    tmdb_id
+    name { "Comedy" }
+  end
 end
