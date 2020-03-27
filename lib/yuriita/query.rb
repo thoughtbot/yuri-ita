@@ -28,6 +28,11 @@ module Yuriita
     end
     alias << add_input
 
+    def delete(input)
+      inputs.delete(input)
+      self
+    end
+
     def delete_if
       block_given? or return enum_for(__method__) { size }
       select { |input| yield input }.each { |input| inputs.delete(input) }

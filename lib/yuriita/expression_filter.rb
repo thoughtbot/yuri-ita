@@ -1,30 +1,18 @@
 module Yuriita
   class ExpressionFilter
-    def initialize(matcher:, &block)
-      @matcher = matcher
-      @block = block
-    end
+    attr_reader :input
 
-    def matches?(inputs)
-      inputs.any? do |input|
-        matches_input?(input)
-      end
+    def initialize(input:, &block)
+      @input = input
+      @block = block
     end
 
     def apply(relation)
       block.call(relation)
     end
 
-    def build_input
-      matcher.build_input
-    end
-
     private
 
-    attr_reader :matcher, :block
-
-    def matches_input?(input)
-      matcher.match?(input)
-    end
+    attr_reader :block
   end
 end

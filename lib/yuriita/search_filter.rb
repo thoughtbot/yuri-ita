@@ -1,15 +1,11 @@
 module Yuriita
   class SearchFilter
-    def initialize(matcher:, combination:, &block)
-      @matcher = matcher
+    attr_reader :input
+
+    def initialize(input:, combination:, &block)
+      @input = input
       @combination = combination
       @block = block
-    end
-
-    def matches?(inputs)
-      inputs.any? do |input|
-        matches_input?(input)
-      end
     end
 
     def apply(relation, keywords)
@@ -23,16 +19,8 @@ module Yuriita
       ).combine
     end
 
-    def build_input
-      matcher.build_input
-    end
-
     private
 
-    attr_reader :matcher, :combination, :block
-
-    def matches_input?(input)
-      matcher.match?(input)
-    end
+    attr_reader :combination, :block
   end
 end

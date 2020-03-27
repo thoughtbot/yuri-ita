@@ -34,7 +34,7 @@ class PostDefinition
 
   def title_option
     filter = Yuriita::SearchFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "in", term: "title"),
+      input: Yuriita::Query::Input.new(qualifier: "in", term: "title"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:title, term)
@@ -45,7 +45,7 @@ class PostDefinition
 
   def body_option
     filter = Yuriita::SearchFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "in", term: "body"),
+      input: Yuriita::Query::Input.new(qualifier: "in", term: "body"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:body, term)
@@ -56,7 +56,7 @@ class PostDefinition
 
   def description_option
     filter = Yuriita::SearchFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "in", term: "description"),
+      input: Yuriita::Query::Input.new(qualifier: "in", term: "description"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:description, term)
@@ -78,7 +78,7 @@ class PostDefinition
 
   def published_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "is", term: "published"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "published"),
     ) do |relation|
       relation.published
     end
@@ -88,7 +88,7 @@ class PostDefinition
 
   def draft_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "is", term: "draft"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "draft"),
     ) do |relation|
       relation.draft
     end
@@ -107,7 +107,7 @@ class PostDefinition
     Category.find_each.map do |category|
       name = category.name
       filter = Yuriita::ExpressionFilter.new(
-        matcher: Yuriita::Matchers::Expression.new(qualifier: "category", term: name),
+        input: Yuriita::Query::Input.new(qualifier: "category", term: name),
       ) do |relation|
         relation.joins(:categories).where(categories: { name: name })
       end
@@ -129,7 +129,7 @@ class PostDefinition
 
   def title_desc_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "sort", term: "title-desc"),
+      input: Yuriita::Query::Input.new(qualifier: "sort", term: "title-desc"),
     ) do |relation|
       relation.order(title: :desc)
     end
@@ -139,7 +139,7 @@ class PostDefinition
 
   def title_asc_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "sort", term: "title-asc"),
+      input: Yuriita::Query::Input.new(qualifier: "sort", term: "title-asc"),
     ) do |relation|
       relation.order(title: :asc)
     end

@@ -8,6 +8,13 @@ module Yuriita
         @term = term
       end
 
+      def ==(other)
+        other.is_a?(self.class) &&
+          other.qualifier == qualifier &&
+          other.term == term
+      end
+      alias_method :eql?, :==
+
       def to_s
         "#{qualifier}:#{term}"
       end

@@ -80,6 +80,19 @@ RSpec.describe Yuriita::Query do
     end
   end
 
+  describe "#delete" do
+    it "removes an input from the query" do
+      published = build(:input, qualifier: "is", term: "published")
+      draft = build(:input, qualifier: "is", term: "draft")
+      query = described_class.new(inputs: [published, draft])
+
+      query.delete(published)
+
+      expect(query).not_to include(published)
+      expect(query).to include(draft)
+    end
+  end
+
   describe "#include?" do
     it "is true if the query contains the input" do
       published = build(:input, qualifier: "is", term: "published")

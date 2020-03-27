@@ -48,12 +48,10 @@ module Yuriita
     def build_query(option)
       if selected?(option)
         option_query = query.dup
-        option_query.delete_if do |input|
-          option.match?([input])
-        end
+        option_query.delete(option.input)
       else
         option_query = query.dup
-        option_query << option.build_input
+        option_query << option.input
       end
     end
 
@@ -62,11 +60,9 @@ module Yuriita
     end
 
     def selected_options
-      options.select { |option| option.match?(inputs) }
-    end
-
-    def inputs
-      query.inputs
+      options.select do |option|
+        query.include?(option.input)
+      end
     end
 
     def options

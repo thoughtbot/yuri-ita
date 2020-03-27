@@ -32,9 +32,7 @@ module Yuriita
 
     def explicit_options
       options.select do |option|
-        query.any? do |input|
-          option.match?([input])
-        end
+        query.include?(option.input)
       end
     end
 

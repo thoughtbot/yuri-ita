@@ -7,12 +7,8 @@ module Yuriita
       @filter = filter
     end
 
-    def match?(inputs)
-      filter.matches?(inputs)
-    end
-
-    def build_input
-      filter.build_input
+    def input
+      filter.input
     end
   end
 end

@@ -30,7 +30,7 @@ class MovieDefinition
 
   def title_option
     filter = Yuriita::SearchFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "in", term: "title"),
+      input: Yuriita::Query::Input.new(qualifier: "in", term: "title"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:title, term)
@@ -41,7 +41,7 @@ class MovieDefinition
 
   def tagline_option
     filter = Yuriita::SearchFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "in", term: "tagline"),
+      input: Yuriita::Query::Input.new(qualifier: "in", term: "tagline"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:tagline, term)
@@ -52,7 +52,7 @@ class MovieDefinition
 
   def overview_option
     filter = Yuriita::SearchFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "in", term: "overview"),
+      input: Yuriita::Query::Input.new(qualifier: "in", term: "overview"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:overview, term)
@@ -79,7 +79,7 @@ class MovieDefinition
 
   def rumored_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "is", term: "rumored"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "rumored"),
     ) do |relation|
       relation.rumored
     end
@@ -89,7 +89,7 @@ class MovieDefinition
 
   def released_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "is", term: "released"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "released"),
     ) do |relation|
       relation.released
     end
@@ -99,7 +99,7 @@ class MovieDefinition
 
   def post_production_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "is", term: "post_production"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "post_production"),
     ) do |relation|
       relation.post_production
     end
@@ -109,7 +109,7 @@ class MovieDefinition
 
   def cancelled_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "is", term: "cancelled"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "cancelled"),
     ) do |relation|
       relation.cancelled
     end
@@ -123,7 +123,7 @@ class MovieDefinition
 
   def adult_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "is", term: "adult"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "adult"),
     ) do |relation|
       relation.where(adult: true)
     end
@@ -133,7 +133,7 @@ class MovieDefinition
 
   def safe_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "is", term: "safe"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "safe"),
     ) do |relation|
       relation.where(adult: false)
     end
@@ -154,7 +154,7 @@ class MovieDefinition
 
   def rating_sort_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "sort", term: "default"),
+      input: Yuriita::Query::Input.new(qualifier: "sort", term: "default"),
     ) do |relation|
       relation.order(vote_average: :desc)
     end
@@ -164,7 +164,7 @@ class MovieDefinition
 
   def title_desc_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "sort", term: "title-desc"),
+      input: Yuriita::Query::Input.new(qualifier: "sort", term: "title-desc"),
     ) do |relation|
       relation.order(title: :desc)
     end
@@ -174,7 +174,7 @@ class MovieDefinition
 
   def title_asc_option
     filter = Yuriita::ExpressionFilter.new(
-      matcher: Yuriita::Matchers::Expression.new(qualifier: "sort", term: "title-asc"),
+      input: Yuriita::Query::Input.new(qualifier: "sort", term: "title-asc"),
     ) do |relation|
       relation.order(title: :asc)
     end
