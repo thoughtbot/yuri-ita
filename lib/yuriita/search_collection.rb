@@ -31,15 +31,15 @@ module Yuriita
     end
 
     def explicit_options
-      options.select { |option| option.match?(inputs) }
+      options.select do |option|
+        query.any? do |input|
+          option.match?([input])
+        end
+      end
     end
 
     def options
       scope.options
-    end
-
-    def inputs
-      query.inputs
     end
 
     def keywords

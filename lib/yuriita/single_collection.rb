@@ -1,9 +1,9 @@
 module Yuriita
   class SingleCollection
-    def initialize(definition:, query:, param_key: nil)
+    def initialize(definition:, query:, formatter: nil)
       @definition = definition
       @query = query
-      @param_key = param_key
+      @formatter = formatter
     end
 
     def apply(relation)
@@ -24,7 +24,7 @@ module Yuriita
 
     private
 
-    attr_reader :definition, :query, :param_key
+    attr_reader :definition, :query, :formatter
 
     def view_option(option)
       ViewOption.new(
@@ -43,18 +43,21 @@ module Yuriita
     end
 
     def params(option)
-      format inputs_for(option)
+      formatter.format build_query(option)
     end
 
-    def inputs_for(option)
+    def build_query(option)
       if selected?(option)
-        inputs.reject do |input|
+        option_query = query.dup
+        option_query.delete_if do |input|
           options.any? { |option| option.match?([input]) }
         end
       else
-        inputs.reject do |input|
+        option_query = query.dup
+        option_query.delete_if do |input|
           options.any? { |option| option.match?([input]) }
-        end + [option.build_input]
+        end
+        option_query << option.build_input
       end
     end
 
@@ -85,15 +88,6 @@ module Yuriita
 
     def options
       definition.options
-    end
-
-    def format(inputs)
-      value = inputs.map(&:to_s).join(" ") + " " + joined_keywords
-      { param_key => value.strip }
-    end
-
-    def joined_keywords
-      query.keywords.join(" ")
     end
   end
 end

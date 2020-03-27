@@ -18,7 +18,7 @@ module Yuriita
       MultipleCollection.new(
         definition: self,
         query: query,
-        param_key: param_key
+        formatter: Yuriita::QueryFormatter.new(param_key: param_key),
       ).view_options
     end
   end
