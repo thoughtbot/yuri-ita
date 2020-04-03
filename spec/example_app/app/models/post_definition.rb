@@ -4,20 +4,17 @@ class PostDefinition
   end
 
   def build
-    Yuriita::Configuration.new(definitions: definitions, scopes: scopes)
+    Yuriita::Configuration.new(definitions)
   end
 
   private
-
-  def scopes
-    { post: post_scope }
-  end
 
   def definitions
     {
       published: published_definition,
       category: category_definition,
       sort: sort_definition,
+      post: post_scope,
     }
   end
 

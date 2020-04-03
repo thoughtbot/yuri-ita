@@ -1,10 +1,9 @@
 module Yuriita
   class Configuration
-    attr_reader :definitions, :scopes
+    attr_reader :definitions
 
-    def initialize(definitions: {}, scopes: {})
+    def initialize(definitions)
       @definitions = definitions
-      @scopes = scopes
     end
 
     def find_definition(key)

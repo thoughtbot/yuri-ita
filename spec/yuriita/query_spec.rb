@@ -1,13 +1,4 @@
 RSpec.describe Yuriita::Query do
-  describe "#keywords" do
-    it "returns the initialized keywords" do
-      keywords = double(:keywords)
-      query = described_class.new(keywords: keywords)
-
-      expect(query.keywords).to eq keywords
-    end
-  end
-
   describe "#inputs" do
     it "returns the initialized" do
       inputs = double(:inputs)
@@ -54,18 +45,6 @@ RSpec.describe Yuriita::Query do
       expect do |b|
         query.each(&b)
       end.to yield_successive_args(published, draft)
-    end
-  end
-
-  describe "#each_element" do
-    it "yields inputs and keywords" do
-      published = build(:input, qualifier: "is", term: "published")
-      draft = build(:input, qualifier: "is", term: "draft")
-      query = described_class.new(inputs: [published, draft], keywords: ["cat"])
-
-      expect do |b|
-        query.each_element(&b)
-      end.to yield_successive_args(published, draft, "cat")
     end
   end
 

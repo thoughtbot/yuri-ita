@@ -4,17 +4,18 @@ class MovieDefinition
   end
 
   def build
-    Yuriita::Configuration.new(definitions: definitions, scopes: scopes)
+    Yuriita::Configuration.new(definitions)
   end
 
   private
 
-  def scopes
-    { movie: movie_scope }
-  end
-
   def definitions
-    { status: status_definition, adult: adult_definition, sort: sort_definition }
+    {
+      status: status_definition,
+      adult: adult_definition,
+      sort: sort_definition,
+      movie: movie_scope,
+    }
   end
 
   def movie_scope

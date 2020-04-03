@@ -1,16 +1,14 @@
 module Yuriita
   class Query
     class Fragment
-      attr_reader :keywords, :inputs
+      attr_reader :inputs
 
-      def initialize(keywords: [], inputs: [])
-        @keywords = keywords
+      def initialize(inputs: [])
         @inputs = inputs
       end
 
       def merge(other)
         Fragment.new(
-          keywords: keywords + other.keywords,
           inputs: inputs + other.inputs,
         )
       end

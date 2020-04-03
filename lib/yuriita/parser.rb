@@ -7,7 +7,6 @@ module Yuriita
     production(:query) do
       clause("SPACE? .fragment SPACE?") do |fragment|
         Query.new(
-          keywords: fragment.keywords,
           inputs: fragment.inputs,
         )
       end
@@ -16,7 +15,7 @@ module Yuriita
 
     production(:fragment) do
       clause(".keyword") do |keyword|
-        Query::Fragment.new(keywords: [keyword])
+        Query::Fragment.new(inputs: [keyword])
       end
       clause(".search_input") do |search_input|
         Query::Fragment.new(inputs: [search_input])

@@ -41,7 +41,7 @@ module Yuriita
     end
 
     def keywords
-      query.keywords
+      query.inputs.reject{|input| input.is_a?  Query::Input}
     end
   end
 end

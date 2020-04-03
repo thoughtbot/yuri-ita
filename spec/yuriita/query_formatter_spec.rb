@@ -1,13 +1,12 @@
 RSpec.describe Yuriita::QueryFormatter do
   describe "#format" do
-    it "returns a an input string keyed by the param_key" do
-      published = build(:input, qualifier: "is", term: "published")
-      title = build(:input, qualifier: "in", term: "title")
-      query = Yuriita::Query.new(inputs: [published, title], keywords: ["cats"])
+    it "returns a an ordered input string keyed by the param_key" do
+      string = "cats in:title is:published"
+      query =Yuriita::QueryBuilder.build(string)
 
       formatted = described_class.new(param_key: :q).format(query)
 
-      expect(formatted).to eq({ q: "is:published in:title cats" })
+      expect(formatted).to eq({ q: "cats in:title is:published" })
     end
 
     it "returns an empty string when the query is empty" do
