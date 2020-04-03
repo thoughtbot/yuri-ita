@@ -1,6 +1,6 @@
 require "bundler/setup"
 require "yuriita"
-require "factory_bot_rails"
+require "factory_bot"
 
 RSpec.configure do |config|
 
