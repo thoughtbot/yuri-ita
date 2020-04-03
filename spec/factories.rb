@@ -51,6 +51,14 @@ FactoryBot.define do
     end
   end
 
+  factory :query, class: "Yuriita::Query" do
+    skip_create
+
+    inputs { [] }
+
+    initialize_with { new(attributes) }
+  end
+
   factory :input, class: "Yuriita::Query::Input" do
     skip_create
 
@@ -58,6 +66,24 @@ FactoryBot.define do
     term { "published" }
 
     initialize_with { new(attributes) }
+  end
+
+  factory :option, class: "Yuriita::Option" do
+    skip_create
+
+    name { "Option Name" }
+    filter { build(:expression_filter) }
+
+    initialize_with { new(attributes) }
+  end
+
+  factory :expression_filter, class: "Yuriita::ExpressionFilter" do
+    skip_create
+
+    input
+    block { ->(relation) { relation } }
+
+    initialize_with { new(input: input, &block) }
   end
 
   factory :genre do

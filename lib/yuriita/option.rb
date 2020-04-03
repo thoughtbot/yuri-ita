@@ -10,5 +10,10 @@ module Yuriita
     def input
       filter.input
     end
+
+    def ==(other)
+      other.is_a?(self.class) && other.name == name
+    end
+    alias_method :eql?, :==
   end
 end

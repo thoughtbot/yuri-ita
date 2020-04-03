@@ -1,0 +1,30 @@
+module Yuriita
+  class MultiSelect
+    def initialize(options:, query:)
+      @options = options
+      @query = query
+    end
+
+    def filters
+      active_options.map(&:filter)
+    end
+
+    def selected?(option)
+      active_options.include?(option)
+    end
+
+    def empty?
+      filters.empty?
+    end
+
+    private
+
+    attr_reader :options, :query
+
+    def active_options
+      options.select do |option|
+        query.include?(option.input)
+      end
+    end
+  end
+end

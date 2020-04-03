@@ -7,9 +7,9 @@ module Yuriita
     end
 
     def apply(relation)
-      return relation if active_filters.empty?
+      return relation if selector.empty?
 
-      relations = active_filters.map { |filter| filter.apply(relation) }
+      relations = selector.filters.map { |filter| filter.apply(relation) }
 
       definition.combination.new(
         base_relation: relation,
@@ -32,13 +32,9 @@ module Yuriita
     def view_option(option)
       ViewOption.new(
         name: option.name,
-        selected: selected?(option),
+        selected: selector.selected?(option),
         params: params(option),
       )
-    end
-
-    def selected?(option)
-      active_options.include?(option)
     end
 
     def params(option)
@@ -46,7 +42,7 @@ module Yuriita
     end
 
     def build_query(option)
-      if selected?(option)
+      if selector.selected?(option)
         option_query = query.dup
         option_query.delete(option.input)
       else
@@ -55,18 +51,12 @@ module Yuriita
       end
     end
 
-    def active_filters
-      active_options.map(&:filter)
-    end
-
-    def active_options
-      options.select do |option|
-        query.include?(option.input)
-      end
-    end
-
     def options
       definition.options
+    end
+
+    def selector
+      MultiSelect.new(options: options, query: query)
     end
   end
 end

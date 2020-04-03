@@ -7,9 +7,9 @@ module Yuriita
     end
 
     def apply(relation)
-      return relation if active_filter.nil?
+      return relation if selector.empty?
 
-      active_filter.apply(relation)
+      selector.filter.apply(relation)
     end
 
     def view_options
@@ -27,17 +27,9 @@ module Yuriita
     def view_option(option)
       ViewOption.new(
         name: option.name,
-        selected: selected?(option),
+        selected: selector.selected?(option),
         params: params(option),
       )
-    end
-
-    def selected?(option)
-      if active_option.present?
-        active_option == option
-      else
-        false
-      end
     end
 
     def params(option)
@@ -45,7 +37,7 @@ module Yuriita
     end
 
     def build_query(option)
-      if selected?(option)
+      if selector.selected?(option)
         option_query = query.dup
         matching_inputs.each do |input|
           option_query.delete(input)
@@ -60,27 +52,6 @@ module Yuriita
       end
     end
 
-    def active_filter
-      if active_option.present?
-        active_option.filter
-      end
-    end
-
-    def active_option
-      input = last_matching_input
-      if input.present?
-        option_for(input)
-      end
-    end
-
-    def last_matching_input
-      matching_inputs.last
-    end
-
-    def option_for(input)
-      options.detect { |option| option.input == input }
-    end
-
     def matching_inputs
       query.select do |input|
         options.any? { |option| option.input == input }
@@ -89,6 +60,10 @@ module Yuriita
 
     def options
       definition.options
+    end
+
+    def selector
+      SingleSelect.new(options: options, query: query)
     end
   end
 end

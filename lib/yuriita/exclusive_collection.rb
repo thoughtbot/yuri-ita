@@ -7,7 +7,7 @@ module Yuriita
     end
 
     def apply(relation)
-      active_filter.apply(relation)
+      selector.filter.apply(relation)
     end
 
     def view_options
@@ -25,16 +25,9 @@ module Yuriita
     def view_option(option)
       ViewOption.new(
         name: option.name,
-        selected: selected?(option),
+        selected: selector.selected?(option),
         params: params(option),
       )
-    end
-
-    def selected?(option)
-      # We have to do this because of how we're creating the options.
-      # In the definition we are creating duplicate options when we call the
-      # method multiple times.
-      active_option.name == option.name
     end
 
     def params(option)
@@ -42,7 +35,7 @@ module Yuriita
     end
 
     def build_query(option)
-      if selected?(option)
+      if selector.selected?(option)
         option_query = query.dup
         matching_inputs.each do |input|
           option_query.delete(input)
@@ -57,29 +50,6 @@ module Yuriita
       end
     end
 
-    def active_filter
-      active_option.filter
-    end
-
-    def active_option
-      chosen_option || default_option
-    end
-
-    def chosen_option
-      input = last_matching_input
-      if input.present?
-        option_for(input)
-      end
-    end
-
-    def last_matching_input
-      matching_inputs.last
-    end
-
-    def option_for(input)
-      options.detect { |option| option.input == input }
-    end
-
     def matching_inputs
       query.select do |input|
         options.any? { |option| option.input == input }
@@ -90,8 +60,12 @@ module Yuriita
       definition.options
     end
 
-    def default_option
-      definition.default
+    def selector
+      ExclusiveSelect.new(
+        options: options,
+        default: definition.default,
+        query: query,
+      )
     end
   end
 end
