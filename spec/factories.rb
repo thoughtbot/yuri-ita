@@ -86,6 +86,17 @@ FactoryBot.define do
     initialize_with { new(input: input, &block) }
   end
 
+  factory :search_filter, class: "Yuriita::SearchFilter" do
+    skip_create
+
+    input
+    combination { Yuriita::AndCombination }
+
+    block { ->(relation) { relation } }
+
+    initialize_with { new(input: input, combination: combination, &block) }
+  end
+
   factory :genre do
     tmdb_id
     name { "Comedy" }

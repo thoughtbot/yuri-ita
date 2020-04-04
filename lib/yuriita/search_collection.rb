@@ -6,11 +6,10 @@ module Yuriita
     end
 
     def apply(relation)
-      return relation if active_filters.empty? || keywords.empty?
+      selector = AllOrExplicitSelect.new(options: options, query: query)
+      return relation if selector.empty?
 
-      relations = active_filters.map do |filter|
-        filter.apply(relation, keywords)
-      end
+      relations = selector.filters.map { |filter| filter.apply(relation, keywords) }
 
       scope.combination.new(
         base_relation: relation,
@@ -21,20 +20,6 @@ module Yuriita
     private
 
     attr_reader :scope, :query
-
-    def active_filters
-      selected_options.map(&:filter)
-    end
-
-    def selected_options
-      explicit_options.presence || options
-    end
-
-    def explicit_options
-      options.select do |option|
-        query.include?(option.input)
-      end
-    end
 
     def options
       scope.options
