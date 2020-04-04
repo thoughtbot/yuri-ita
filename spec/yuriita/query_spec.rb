@@ -1,10 +1,27 @@
 RSpec.describe Yuriita::Query do
-  describe "#inputs" do
-    it "returns the initialized" do
-      inputs = double(:inputs)
-      query = described_class.new(inputs: inputs)
+  describe "#keywords" do
+    it "returns only keywords" do
+      active = build(:input, qualifier: "is", term: "active")
+      author = build(:input, qualifier: "author", term: "eebs")
 
-      expect(query.inputs).to eq inputs
+      query = described_class.new(
+        inputs: [active, "keyword", author]
+      )
+
+      expect(query.keywords).to eq ["keyword"]
+    end
+  end
+
+  describe "#inputs" do
+    it "returns all items" do
+      active = build(:input, qualifier: "is", term: "active")
+      author = build(:input, qualifier: "author", term: "eebs")
+
+      query = described_class.new(
+        inputs: [active, "keyword", author]
+      )
+
+      expect(query.inputs).to eq [active, "keyword", author]
     end
   end
 

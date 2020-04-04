@@ -8,6 +8,10 @@ module Yuriita
       @inputs = inputs
     end
 
+    def keywords
+      inputs.reject{ |input| input.is_a?(Query::Input) }
+    end
+
     def each(&block)
       block or return enum_for(__method__) { size }
       inputs.each(&block)
