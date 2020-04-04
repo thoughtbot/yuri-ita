@@ -7,6 +7,11 @@ module Yuriita
     end
 
     def apply(relation)
+      selector = ExclusiveSelect.new(
+        options: options,
+        default: definition.default,
+        query: query,
+      )
       selector.filter.apply(relation)
     end
 
@@ -24,48 +29,22 @@ module Yuriita
 
     def view_option(option)
       ViewOption.new(
-        name: option.name,
-        selected: selector.selected?(option),
-        params: params(option),
+        option: option,
+        selector: ExclusiveSelect.new(
+          options: options,
+          default: definition.default,
+          query: query,
+        ),
+        parameters: SingleParameter.new(
+          options: options,
+          query: query.dup,
+          formatter: formatter,
+        ),
       )
-    end
-
-    def params(option)
-      formatter.format build_query(option)
-    end
-
-    def build_query(option)
-      if selector.selected?(option)
-        option_query = query.dup
-        matching_inputs.each do |input|
-          option_query.delete(input)
-        end
-        option_query
-      else
-        option_query = query.dup
-        matching_inputs.each do |input|
-          option_query.delete(input)
-        end
-        option_query << option.input
-      end
-    end
-
-    def matching_inputs
-      query.select do |input|
-        options.any? { |option| option.input == input }
-      end
     end
 
     def options
       definition.options
-    end
-
-    def selector
-      ExclusiveSelect.new(
-        options: options,
-        default: definition.default,
-        query: query,
-      )
     end
   end
 end

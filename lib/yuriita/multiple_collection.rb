@@ -7,6 +7,7 @@ module Yuriita
     end
 
     def apply(relation)
+      selector = MultiSelect.new(options: options, query: query)
       return relation if selector.empty?
 
       relations = selector.filters.map { |filter| filter.apply(relation) }
@@ -31,32 +32,14 @@ module Yuriita
 
     def view_option(option)
       ViewOption.new(
-        name: option.name,
-        selected: selector.selected?(option),
-        params: params(option),
+        option: option,
+        selector: MultiSelect.new(options: options, query: query),
+        parameters: MultiParameter.new(query: query.dup, formatter: formatter),
       )
-    end
-
-    def params(option)
-      formatter.format build_query(option)
-    end
-
-    def build_query(option)
-      if selector.selected?(option)
-        option_query = query.dup
-        option_query.delete(option.input)
-      else
-        option_query = query.dup
-        option_query << option.input
-      end
     end
 
     def options
       definition.options
-    end
-
-    def selector
-      MultiSelect.new(options: options, query: query)
     end
   end
 end
