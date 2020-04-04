@@ -7,7 +7,7 @@ module Yuriita
     end
 
     def format(query)
-      value = query.each_element.map(&:to_s).join(SPACE)
+      value = query.each.map(&:to_s).join(SPACE)
       { param_key => value }
     end
 

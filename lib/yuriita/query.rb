@@ -2,23 +2,19 @@ module Yuriita
   class Query
     include Enumerable
 
-    attr_reader :keywords, :inputs
+    attr_reader :inputs
 
-    def initialize(keywords: [], inputs: [])
-      @keywords = keywords
+    def initialize(inputs: [])
       @inputs = inputs
+    end
+
+    def keywords
+      inputs.reject{ |input| input.is_a?(Query::Input) }
     end
 
     def each(&block)
       block or return enum_for(__method__) { size }
       inputs.each(&block)
-      self
-    end
-
-    def each_element(&block)
-      block or return enum_for(__method__) { size + keywords.size }
-      elements = inputs + keywords
-      elements.each(&block)
       self
     end
 
