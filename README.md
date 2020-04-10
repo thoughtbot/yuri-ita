@@ -1,14 +1,47 @@
-# Yuri-Ita
+# Yuri-ita
+
+🚧 This gem is in active development 🚧
+
+The yuri-ita (揺り板), Japanese for "rocking plate", is a traditional wooden gold
+pan used in Japan.
 
 The goal of this library is to provide developers with a powerful set of tools
-to build expressive user interfaces for filtering, searching, and sorting data.
+to build expressive user interfaces for filtering, searching, and sorting data
+in Ruby on Rails. It does not provide UI components but instead offers a simple
+interface that allows you to build your own UI.
 
-TODO: What problem are we solving
+[Check out a demo application showcasing some of the capabilities of the
+library.][demo]
 
-TODO: How does this library solve that problem
+[demo]: https://yuriita-prerelease.herokuapp.com/movies
 
-The yuri-ita (揺り板), Japanese for "rocking plate" is a traditional wooden gold
-pan used in Japan.
+## Introduction
+
+Yuri-ita offers a powerful set of tools to build powerful user interfaces that
+allow users to find exactly what they need while allowing designers and
+developers full control of the UI, filtering, and searching. Powerful primitives
+allow developers to compose the query and sorting behavior while using
+ActiveRecord scopes that already exist in your application.
+
+Yuri-ita allows you to define a "Table" which represents a particular set of
+data, how that data can be filtered and searched, and the current query. Each
+table is created from a flexible configuration of behaviors. Developers define
+collections of filters, sort options, and search fields. For each collection
+they define how each option changes the data, and how options interact with each
+other. Two options may be mutually exclusive and so cannot be selected
+simultaneously. Two other options may be complementary and combine to either
+expand or reduce the filtered data. All of this behavior is chosen by the
+developer or designer within a modest set of constraints.
+
+Yuri-ita supports configurable keyword searching in one or more fields. Each
+table defines options for searching and how to combine those options.
+
+Through the configuration an expressive query language is created. Each filter,
+sort, or search option defines a textual representation. This text
+representation can be used directly in a text field to apply filters. Not all
+filters need to have an associated UI component, which allows for each table to
+have powerful advanced search behavior that can be accessed when needed without
+causing visual clutter.
 
 ## Installation
 
@@ -28,7 +61,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Give examples!
+### Creating a Table
+
+- The Base Relation
+- Params
+- Table Configuration
+
+#### Rendering a table
+
+- Options
+- Items
+- Query input
+
+### Table Configuration
+
+- Filtering and Sorting
+  - Exclusive
+  - Multiple
+  - Single
+- Searching
+- Dynamically creating options
+
+## Examples
 
 ## Contributing
 
