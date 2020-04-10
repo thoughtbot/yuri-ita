@@ -16,7 +16,11 @@ module Yuriita
       alias_method :eql?, :==
 
       def to_s
-        "#{qualifier}:#{term}"
+        if term.match?(" ")
+          "#{qualifier}:\"#{term}\""
+        else
+          "#{qualifier}:#{term}"
+        end
       end
     end
   end
