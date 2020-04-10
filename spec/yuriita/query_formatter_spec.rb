@@ -16,5 +16,14 @@ RSpec.describe Yuriita::QueryFormatter do
 
       expect(formatted).to eq({ q: "" })
     end
+
+    it "wraps the term in quotes when the query contains terms with spaces" do
+      string = "cats in:title is:\"post production\""
+      query = Yuriita::QueryBuilder.build(string)
+
+      formatted = described_class.new(param_key: :q).format(query)
+
+      expect(formatted).to eq({ q: string })
+    end
   end
 end
