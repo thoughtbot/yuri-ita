@@ -100,7 +100,7 @@ class MovieDefinition
 
   def post_production_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "is", term: "post_production"),
+      input: Yuriita::Query::Input.new(qualifier: "is", term: "post-production"),
     ) do |relation|
       relation.post_production
     end
