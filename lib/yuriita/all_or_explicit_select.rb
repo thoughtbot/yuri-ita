@@ -9,10 +9,6 @@ module Yuriita
       active_options.map(&:filter)
     end
 
-    def empty?
-      keywords.empty?
-    end
-
     private
 
     attr_reader :options, :query
@@ -25,10 +21,6 @@ module Yuriita
       options.select do |option|
         query.include?(option.input)
       end
-    end
-
-    def keywords
-      query.keywords
     end
   end
 end

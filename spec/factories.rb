@@ -92,7 +92,7 @@ FactoryBot.define do
     input
     combination { Yuriita::AndCombination }
 
-    block { ->(relation) { relation } }
+    block { ->(relation, term) { relation } }
 
     initialize_with { new(input: input, combination: combination, &block) }
   end

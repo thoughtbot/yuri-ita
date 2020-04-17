@@ -6,15 +6,6 @@ module Yuriita
       @formatter = formatter
     end
 
-    def apply(relation)
-      selector = ExclusiveSelect.new(
-        options: options,
-        default: definition.default,
-        query: query,
-      )
-      selector.filter.apply(relation)
-    end
-
     def view_options
       return enum_for(:view_options) unless block_given?
 

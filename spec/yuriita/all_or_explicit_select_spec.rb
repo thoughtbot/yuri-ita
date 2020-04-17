@@ -50,40 +50,6 @@ RSpec.describe Yuriita::AllOrExplicitSelect do
     end
   end
 
-  describe "#empty?" do
-    it "returns true when there are no keywords" do
-      title_option = build_option("Title", "in", "title")
-      tagline_option = build_option("Tagline", "in", "tagline")
-      query = build(
-        :query,
-        inputs: [build(:input, qualifier: "in", term: "title")],
-      )
-
-      selector = described_class.new(
-        options: [title_option, tagline_option],
-        query: query,
-      )
-
-      expect(selector).to be_empty
-    end
-
-    it "returns false if there are any keywords" do
-      title_option = build_option("Title", "in", "title")
-      tagline_option = build_option("Tagline", "in", "tagline")
-      query = build(
-        :query,
-        inputs: ["cats"],
-      )
-
-      selector = described_class.new(
-        options: [title_option, tagline_option],
-        query: query,
-      )
-
-      expect(selector).not_to be_empty
-    end
-  end
-
   def build_option(name, qualifier, term)
     input = build(:input, qualifier: qualifier, term: term)
     build(:option, name: name, filter: build(:search_filter, input: input))

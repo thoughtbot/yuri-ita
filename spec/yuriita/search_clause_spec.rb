@@ -1,0 +1,42 @@
+require "rails_helper"
+
+RSpec.describe Yuriita::SearchClause do
+  describe "#apply" do
+    it "returns the relation when there are no filters or keywords" do
+      combination = Yuriita::OrCombination
+      relation = double(:relation)
+
+      clause = described_class.new(
+        filters: [],
+        keywords: [],
+        combination: combination,
+      )
+      result = clause.apply(relation)
+
+      expect(result).to eq(relation)
+    end
+
+    it "combines the applied filters using the combination" do
+      cats_post = create(:post, title: "cats")
+      ducks_post = create(:post, title: "ducks", description: "cats")
+      title_filter = build(
+        :search_filter,
+        block: ->(relation, term) { relation.search(:title, term) },
+      )
+      description_filter = build(
+        :search_filter,
+        block: ->(relation, term) { relation.search(:description, term) },
+      )
+      filters = [title_filter, description_filter]
+
+      clause = described_class.new(
+        filters: filters,
+        keywords: ["cats"],
+        combination: Yuriita::OrCombination,
+      )
+      result = clause.apply(Post.all)
+
+      expect(result).to contain_exactly(cats_post, ducks_post)
+    end
+  end
+end

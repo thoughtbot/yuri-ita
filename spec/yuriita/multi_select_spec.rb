@@ -58,24 +58,6 @@ RSpec.describe Yuriita::MultiSelect do
     end
   end
 
-  describe "#empty?" do
-    it "returns true when none of the options match the query" do
-      active_option = build_option("Active", "is", "active")
-      hidden_option = build_option("Hidden", "is", "hidden")
-      query = build(
-        :query,
-        inputs: [build(:input, qualifier: "author", term: "eebs")],
-      )
-
-      selector = described_class.new(
-        options: [active_option, hidden_option],
-        query: query,
-      )
-
-      expect(selector).to be_empty
-    end
-  end
-
   def build_option(name, qualifier, term)
     input = build(:input, qualifier: qualifier, term: term)
     build(:option, name: name, filter: build(:expression_filter, input: input))

@@ -8,9 +8,12 @@ module Yuriita
     end
 
     def apply(query:)
-      SearchCollection.new(
-        scope: self,
-        query: query
+      selector = AllOrExplicitSelect.new(options: options, query: query)
+
+      SearchClause.new(
+        filters: selector.filters,
+        keywords: query.keywords,
+        combination: combination,
       )
     end
   end

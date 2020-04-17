@@ -8,10 +8,14 @@ module Yuriita
     end
 
     def apply(query:)
-      ExclusiveCollection.new(
-        definition: self,
+      selector = ExclusiveSelect.new(
+        options: options,
+        default: default,
         query: query,
       )
+
+      filters = [selector.filter]
+      FilterClause.new(filters: filters, combination: combination)
     end
 
     def view_options(query:, param_key:)
@@ -20,6 +24,10 @@ module Yuriita
         query: query,
         formatter: Yuriita::QueryFormatter.new(param_key: param_key),
       ).view_options
+    end
+
+    def combination
+      AndCombination
     end
   end
 end

@@ -30,6 +30,8 @@
 
     - **Search collection**: A collection resulting from applying the filter(s) from an all or explicit select
 
+- **Clause**: Contains the selected filters and a means to combine them.
+
 - **Select**: Given a definition and a query, returns the filter selected by the query that should be applied to a relation
     - **Multiple select**: Returns an array of all selected filters
 
@@ -41,7 +43,7 @@
 
 - **Filter**:   A set of matchers, a combination, and a block that produce a list of clauses
 
-    - **Expression filter**:  A filter that can be applied to a list of expression inputs 
+    - **Expression filter**:  A filter that can be applied to a list of expression inputs
 
     - **Keyword filter**:  A filter that can be applied to a list of keywords and optional scope inputs
 

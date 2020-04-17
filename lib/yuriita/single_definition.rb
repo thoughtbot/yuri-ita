@@ -7,10 +7,10 @@ module Yuriita
     end
 
     def apply(query:)
-      SingleCollection.new(
-        definition: self,
-        query: query,
-      )
+      selector = SingleSelect.new(options: options, query: query)
+
+      filters = [selector.filter].compact
+      FilterClause.new(filters: filters, combination: combination)
     end
 
     def view_options(query:, param_key:)
@@ -19,6 +19,10 @@ module Yuriita
         query: query,
         formatter: Yuriita::QueryFormatter.new(param_key: param_key),
       ).view_options
+    end
+
+    def combination
+      AndCombination
     end
   end
 end

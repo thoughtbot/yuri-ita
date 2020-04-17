@@ -19,10 +19,6 @@ module Yuriita
       end
     end
 
-    def empty?
-      filter.nil?
-    end
-
     private
 
     attr_reader :options, :query

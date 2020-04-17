@@ -6,18 +6,6 @@ module Yuriita
       @formatter = formatter
     end
 
-    def apply(relation)
-      selector = MultiSelect.new(options: options, query: query)
-      return relation if selector.empty?
-
-      relations = selector.filters.map { |filter| filter.apply(relation) }
-
-      definition.combination.new(
-        base_relation: relation,
-        relations: relations,
-      ).combine
-    end
-
     def view_options
       return enum_for(:view_options) unless block_given?
 

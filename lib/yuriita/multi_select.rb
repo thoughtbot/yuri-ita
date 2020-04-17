@@ -13,10 +13,6 @@ module Yuriita
       active_options.include?(option)
     end
 
-    def empty?
-      filters.empty?
-    end
-
     private
 
     attr_reader :options, :query

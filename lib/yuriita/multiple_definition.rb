@@ -8,10 +8,9 @@ module Yuriita
     end
 
     def apply(query:)
-      MultipleCollection.new(
-        definition: self,
-        query: query,
-      )
+      selector = MultiSelect.new(options: options, query: query)
+
+      FilterClause.new(filters: selector.filters, combination: combination)
     end
 
     def view_options(query:, param_key:)
