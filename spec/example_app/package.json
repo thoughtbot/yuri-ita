@@ -1,5 +1,7 @@
 {
+  "license": "MIT",
   "dependencies": {
+    "@rails/ujs": "^6.0.2-2",
     "@rails/webpacker": "5.1.1"
   },
   "devDependencies": {
