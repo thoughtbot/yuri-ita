@@ -2,7 +2,8 @@
   "license": "MIT",
   "dependencies": {
     "@rails/ujs": "^6.0.2-2",
-    "@rails/webpacker": "5.1.1"
+    "@rails/webpacker": "5.1.1",
+    "stimulus": "^1.1.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"
