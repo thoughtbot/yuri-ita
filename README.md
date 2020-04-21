@@ -82,6 +82,42 @@ Or install it yourself as:
 - Searching
 - Dynamically creating options
 
+### Clearing all filters, searches, and sorts
+
+You may wish to add a means to clear the current filters, searches, and sorts to
+your UI. Yuri-ita does provide an explicit means to reset the filters, but it
+does allow you to query the table to determine if it is currently filtered or
+not.
+
+```ruby
+table = Yuriita::Table.new(param_key: :q, params: { q: "is:published" })
+table.filtered? #=> true
+
+table = Yuriita::Table.new(param_key: :q, params: { q: "" })
+table.filtered? #=> false
+```
+
+You may use this `.fitlered?` method to conditionally render a link to reload
+the page without any query parameters.
+
+```erb
+<% if table.filtered? %>
+  <%= link_to "Clear all", posts_path %>
+<% end %>
+```
+
+This will reload the page without the table's query parameter, effectively
+resetting the table. There is no explicit reset because we want to leave it up
+to you to decide what "resetting" means. Resetting for your application may be
+reloading the page with some other default parameters.
+
+
+```erb
+<% if table.filtered? %>
+  <%= link_to "Clear all", posts_path(list: "mine") %>
+<% end %>
+```
+
 ## Examples
 
 ## Contributing

@@ -5,6 +5,10 @@
     <%= form_tag movies_path, method: :get do %>
       <%= text_field_tag :q, table.q, size: 50, autocomplete: "off" %>
     <% end %>
+
+    <% if table.filtered? %>
+      <%= link_to "Clear current search, filters, and sort", movies_path %>
+    <% end %>
   </div>
 
   <div class="index-table">

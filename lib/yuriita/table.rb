@@ -20,7 +20,7 @@ module Yuriita
       if input.present?
         input.strip + SPACE
       else
-        input
+        input.strip
       end
     end
 
@@ -33,12 +33,24 @@ module Yuriita
       Runner.new(relation: relation, configuration: configuration).run(query)
     end
 
+    def filtered?
+      user_input.present?
+    end
+
     private
 
     attr_reader :relation, :params, :configuration, :param_key
 
     def input
-      params[param_key] || EMPTY_STRING
+      user_input || default_input
+    end
+
+    def user_input
+      params[param_key].presence
+    end
+
+    def default_input
+      EMPTY_STRING
     end
 
     def query
