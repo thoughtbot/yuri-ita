@@ -1,6 +1,6 @@
 module Yuriita
   class Configuration
-    attr_reader :definitions
+    include Enumerable
 
     def initialize(definitions)
       @definitions = definitions
@@ -9,5 +9,19 @@ module Yuriita
     def find_definition(key)
       definitions.fetch(key)
     end
+
+    def each(&block)
+      block or return enum_for(__method__) { size }
+      definitions.each_value(&block)
+      self
+    end
+
+    def size
+      definitions.size
+    end
+
+    private
+
+    attr_reader :definitions
   end
 end

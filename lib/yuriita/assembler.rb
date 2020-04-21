@@ -7,7 +7,7 @@ module Yuriita
     end
 
     def build(query)
-      configuration.definitions.each_value.map do |definition|
+      configuration.map do |definition|
         definition.apply(query: query)
       end
     end
