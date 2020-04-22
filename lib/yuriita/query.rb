@@ -8,6 +8,10 @@ module Yuriita
       @inputs = inputs
     end
 
+    def ==(other)
+      other.is_a?(self.class) && other.inputs == inputs
+    end
+
     def keywords
       inputs.reject{ |input| input.is_a?(Query::Input) }
     end

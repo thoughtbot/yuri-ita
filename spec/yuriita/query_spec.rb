@@ -25,6 +25,45 @@ RSpec.describe Yuriita::Query do
     end
   end
 
+  describe "#==" do
+    it "is equal if the inputs are equal and in the same order" do
+      active = build(:input, qualifier: "is", term: "active")
+      author = build(:input, qualifier: "author", term: "eebs")
+
+      query = described_class.new(inputs: [active, author])
+      other = described_class.new(inputs: [active, author])
+
+      expect(query).to eq other
+    end
+
+    it "is not equal if the inputs are equal but in a different order" do
+      active = build(:input, qualifier: "is", term: "active")
+      author = build(:input, qualifier: "author", term: "eebs")
+
+      query = described_class.new(inputs: [author, active])
+      other = described_class.new(inputs: [active, author])
+
+      expect(query).not_to eq other
+    end
+
+    it "is not equal if the inputs are different" do
+      active = build(:input, qualifier: "is", term: "active")
+      author = build(:input, qualifier: "author", term: "eebs")
+
+      query = described_class.new(inputs: [author, active])
+      other = described_class.new(inputs: [author])
+
+      expect(query).not_to eq other
+    end
+
+    it "is equal if both queries are empty" do
+      query = described_class.new(inputs: [])
+      other = described_class.new(inputs: [])
+
+      expect(query).to eq other
+    end
+  end
+
   describe "#dup" do
     it "duplicates the inputs" do
       input = Yuriita::Query::Input.new(qualifier: "is", term: "original")
