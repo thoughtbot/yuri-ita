@@ -9,18 +9,32 @@ module Yuriita
     SPACE = " ".freeze
     EMPTY_STRING = "".freeze
 
-    def initialize(relation:, params:, configuration:, param_key: :q)
+    def initialize(
+      relation:,
+      params:,
+      configuration:,
+      default_input: EMPTY_STRING,
+      param_key: :q
+    )
       @relation = relation
       @params = params
       @configuration = configuration
+      @default_input = default_input
       @param_key = param_key
     end
 
     def q
-      if input.present?
-        input.strip + SPACE
+      output =
+        if user_input?
+          user_input
+        else
+          default_input
+        end
+
+      if output.blank?
+        EMPTY_STRING
       else
-        input.strip
+        output + SPACE
       end
     end
 
@@ -34,27 +48,35 @@ module Yuriita
     end
 
     def filtered?
-      user_input.present?
+      user_input? && user_query != default_query
     end
 
     private
 
-    attr_reader :relation, :params, :configuration, :param_key
+    attr_reader :relation, :params, :configuration, :default_input, :param_key
 
-    def input
-      user_input || default_input
+    def query
+      if user_input?
+        user_query
+      else
+        default_query
+      end
     end
 
     def user_input
-      params[param_key].presence
+      params.fetch(param_key, EMPTY_STRING)
     end
 
-    def default_input
-      EMPTY_STRING
+    def user_input?
+      params.key?(param_key)
     end
 
-    def query
-      QueryBuilder.build(input)
+    def default_query
+      QueryBuilder.build(default_input)
+    end
+
+    def user_query
+      QueryBuilder.build(user_input)
     rescue ParseError
       Query.new
     end
