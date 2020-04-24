@@ -42,4 +42,15 @@ RSpec.describe Yuriita::Configuration do
       expect(config.size).to eq 2
     end
   end
+
+  describe "#default_input" do
+    it "returns the default input" do
+      definitions = {
+        published: double(:definition),
+        sort: double(:definition),
+      }
+      config = described_class.new(definitions, default_input: "is:published")
+      expect(config.default_input).to eq "is:published"
+    end
+  end
 end
