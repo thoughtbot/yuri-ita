@@ -1,0 +1,6 @@
+<% options.each do |option| %>
+  <% classes = option.selected? ? ["filter-list__link", "active"] : ["filter-list__link"] %>
+  <%= link_to movies_path(option.params), class: classes do %>
+    <span><%= option.name %></span>
+  <% end %>
+<% end %>

@@ -1,27 +1,31 @@
-<div class="container">
-  <h1>Movies</h1>
+<div class="site-header">
+  <div class="site-header__content">
+    <h1>Top Movies</h1>
 
-  <div class="index-search">
-    <%= form_tag movies_path, method: :get do %>
+    <%= form_tag movies_path, method: :get, class: "index-search" do %>
+      <%= label_tag :q, "Search" %>
       <%= text_field_tag :q, table.q, size: 50, autocomplete: "off" %>
     <% end %>
-
-    <% if table.filtered? %>
-      <%= link_to "Clear current search, filters, and sort", movies_path %>
-    <% end %>
   </div>
+</div>
 
-  <div class="index-table">
-    <div class="index-table__header">
-      <div class="index-table__header-collections">
-        <%= render "toggle", options: table.options_for(:status) %>
-        <%= render "toggle", options: table.options_for(:adult) %>
-        <%= render "toggle", options: table.options_for(:sort) %>
-      </div>
+<div class="site-body">
+  <div class="site-body__content">
+    <div class="filter-list">
+      <h2 class="filter-list__heading">Filter</h2>
+      <%= render "options", options: table.options_for(:status) %>
+      <%= render "options", options: table.options_for(:adult) %>
+      <h2 class="filter-list__heading">Sort</h2>
+      <%= render "options", options: table.options_for(:sort) %>
     </div>
 
-    <ul>
-      <%= render(table.items) || render("empty_index") %>
-    </ul>
+    <div class="movie-list">
+      <% if table.filtered? %>
+        <%= link_to "Clear current search, filters, and sort", movies_path, class: "clear-filter-link"  %>
+      <% end %>
+      <ul>
+        <%= render(table.items) || render("empty_index") %>
+      </ul>
+    </div>
   </div>
 </div>

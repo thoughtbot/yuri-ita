@@ -11,14 +11,18 @@ $gray-700: #63676b;
 $gray-800: #494b4e;
 $gray-900: #262729;
 
-$table-header-color: $gray-100;
-$table-hover-color: #fff9d8;
-
 $background-color-base: #ffffff;
 $background-color-alt: #f4f4f4;
 
 $font-color-base: $gray-900;
 $font-color-inverse: #ffffff;
+
+$action-color: #001DB5;
+
+// Site
+
+$site-header-height: 9rem;
+$container-width: 90rem;
 
 // Font sizes
 
@@ -33,12 +37,7 @@ $font-weight-regular: 400;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
-// Line heights
-
-$line-height-base: 1.4;
-$line-height-tall: 1.8;
-
-// Size system
+// Spacing sizes
 
 $spacing-xs: 0.4rem;
 $spacing-sm: 0.8rem;
@@ -46,11 +45,9 @@ $spacing-md: 1.6rem;
 $spacing-lg: 3.2rem;
 $spacing-xl: 6.4rem;
 
-// Default styles
+// Borders
 
-$base-border: 1px solid $gray-300;
-$base-border-radius: 4px;
-$input-box-shadow: inset 1px 2px 4px 1px rgba(#000000, 0.12);
+$radius: 4px;
 
 // Default transitions
 
@@ -61,5 +58,3 @@ $slow-transition: 0.5s ease;
 // HTML Entities
 
 $entity-checkmark: "\2713"; //✓
-$entity-triangle-down: "\25BC" //▼
-

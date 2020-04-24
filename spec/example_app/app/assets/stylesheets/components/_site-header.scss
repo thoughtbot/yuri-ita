@@ -1,0 +1,16 @@
+.site-header {
+  background: $gray-800;
+  color: $white;
+  height: $site-header-height;
+}
+
+.site-header__content {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: $container-width;
+  padding: $spacing-md;
+  white-space: nowrap;
+}

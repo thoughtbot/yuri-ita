@@ -1,0 +1,30 @@
+.filter-list {
+  align-items: flex-start;
+  background-color: $gray-200;
+  display: flex;
+  flex-direction: column;
+  order: 1;
+  padding: $spacing-md;
+  padding-left: 0;
+  width: 22rem;
+}
+
+.filter-list__link {
+  margin-bottom: $spacing-sm;
+
+  &.active {
+    font-weight: 900;
+
+    &::before {
+      content: $entity-checkmark;
+    }
+  }
+}
+
+.filter-list__heading {
+  margin-bottom: $spacing-sm;
+
+  &:not(:first-child) {
+    margin-top: $spacing-md;
+  }
+}

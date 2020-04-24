@@ -1,6 +1,11 @@
-<li class="index-table__item">
-  <div>
-    <div><%= "#{movie.title} - #{movie.status}" %></div>
-    <div><%= "#{movie.tagline}" %></div>
+<li class="movie-card">
+  <div class="movie-card__title">
+    <%= movie.title %>
+  </div>
+  <div class="movie-card__tagline">
+    <%= movie.tagline %>
+  </div>
+  <div class="movie-card__status">
+    <%= movie.status %>
   </div>
 </li>
