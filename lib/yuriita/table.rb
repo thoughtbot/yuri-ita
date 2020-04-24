@@ -19,6 +19,8 @@ module Yuriita
       @params = params
       @configuration = configuration
       @param_key = param_key
+
+      alias :"#{param_key}" :q
     end
 
     def q

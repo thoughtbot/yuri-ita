@@ -19,6 +19,17 @@ RSpec.describe Yuriita::Table do
 
       expect(table.q).to eq ""
     end
+
+    it "is aliased to the param key when provided" do
+      table = described_class.new(
+        relation: double(:relation),
+        configuration: double(:configuration, default_input: "is:published"),
+        param_key: :input_query,
+        params: {input_query: ""},
+      )
+
+      expect(table.input_query).to eq ""
+    end
   end
 
   describe "#filtered?" do
