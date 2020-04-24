@@ -1,9 +1,13 @@
 module Yuriita
   class Configuration
     include Enumerable
+    EMPTY_STRING = "".freeze
 
-    def initialize(definitions)
+    attr_reader :default_input
+
+    def initialize(definitions, default_input: EMPTY_STRING)
       @definitions = definitions
+      @default_input = default_input
     end
 
     def find_definition(key)

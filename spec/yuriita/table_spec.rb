@@ -3,9 +3,8 @@ RSpec.describe Yuriita::Table do
     it "returns the default input if none is given" do
       table = described_class.new(
         relation: double(:relation),
-        configuration: double(:configuration),
+        configuration: double(:configuration, default_input: "is:published"),
         params: {},
-        default_input: "is:published"
       )
 
       expect(table.q).to eq "is:published "
@@ -14,9 +13,8 @@ RSpec.describe Yuriita::Table do
     it "returns the input when one is provided" do
       table = described_class.new(
         relation: double(:relation),
-        configuration: double(:configuration),
+        configuration: double(:configuration, default_input: "is:published"),
         params: { q: "" },
-        default_input: "is:published"
       )
 
       expect(table.q).to eq ""
@@ -27,9 +25,8 @@ RSpec.describe Yuriita::Table do
     it "is true when user input is not equal to the default input" do
       table = described_class.new(
         relation: double(:relation),
-        configuration: double(:configuration),
+        configuration: double(:configuration, default_input: "is:published"),
         params: { q: "is:draft" },
-        default_input: "is:published",
       )
 
       expect(table.filtered?).to be true
@@ -38,9 +35,8 @@ RSpec.describe Yuriita::Table do
     it "is true when the user input is in a different order from the default" do
       table = described_class.new(
         relation: double(:relation),
-        configuration: double(:configuration),
+        configuration: double(:configuration, default_input: "author:eebs is:draft"),
         params: { q: "is:draft author:eebs" },
-        default_input: "author:eebs is:draft",
       )
 
       expect(table.filtered?).to be true
@@ -49,9 +45,8 @@ RSpec.describe Yuriita::Table do
     it "is false when user input is equal to the default input" do
       table = described_class.new(
         relation: double(:relation),
-        configuration: double(:configuration),
+        configuration: double(:configuration, default_input: "is:published"),
         params: { q: "is:published" },
-        default_input: "is:published",
       )
 
       expect(table.filtered?).to be false
@@ -60,9 +55,8 @@ RSpec.describe Yuriita::Table do
     it "is false with no user input" do
       table = described_class.new(
         relation: double(:relation),
-        configuration: double(:configuration),
+        configuration: double(:configuration, default_input: "is:released"),
         params: {},
-        default_input: "is:released",
       )
 
       expect(table.filtered?).to be false

@@ -13,13 +13,11 @@ module Yuriita
       relation:,
       params:,
       configuration:,
-      default_input: EMPTY_STRING,
       param_key: :q
     )
       @relation = relation
       @params = params
       @configuration = configuration
-      @default_input = default_input
       @param_key = param_key
     end
 
@@ -51,9 +49,13 @@ module Yuriita
       user_input? && user_query != default_query
     end
 
+    def default_input
+      configuration.default_input
+    end
+
     private
 
-    attr_reader :relation, :params, :configuration, :default_input, :param_key
+    attr_reader :relation, :params, :configuration, :param_key
 
     def query
       if user_input?
