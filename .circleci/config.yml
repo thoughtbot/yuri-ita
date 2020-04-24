@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.5
+      - image: circleci/ruby:2.6.5-node-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -32,6 +32,24 @@ jobs:
           paths:
             - vendor/bundle
           key: yuriita-bundle-{{ checksum "Gemfile.lock" }}
+
+      - restore_cache:
+          keys:
+            - yuriita-yarn-{{ checksum "spec/example_app/yarn.lock" }}
+            - yuriita-yarn-
+
+      - run:
+          name: Yarn Install
+          command: bin/yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+
+      - save_cache:
+          key: yuriita-yarn-{{ checksum "spec/example_app/yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - run:
+          name: Precompile Assets
+          command: NODE_ENV=test bin/rails assets:precompile
 
       - run:
           name: Database Setup
