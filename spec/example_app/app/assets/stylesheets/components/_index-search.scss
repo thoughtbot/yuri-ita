@@ -1,3 +1,15 @@
 .index-search {
-  margin-bottom: $spacing-sm;
+  align-items: center;
+  display: flex;
+  font-size: $font-size-large;
+  width: 60%;
+}
+
+.index-search input {
+  border: 0;
+  border-radius: $radius;
+  flex: 1;
+  margin-left: $spacing-md;
+  min-width: 0;
+  padding: $spacing-sm;
 }
