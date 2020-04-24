@@ -38,6 +38,6 @@ RSpec.describe "single select options" do
   end
 
   def have_selected_option(text)
-    have_selector(".toggle-group__option.active", text: text)
+    have_selector(".filter-list__link.active", text: text)
   end
 end

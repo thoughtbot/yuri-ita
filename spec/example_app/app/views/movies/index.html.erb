@@ -21,7 +21,7 @@
 
     <div class="movie-list">
       <% if table.filtered? %>
-        <%= link_to "Reset search and filters", movies_path, class: "clear-filter-link"  %>
+        <%= link_to "Clear current search, filters, and sort", movies_path, class: "clear-filter-link"  %>
       <% end %>
       <ul>
         <%= render(table.items) || render("empty_index") %>
