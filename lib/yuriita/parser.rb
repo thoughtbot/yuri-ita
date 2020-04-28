@@ -5,30 +5,22 @@ module Yuriita
     left :SPACE
 
     production(:query) do
-      clause("SPACE? .fragment SPACE?") do |fragment|
-        Query.new(
-          inputs: fragment.inputs,
-        )
+      clause("SPACE? .input_list SPACE?") do |inputs|
+        Query.new(inputs: inputs)
       end
       clause("SPACE?") { |_| Query.new }
     end
 
-    production(:fragment) do
-      clause(".keyword") do |keyword|
-        Query::Fragment.new(inputs: [keyword])
-      end
-      clause(".search_input") do |search_input|
-        Query::Fragment.new(inputs: [search_input])
-      end
-      clause(".expression_input") do |expression_input|
-        Query::Fragment.new(inputs: [expression_input])
-      end
-      clause(".sort_input") do |sort_input|
-        Query::Fragment.new(inputs: [sort_input])
-      end
-      clause(".fragment SPACE .fragment") do |head, tail|
-        head.merge(tail)
-      end
+    production(:input_list) do
+      clause(".input") { |input| [input] }
+      clause(".input_list SPACE .input") { |head, tail| head + [tail] }
+    end
+
+    production(:input) do
+      clause(".keyword") { |keyword| keyword }
+      clause(".search_input") { |search_input| search_input }
+      clause(".expression_input") { |expression_input| expression_input }
+      clause(".sort_input") { |sort_input| sort_input }
     end
 
     production(:keyword) do
