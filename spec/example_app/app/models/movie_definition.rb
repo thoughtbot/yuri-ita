@@ -26,7 +26,7 @@ class MovieDefinition
   end
 
   def search_options
-    [title_option, tagline_option, overview_option]
+    [title_option, tagline_option]
   end
 
   def title_option
@@ -49,17 +49,6 @@ class MovieDefinition
     end
 
     Yuriita::Option.new(name: "In Tagline", filter: filter)
-  end
-
-  def overview_option
-    filter = Yuriita::SearchFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "in", term: "overview"),
-      combination: Yuriita::AndCombination,
-    ) do |relation, term|
-      relation.search(:overview, term)
-    end
-
-    Yuriita::Option.new(name: "In Overview", filter: filter)
   end
 
   def status_definition
