@@ -31,7 +31,7 @@ class MovieDefinition
 
   def title_option
     filter = Yuriita::SearchFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "in", term: "title"),
+      input: Yuriita::Inputs::Scope.new("in", "title"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:title, term)
@@ -42,7 +42,7 @@ class MovieDefinition
 
   def tagline_option
     filter = Yuriita::SearchFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "in", term: "tagline"),
+      input: Yuriita::Inputs::Scope.new("in", "tagline"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:tagline, term)
@@ -69,7 +69,7 @@ class MovieDefinition
 
   def rumored_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "is", term: "rumored"),
+      input: Yuriita::Inputs::Expression.new("is", "rumored"),
     ) do |relation|
       relation.rumored
     end
@@ -79,7 +79,7 @@ class MovieDefinition
 
   def released_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "is", term: "released"),
+      input: Yuriita::Inputs::Expression.new("is", "released"),
     ) do |relation|
       relation.released
     end
@@ -89,7 +89,7 @@ class MovieDefinition
 
   def post_production_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "is", term: "post-production"),
+      input: Yuriita::Inputs::Expression.new("is", "post-production"),
     ) do |relation|
       relation.post_production
     end
@@ -99,7 +99,7 @@ class MovieDefinition
 
   def cancelled_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "is", term: "cancelled"),
+      input: Yuriita::Inputs::Expression.new("is", "cancelled"),
     ) do |relation|
       relation.cancelled
     end
@@ -113,7 +113,7 @@ class MovieDefinition
 
   def adult_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "is", term: "adult"),
+      input: Yuriita::Inputs::Expression.new("is", "adult"),
     ) do |relation|
       relation.where(adult: true)
     end
@@ -123,7 +123,7 @@ class MovieDefinition
 
   def safe_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "is", term: "safe"),
+      input: Yuriita::Inputs::Expression.new("is", "safe"),
     ) do |relation|
       relation.where(adult: false)
     end
@@ -144,7 +144,7 @@ class MovieDefinition
 
   def rating_sort_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "sort", term: "default"),
+      input: Yuriita::Inputs::Sort.new("sort", "default"),
     ) do |relation|
       relation.order(vote_average: :desc)
     end
@@ -154,7 +154,7 @@ class MovieDefinition
 
   def title_desc_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "sort", term: "title-desc"),
+      input: Yuriita::Inputs::Sort.new("sort", "title-desc"),
     ) do |relation|
       relation.order(title: :desc)
     end
@@ -164,7 +164,7 @@ class MovieDefinition
 
   def title_asc_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Query::Input.new(qualifier: "sort", term: "title-asc"),
+      input: Yuriita::Inputs::Sort.new("sort", "title-asc"),
     ) do |relation|
       relation.order(title: :asc)
     end

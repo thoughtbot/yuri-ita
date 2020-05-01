@@ -1,16 +1,16 @@
 RSpec.describe Yuriita::MultiSelect do
   describe "filters" do
     it "returns the selected option's filters" do
-      active_input = build(:input, qualifier: "is", term: "active")
+      active_input = build(:expression, qualifier: "is", term: "active")
       active_filter = build(:expression_filter, input: active_input)
       active_option = build(:option, name: "Active", filter: active_filter)
-      hidden_input = build(:input, qualifier: "is", term: "hidden")
+      hidden_input = build(:expression, qualifier: "is", term: "hidden")
       hidden_filter = build(:expression_filter, input: hidden_input)
       hidden_option = build(:option, name: "Hidden", filter: hidden_filter)
 
       query = build(
         :query,
-        inputs: [build(:input, qualifier: "is", term: "active")],
+        inputs: [build(:expression, qualifier: "is", term: "active")],
       )
 
       selector = described_class.new(
@@ -28,7 +28,7 @@ RSpec.describe Yuriita::MultiSelect do
       hidden_option = build_option("Hidden", "is", "hidden")
       query = build(
         :query,
-        inputs: [build(:input, qualifier: "is", term: "active")],
+        inputs: [build(:expression, qualifier: "is", term: "active")],
       )
 
       selector = described_class.new(
@@ -45,7 +45,7 @@ RSpec.describe Yuriita::MultiSelect do
       hidden_option = build_option("Hidden", "is", "hidden")
       query = build(
         :query,
-        inputs: [build(:input, qualifier: "is", term: "active")],
+        inputs: [build(:expression, qualifier: "is", term: "active")],
       )
 
       selector = described_class.new(
@@ -59,7 +59,11 @@ RSpec.describe Yuriita::MultiSelect do
   end
 
   def build_option(name, qualifier, term)
-    input = build(:input, qualifier: qualifier, term: term)
-    build(:option, name: name, filter: build(:expression_filter, input: input))
+    expression = build(:expression, qualifier: qualifier, term: term)
+    build(
+      :option,
+      name: name,
+      filter: build(:expression_filter, input: expression),
+    )
   end
 end

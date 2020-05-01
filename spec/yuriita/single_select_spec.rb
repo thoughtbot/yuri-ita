@@ -2,16 +2,16 @@ RSpec.describe Yuriita::SingleSelect do
   describe "filter" do
     context "when there are no selected options" do
       it "returns the selected option's filter" do
-        active_input = build(:input, qualifier: "is", term: "active")
+        active_input = build(:expression, qualifier: "is", term: "active")
         active_filter = build(:expression_filter, input: active_input)
         active_option = build(:option, name: "Active", filter: active_filter)
-        hidden_input = build(:input, qualifier: "is", term: "hidden")
+        hidden_input = build(:expression, qualifier: "is", term: "hidden")
         hidden_filter = build(:expression_filter, input: hidden_input)
         hidden_option = build(:option, name: "Hidden", filter: hidden_filter)
 
         query = build(
           :query,
-          inputs: [build(:input, qualifier: "author", term: "eebs")],
+          inputs: [build(:expression, qualifier: "author", term: "eebs")],
         )
 
         selector = described_class.new(
@@ -25,16 +25,16 @@ RSpec.describe Yuriita::SingleSelect do
 
     context "when there is a selected option" do
       it "returns the selected option's filter" do
-        active_input = build(:input, qualifier: "is", term: "active")
+        active_input = build(:expression, qualifier: "is", term: "active")
         active_filter = build(:expression_filter, input: active_input)
         active_option = build(:option, name: "Active", filter: active_filter)
-        hidden_input = build(:input, qualifier: "is", term: "hidden")
+        hidden_input = build(:expression, qualifier: "is", term: "hidden")
         hidden_filter = build(:expression_filter, input: hidden_input)
         hidden_option = build(:option, name: "Hidden", filter: hidden_filter)
 
         query = build(
           :query,
-          inputs: [build(:input, qualifier: "is", term: "active")],
+          inputs: [build(:expression, qualifier: "is", term: "active")],
         )
 
         selector = described_class.new(
@@ -72,7 +72,7 @@ RSpec.describe Yuriita::SingleSelect do
 
         query = build(
           :query,
-          inputs: [build(:input, qualifier: "is", term: "active")],
+          inputs: [build(:expression, qualifier: "is", term: "active")],
         )
 
         selector = described_class.new(
@@ -93,8 +93,8 @@ RSpec.describe Yuriita::SingleSelect do
         query = build(
           :query,
           inputs: [
-            build(:input, qualifier: "is", term: "hidden"),
-            build(:input, qualifier: "is", term: "active"),
+            build(:expression, qualifier: "is", term: "hidden"),
+            build(:expression, qualifier: "is", term: "active"),
           ],
         )
 
@@ -112,7 +112,7 @@ RSpec.describe Yuriita::SingleSelect do
   end
 
   def build_option(name, qualifier, term)
-    input = build(:input, qualifier: qualifier, term: term)
+    input = build(:expression, qualifier: qualifier, term: term)
     build(:option, name: name, filter: build(:expression_filter, input: input))
   end
 end

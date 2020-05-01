@@ -1,21 +1,22 @@
 RSpec.describe Yuriita::Query do
   describe "#keywords" do
     it "returns only keywords" do
-      active = build(:input, qualifier: "is", term: "active")
-      author = build(:input, qualifier: "author", term: "eebs")
+      active = build(:expression, qualifier: "is", term: "active")
+      author = build(:expression, qualifier: "author", term: "eebs")
+      keyword = build(:keyword, value: "keyword")
 
       query = described_class.new(
-        inputs: [active, "keyword", author]
+        inputs: [active, keyword, author]
       )
 
-      expect(query.keywords).to eq ["keyword"]
+      expect(query.keywords).to eq [keyword("keyword")]
     end
   end
 
   describe "#inputs" do
     it "returns all items" do
-      active = build(:input, qualifier: "is", term: "active")
-      author = build(:input, qualifier: "author", term: "eebs")
+      active = build(:expression, qualifier: "is", term: "active")
+      author = build(:expression, qualifier: "author", term: "eebs")
 
       query = described_class.new(
         inputs: [active, "keyword", author]
@@ -27,8 +28,8 @@ RSpec.describe Yuriita::Query do
 
   describe "#==" do
     it "is equal if the inputs are equal and in the same order" do
-      active = build(:input, qualifier: "is", term: "active")
-      author = build(:input, qualifier: "author", term: "eebs")
+      active = build(:expression, qualifier: "is", term: "active")
+      author = build(:expression, qualifier: "author", term: "eebs")
 
       query = described_class.new(inputs: [active, author])
       other = described_class.new(inputs: [active, author])
@@ -37,8 +38,8 @@ RSpec.describe Yuriita::Query do
     end
 
     it "is not equal if the inputs are equal but in a different order" do
-      active = build(:input, qualifier: "is", term: "active")
-      author = build(:input, qualifier: "author", term: "eebs")
+      active = build(:expression, qualifier: "is", term: "active")
+      author = build(:expression, qualifier: "author", term: "eebs")
 
       query = described_class.new(inputs: [author, active])
       other = described_class.new(inputs: [active, author])
@@ -47,8 +48,8 @@ RSpec.describe Yuriita::Query do
     end
 
     it "is not equal if the inputs are different" do
-      active = build(:input, qualifier: "is", term: "active")
-      author = build(:input, qualifier: "author", term: "eebs")
+      active = build(:expression, qualifier: "is", term: "active")
+      author = build(:expression, qualifier: "author", term: "eebs")
 
       query = described_class.new(inputs: [author, active])
       other = described_class.new(inputs: [author])
@@ -66,8 +67,8 @@ RSpec.describe Yuriita::Query do
 
   describe "#dup" do
     it "duplicates the inputs" do
-      input = Yuriita::Query::Input.new(qualifier: "is", term: "original")
-      new_input = Yuriita::Query::Input.new(qualifier: "is", term: "new")
+      input = Yuriita::Inputs::Expression.new("is", "original")
+      new_input = Yuriita::Inputs::Expression.new("is", "new")
       original = described_class.new(inputs: [input])
 
       duplicate = original.dup
@@ -80,8 +81,8 @@ RSpec.describe Yuriita::Query do
 
   describe "#clone" do
     it "duplicates the inputs" do
-      input = Yuriita::Query::Input.new(qualifier: "is", term: "original")
-      new_input = Yuriita::Query::Input.new(qualifier: "is", term: "new")
+      input = Yuriita::Inputs::Expression.new("is", "original")
+      new_input = Yuriita::Inputs::Expression.new("is", "new")
       original = described_class.new(inputs: [input])
 
       duplicate = original.clone
@@ -94,8 +95,8 @@ RSpec.describe Yuriita::Query do
 
   describe "#each" do
     it "yields the inputs" do
-      published = build(:input, qualifier: "is", term: "published")
-      draft = build(:input, qualifier: "is", term: "draft")
+      published = build(:expression, qualifier: "is", term: "published")
+      draft = build(:expression, qualifier: "is", term: "draft")
       query = described_class.new(inputs: [published, draft])
 
       expect do |b|
@@ -106,7 +107,7 @@ RSpec.describe Yuriita::Query do
 
   describe "#add_input" do
     it "adds an input to the query" do
-      published = build(:input, qualifier: "is", term: "published")
+      published = build(:expression, qualifier: "is", term: "published")
       query = described_class.new(inputs: [])
 
       query.add_input(published)
@@ -117,8 +118,8 @@ RSpec.describe Yuriita::Query do
 
   describe "#delete" do
     it "removes an input from the query" do
-      published = build(:input, qualifier: "is", term: "published")
-      draft = build(:input, qualifier: "is", term: "draft")
+      published = build(:expression, qualifier: "is", term: "published")
+      draft = build(:expression, qualifier: "is", term: "draft")
       query = described_class.new(inputs: [published, draft])
 
       query.delete(published)
@@ -130,8 +131,8 @@ RSpec.describe Yuriita::Query do
 
   describe "#include?" do
     it "is true if the query contains the input" do
-      published = build(:input, qualifier: "is", term: "published")
-      draft = build(:input, qualifier: "is", term: "draft")
+      published = build(:expression, qualifier: "is", term: "published")
+      draft = build(:expression, qualifier: "is", term: "draft")
 
       query = described_class.new(inputs: [published, draft])
 
@@ -139,7 +140,7 @@ RSpec.describe Yuriita::Query do
     end
 
     it "is false if the query does not contain the input" do
-      published = build(:input, qualifier: "is", term: "published")
+      published = build(:expression, qualifier: "is", term: "published")
       query = described_class.new(inputs: [])
 
       expect(query).not_to include(published)
@@ -148,8 +149,8 @@ RSpec.describe Yuriita::Query do
 
   describe "#delete_if" do
     it "removes inputs matching the block" do
-      published = build(:input, qualifier: "is", term: "published")
-      draft = build(:input, qualifier: "is", term: "draft")
+      published = build(:expression, qualifier: "is", term: "published")
+      draft = build(:expression, qualifier: "is", term: "draft")
       query = described_class.new(inputs: [published, draft])
 
       query.delete_if { |input| input == published }
@@ -161,8 +162,8 @@ RSpec.describe Yuriita::Query do
 
   describe "#size" do
     it "returns the number of inputs" do
-      published = build(:input, qualifier: "is", term: "published")
-      draft = build(:input, qualifier: "is", term: "draft")
+      published = build(:expression, qualifier: "is", term: "published")
+      draft = build(:expression, qualifier: "is", term: "draft")
 
       query = described_class.new(inputs: [published, draft])
 
@@ -174,5 +175,9 @@ RSpec.describe Yuriita::Query do
 
       expect(query.size).to eq 0
     end
+  end
+
+  def keyword(value)
+    Yuriita::Inputs::Keyword.new(value)
   end
 end

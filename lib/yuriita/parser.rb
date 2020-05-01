@@ -18,35 +18,37 @@ module Yuriita
 
     production(:input) do
       clause(".keyword") { |keyword| keyword }
-      clause(".search_input") { |search_input| search_input }
-      clause(".expression_input") { |expression_input| expression_input }
-      clause(".sort_input") { |sort_input| sort_input }
+      clause(".scope") { |scope| scope }
+      clause(".expression") { |expression| expression }
+      clause(".sort") { |sort| sort }
     end
 
     production(:keyword) do
-      clause(:WORD) { |word| word }
-      clause("QUOTE SPACE? .phrase SPACE? QUOTE") { |phrase| phrase.join(" ") }
+      clause(:WORD) { |word| Inputs::Keyword.new(word) }
+      clause("QUOTE SPACE? .phrase SPACE? QUOTE") do |phrase|
+        Inputs::Keyword.new(phrase)
+      end
     end
 
-    production(:expression_input) do
+    production(:expression) do
       clause(".qualifier COLON .term") do |qualifier, term|
-        Query::Input.new(qualifier: qualifier, term: term)
-      end
-    end
-
-    production(:search_input) do
-      clause("IN COLON .scope") do |scope|
-        Query::Input.new(qualifier: "in", term: scope)
-      end
-    end
-
-    production(:sort_input) do
-      clause("SORT COLON .order") do |order|
-        Query::Input.new(qualifier: "sort", term: order)
+        Inputs::Expression.new(qualifier, term)
       end
     end
 
     production(:scope) do
+      clause("IN COLON .scope_field") do |scope|
+        Inputs::Scope.new("in", scope)
+      end
+    end
+
+    production(:sort) do
+      clause("SORT COLON .order") do |order|
+        Inputs::Sort.new("sort", order)
+      end
+    end
+
+    production(:scope_field) do
       clause(:WORD) { |word| word }
     end
 
@@ -60,12 +62,12 @@ module Yuriita
 
     production(:term) do
       clause(:WORD) { |word| word }
-      clause("QUOTE SPACE? .phrase SPACE? QUOTE") { |phrase| phrase.join(" ") }
+      clause("QUOTE SPACE? .phrase SPACE? QUOTE") { |phrase| phrase }
     end
 
     production(:phrase) do
-      clause(:WORD) { |word| [word] }
-      clause(".phrase SPACE .WORD") { |phrase, word| phrase + [word] }
+      clause(:WORD) { |word| word }
+      clause(".phrase SPACE .WORD") { |phrase, word| phrase + " " + word }
     end
 
     finalize

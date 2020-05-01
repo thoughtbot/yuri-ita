@@ -1,8 +1,8 @@
 RSpec.describe Yuriita::MultiParameter do
   describe "#select" do
     it "adds the input to the query" do
-      active_input = build(:input, qualifier: "is", term: "active")
-      author_input = build(:input, qualifier: "author", term: "eebs")
+      active_input = build(:expression, qualifier: "is", term: "active")
+      author_input = build(:expression, qualifier: "author", term: "eebs")
       query = Yuriita::Query.new(inputs: [active_input])
 
       formatter = Yuriita::QueryFormatter.new(param_key: :q)
@@ -15,8 +15,8 @@ RSpec.describe Yuriita::MultiParameter do
 
   describe "#deselect" do
     it "removes the input from the query" do
-      active_input = build(:input, qualifier: "is", term: "active")
-      author_input = build(:input, qualifier: "author", term: "eebs")
+      active_input = build(:expression, qualifier: "is", term: "active")
+      author_input = build(:expression, qualifier: "author", term: "eebs")
       query = Yuriita::Query.new(inputs: [active_input, author_input])
 
       formatter = Yuriita::QueryFormatter.new(param_key: :q)

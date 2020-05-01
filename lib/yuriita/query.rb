@@ -13,7 +13,7 @@ module Yuriita
     end
 
     def keywords
-      inputs.reject{ |input| input.is_a?(Query::Input) }
+      inputs.select{ |input| input.is_a?(Yuriita::Inputs::Keyword) }
     end
 
     def each(&block)

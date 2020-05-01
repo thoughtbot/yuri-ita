@@ -6,13 +6,13 @@
 
 - **Query object**:  Holds a list of inputs (including expression inputs, keywords, and scope inputs)
 
-- **Expression input**:  A qualifier and a term used to apply a developer defined filter to a relation
+- **Expression**:  An input whose qualifier and a term are used to apply a developer defined filter to a relation
 
 - **Keyword**:  A search term, potentially in quotes.
 
-- **Scope input**:  An expression input whose qualifier is "in" which is used to scope the keyword search to an attribute of the relation
+- **Scope**:  An input whose qualifier is "in" which is used to scope the keyword search to an attribute of the relation
 
-- **Sort input**: An expression input whose qualifier is "sort" which is used to sort the relation.
+- **Sort**: An input whose qualifier is "sort" which is used to sort the relation.
 
 - **Definition**:  a list of expression filters and keyword filters that define how to apply a query object to a relation
     - **Single definition**: A definition that permits selection of 0 or 1 options

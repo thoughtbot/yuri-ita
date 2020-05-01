@@ -28,10 +28,11 @@ RSpec.describe Yuriita::SearchClause do
         block: ->(relation, term) { relation.search(:description, term) },
       )
       filters = [title_filter, description_filter]
+      keyword = build(:keyword, value: "cats")
 
       clause = described_class.new(
         filters: filters,
-        keywords: ["cats"],
+        keywords: [keyword],
         combination: Yuriita::OrCombination,
       )
       result = clause.apply(Post.all)

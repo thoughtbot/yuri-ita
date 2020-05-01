@@ -10,7 +10,7 @@ module Yuriita
 
     def apply(relation, keywords)
       relations = keywords.map do |keyword|
-        block.call(relation, keyword)
+        block.call(relation, keyword.to_s)
       end
 
       combination.new(
