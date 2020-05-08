@@ -21,6 +21,19 @@ RSpec.describe Yuriita::Table do
     end
   end
 
+  describe "#search" do
+    it "returns the input with the given param_key" do
+      table = described_class.new(
+        relation: double(:relation),
+        configuration: double(:configuration, default_input: "is:published"),
+        param_key: :query,
+        params: {query: "is:published"},
+      )
+
+      expect(table.search.query).to eq "is:published "
+    end
+  end
+
   describe "#filtered?" do
     it "is true when user input is not equal to the default input" do
       table = described_class.new(

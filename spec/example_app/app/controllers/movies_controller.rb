@@ -11,10 +11,11 @@ class MoviesController < ApplicationController
       relation: Movie.all,
       params: table_params,
       configuration: MovieDefinition.build,
+      param_key: :query
     )
   end
 
   def table_params
-    params.permit(:q)
+    params.permit(:query)
   end
 end
