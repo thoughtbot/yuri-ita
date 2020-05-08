@@ -19,7 +19,10 @@ module Yuriita
       @params = params
       @configuration = configuration
       @param_key = param_key
+      @search = Yuriita::Search.new(self, @param_key)
     end
+
+    attr_reader :search
 
     def q
       output =
