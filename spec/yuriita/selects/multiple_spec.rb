@@ -1,4 +1,4 @@
-RSpec.describe Yuriita::MultiSelect do
+RSpec.describe Yuriita::Selects::Multiple do
   describe "filters" do
     it "returns the selected option's filters" do
       active_input = build(:expression, qualifier: "is", term: "active")

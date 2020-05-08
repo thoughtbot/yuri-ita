@@ -1,4 +1,4 @@
-RSpec.describe Yuriita::ExclusiveSelect do
+RSpec.describe Yuriita::Selects::Exclusive do
   describe "filter" do
     context "when there are no selected options" do
       it "returns the default option's filter" do

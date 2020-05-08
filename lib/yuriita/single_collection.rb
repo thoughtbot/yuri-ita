@@ -21,7 +21,7 @@ module Yuriita
     def view_option(option)
       ViewOption.new(
         option: option,
-        selector: SingleSelect.new(options: options, query: query),
+        selector: Selects::Single.new(options: options, query: query),
         parameters: SingleParameter.new(
           options: options,
           query: query.dup,

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Yuriita::FilterClause do
+RSpec.describe Yuriita::Clauses::Filter do
   describe "#apply" do
     it "returns the relation when there are no filters" do
       filters = []

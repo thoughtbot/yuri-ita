@@ -19,7 +19,7 @@ class MovieDefinition
   end
 
   def movie_scope
-    Yuriita::Scope.new(
+    Yuriita::Definitions::Scope.new(
       options: search_options,
       combination: Yuriita::OrCombination,
     )
@@ -52,7 +52,7 @@ class MovieDefinition
   end
 
   def status_definition
-    Yuriita::MultipleDefinition.new(
+    Yuriita::Definitions::Multiple.new(
       options: status_options,
       combination: Yuriita::OrCombination,
     )
@@ -108,7 +108,7 @@ class MovieDefinition
   end
 
   def adult_definition
-    Yuriita::SingleDefinition.new(options: [adult_option, safe_option])
+    Yuriita::Definitions::Single.new(options: [adult_option, safe_option])
   end
 
   def adult_option
@@ -132,7 +132,7 @@ class MovieDefinition
   end
 
   def sort_definition
-    Yuriita::ExclusiveDefinition.new(
+    Yuriita::Definitions::Exclusive.new(
       options: sort_options,
       default: rating_sort_option,
     )

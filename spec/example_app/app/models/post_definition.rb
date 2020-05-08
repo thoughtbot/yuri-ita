@@ -19,7 +19,7 @@ class PostDefinition
   end
 
   def post_scope
-    Yuriita::Scope.new(
+    Yuriita::Definitions::Scope.new(
       options: search_options,
       combination: Yuriita::OrCombination,
     )
@@ -63,7 +63,7 @@ class PostDefinition
   end
 
   def published_definition
-    Yuriita::SingleDefinition.new(options: published_options)
+    Yuriita::Definitions::Single.new(options: published_options)
   end
 
   def published_options
@@ -94,7 +94,7 @@ class PostDefinition
   end
 
   def category_definition
-    Yuriita::MultipleDefinition.new(
+    Yuriita::Definitions::Multiple.new(
       options: category_options,
       combination: Yuriita::OrCombination,
     )
@@ -114,7 +114,7 @@ class PostDefinition
   end
 
   def sort_definition
-    Yuriita::ExclusiveDefinition.new(
+    Yuriita::Definitions::Exclusive.new(
       options: sort_options,
       default: title_desc_option,
     )

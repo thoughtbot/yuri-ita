@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Yuriita::SearchClause do
+RSpec.describe Yuriita::Clauses::Search do
   describe "#apply" do
     it "returns the relation when there are no filters or keywords" do
       combination = Yuriita::OrCombination

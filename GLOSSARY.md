@@ -15,11 +15,11 @@
 - **Sort**: An input whose qualifier is "sort" which is used to sort the relation.
 
 - **Definition**:  a list of expression filters and keyword filters that define how to apply a query object to a relation
-    - **Single definition**: A definition that permits selection of 0 or 1 options
+    - **Single**: A definition that permits selection of 0 or 1 options
 
-    - **Multiple definition**: A definition that permits selection of 0 or more options and has a combination used to combine relations when more than one option is selected.
+    - **Multiple**: A definition that permits selection of 0 or more options and has a combination used to combine relations when more than one option is selected.
 
-    - **Exclusive definition**: A definition that permits selection of exactly 1 option and has a default option for when no option has been selected by the user.
+    - **Exclusive**: A definition that permits selection of exactly 1 option and has a default option for when no option has been selected by the user.
 
 - **Collection**: The result of applying a select to a relation
     - **Multiple collection**: A collection resulting from applying the filter(s) from a multiple select along with the combination from a multiple definition
@@ -33,13 +33,13 @@
 - **Clause**: Contains the selected filters and a means to combine them.
 
 - **Select**: Given a definition and a query, returns the filter selected by the query that should be applied to a relation
-    - **Multiple select**: Returns an array of all selected filters
+    - **Multiple**: Returns an array of all selected filters
 
-    - **Exclusive select**: Returns either the selected filter or the defalt filter
+    - **Exclusive**: Returns either the selected filter or the defalt filter
 
-    - **Single select**: Returns either the selected filter or false
+    - **Single**: Returns either the selected filter or false
 
-    - **All or explicit select**: Returns either the selected filter or an array of all filters
+    - **All or explicit**: Returns either the selected filter or an array of all filters
 
 - **Filter**:   A set of matchers, a combination, and a block that produce a list of clauses
 
