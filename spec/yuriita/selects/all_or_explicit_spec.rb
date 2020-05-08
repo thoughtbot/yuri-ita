@@ -1,4 +1,4 @@
-RSpec.describe Yuriita::AllOrExplicitSelect do
+RSpec.describe Yuriita::Selects::AllOrExplicit do
   describe "filters" do
     context "when there are no selected options" do
       it "returns the all option's filters" do

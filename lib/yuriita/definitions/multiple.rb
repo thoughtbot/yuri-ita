@@ -9,7 +9,7 @@ module Yuriita
       end
 
       def apply(query:)
-        selector = MultiSelect.new(options: options, query: query)
+        selector = Selects::Multiple.new(options: options, query: query)
 
         Clauses::Filter.new(filters: selector.filters, combination: combination)
       end

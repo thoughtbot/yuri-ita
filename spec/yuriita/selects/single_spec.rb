@@ -1,4 +1,4 @@
-RSpec.describe Yuriita::SingleSelect do
+RSpec.describe Yuriita::Selects::Single do
   describe "filter" do
     context "when there are no selected options" do
       it "returns the selected option's filter" do

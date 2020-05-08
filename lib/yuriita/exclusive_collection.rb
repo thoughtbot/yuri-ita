@@ -21,7 +21,7 @@ module Yuriita
     def view_option(option)
       ViewOption.new(
         option: option,
-        selector: ExclusiveSelect.new(
+        selector: Selects::Exclusive.new(
           options: options,
           default: definition.default,
           query: query,

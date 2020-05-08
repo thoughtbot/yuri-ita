@@ -9,7 +9,7 @@ module Yuriita
       end
 
       def apply(query:)
-        selector = AllOrExplicitSelect.new(options: options, query: query)
+        selector = Selects::AllOrExplicit.new(options: options, query: query)
 
         Clauses::Search.new(
           filters: selector.filters,

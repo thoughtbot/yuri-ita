@@ -33,13 +33,13 @@
 - **Clause**: Contains the selected filters and a means to combine them.
 
 - **Select**: Given a definition and a query, returns the filter selected by the query that should be applied to a relation
-    - **Multiple select**: Returns an array of all selected filters
+    - **Multiple**: Returns an array of all selected filters
 
-    - **Exclusive select**: Returns either the selected filter or the defalt filter
+    - **Exclusive**: Returns either the selected filter or the defalt filter
 
-    - **Single select**: Returns either the selected filter or false
+    - **Single**: Returns either the selected filter or false
 
-    - **All or explicit select**: Returns either the selected filter or an array of all filters
+    - **All or explicit**: Returns either the selected filter or an array of all filters
 
 - **Filter**:   A set of matchers, a combination, and a block that produce a list of clauses
 

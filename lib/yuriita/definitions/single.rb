@@ -8,7 +8,7 @@ module Yuriita
       end
 
       def apply(query:)
-        selector = SingleSelect.new(options: options, query: query)
+        selector = Selects::Single.new(options: options, query: query)
 
         filters = [selector.filter].compact
         Clauses::Filter.new(filters: filters, combination: combination)

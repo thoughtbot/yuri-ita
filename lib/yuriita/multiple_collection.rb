@@ -21,7 +21,7 @@ module Yuriita
     def view_option(option)
       ViewOption.new(
         option: option,
-        selector: MultiSelect.new(options: options, query: query),
+        selector: Selects::Multiple.new(options: options, query: query),
         parameters: MultiParameter.new(query: query.dup, formatter: formatter),
       )
     end

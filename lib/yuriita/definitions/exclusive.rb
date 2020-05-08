@@ -9,7 +9,7 @@ module Yuriita
       end
 
       def apply(query:)
-        selector = ExclusiveSelect.new(
+        selector = Selects::Exclusive.new(
           options: options,
           default: default,
           query: query,
