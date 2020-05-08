@@ -11,11 +11,21 @@
 <div class="site-body">
   <div class="site-body__content">
     <div class="filter-list">
-      <h2 class="filter-list__heading">Filter</h2>
-      <%= render "options", options: table.options_for(:status) %>
-      <%= render "options", options: table.options_for(:adult) %>
       <h2 class="filter-list__heading">Sort</h2>
       <%= render "options", options: table.options_for(:sort) %>
+
+      <h2 class="filter-list__heading">Status</h2>
+      <div>
+        <% table.options_for(:status).each do |option| %>
+          <% classes = option.selected? ? ["filter-toggle", "active"] : ["filter-toggle"] %>
+          <%= link_to movies_path(option.params), class: classes do %>
+            <span><%= option.name %></span>
+          <% end %>
+        <% end %>
+      </div>
+
+      <h2 class="filter-list__heading">Rating</h2>
+      <%= render "options", options: table.options_for(:adult) %>
     </div>
 
     <div class="movie-list">

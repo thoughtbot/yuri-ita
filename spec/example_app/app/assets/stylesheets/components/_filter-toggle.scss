@@ -1,0 +1,22 @@
+.filter-toggle {
+  border: 1px solid $gray-400;
+  border-radius: 5em;
+  display: inline-block;
+  margin-bottom: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+
+  &:hover {
+    border-color: $action-color;
+  }
+
+  &.active {
+    background-color: $action-color;
+    border-color: $action-color;
+    color: $white;
+
+    &:hover {
+      background-color: lighten($action-color, 8%);
+      border-color: lighten($action-color, 8%);
+    }
+  }
+}
