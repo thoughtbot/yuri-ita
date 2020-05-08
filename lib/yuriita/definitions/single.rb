@@ -11,7 +11,7 @@ module Yuriita
         selector = SingleSelect.new(options: options, query: query)
 
         filters = [selector.filter].compact
-        FilterClause.new(filters: filters, combination: combination)
+        Clauses::Filter.new(filters: filters, combination: combination)
       end
 
       def view_options(query:, param_key:)

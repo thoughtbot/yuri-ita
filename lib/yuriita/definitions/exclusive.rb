@@ -16,7 +16,7 @@ module Yuriita
         )
 
         filters = [selector.filter]
-        FilterClause.new(filters: filters, combination: combination)
+        Clauses::Filter.new(filters: filters, combination: combination)
       end
 
       def view_options(query:, param_key:)

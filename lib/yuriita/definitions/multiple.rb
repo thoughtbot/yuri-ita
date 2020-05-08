@@ -11,7 +11,7 @@ module Yuriita
       def apply(query:)
         selector = MultiSelect.new(options: options, query: query)
 
-        FilterClause.new(filters: selector.filters, combination: combination)
+        Clauses::Filter.new(filters: selector.filters, combination: combination)
       end
 
       def view_options(query:, param_key:)
