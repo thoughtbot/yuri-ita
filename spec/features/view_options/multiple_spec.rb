@@ -59,6 +59,6 @@ RSpec.describe "multiple select options" do
   end
 
   def have_selected_option(text)
-    have_selector(".filter-list__link.active", text: text)
+    have_selector(".filter-toggle.active", text: text)
   end
 end
