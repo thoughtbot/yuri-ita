@@ -15,6 +15,7 @@ class PostDefinition
       category: category_definition,
       sort: sort_definition,
       post: post_scope,
+      author: author_definition,
     }
   end
 
@@ -142,5 +143,13 @@ class PostDefinition
     end
 
     Yuriita::Option.new(name: "Title Asc", filter: filter)
+  end
+
+  def author_definition
+    filter = Yuriita::DynamicFilter.new(qualifier: "author") do |relation, input|
+      relation.authored_by(input.term)
+    end
+
+    Yuriita::Definitions::Dynamic.new(filter: filter)
   end
 end
