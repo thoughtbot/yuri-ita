@@ -2,17 +2,6 @@ require "rails_helper"
 
 RSpec.describe Yuriita::Clauses::Filter do
   describe "#apply" do
-    it "returns the relation when there are no filters" do
-      filters = []
-      combination = Yuriita::AndCombination
-      relation = double(:relation)
-
-      clause = described_class.new(filters: filters, combination: combination)
-      result = clause.apply(relation)
-
-      expect(result).to eq(relation)
-    end
-
     it "combines the applied filters using the combination" do
       published = create(:post, :published)
       draft = create(:post, :draft)

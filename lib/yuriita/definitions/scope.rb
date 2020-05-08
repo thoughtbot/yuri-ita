@@ -9,13 +9,24 @@ module Yuriita
       end
 
       def apply(query:)
-        selector = Selects::AllOrExplicit.new(options: options, query: query)
+        filters = selected_filters(query)
+        keywords = query.keywords
 
-        Clauses::Search.new(
-          filters: selector.filters,
-          keywords: query.keywords,
-          combination: combination,
-        )
+        if keywords.present?
+          Clauses::Search.new(
+            filters: filters,
+            keywords: keywords,
+            combination: combination,
+          )
+        else
+          Clauses::Identity.new
+        end
+      end
+
+      private
+
+      def selected_filters(query)
+        Selects::AllOrExplicit.new(options: options, query: query).filters
       end
     end
   end

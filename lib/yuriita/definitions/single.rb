@@ -8,10 +8,13 @@ module Yuriita
       end
 
       def apply(query:)
-        selector = Selects::Single.new(options: options, query: query)
+        filter = selected_filter(query)
 
-        filters = [selector.filter].compact
-        Clauses::Filter.new(filters: filters, combination: combination)
+        if filter.present?
+          Clauses::Filter.new(filters: [filter], combination: combination)
+        else
+          Clauses::Identity.new
+        end
       end
 
       def view_options(query:, param_key:)
@@ -24,6 +27,10 @@ module Yuriita
 
       def combination
         AndCombination
+      end
+
+      def selected_filter(query)
+        Selects::Single.new(options: options, query: query).filter
       end
     end
   end

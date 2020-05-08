@@ -9,14 +9,9 @@ module Yuriita
       end
 
       def apply(query:)
-        selector = Selects::Exclusive.new(
-          options: options,
-          default: default,
-          query: query,
-        )
+        filter = selected_filter(query)
 
-        filters = [selector.filter]
-        Clauses::Filter.new(filters: filters, combination: combination)
+        Clauses::Filter.new(filters: [filter], combination: combination)
       end
 
       def view_options(query:, param_key:)
@@ -29,6 +24,14 @@ module Yuriita
 
       def combination
         AndCombination
+      end
+
+      def selected_filter(query)
+        Selects::Exclusive.new(
+          options: options,
+          default: default,
+          query: query,
+        ).filter
       end
     end
   end
