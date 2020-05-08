@@ -15,11 +15,11 @@
 - **Sort**: An input whose qualifier is "sort" which is used to sort the relation.
 
 - **Definition**:  a list of expression filters and keyword filters that define how to apply a query object to a relation
-    - **Single definition**: A definition that permits selection of 0 or 1 options
+    - **Single**: A definition that permits selection of 0 or 1 options
 
-    - **Multiple definition**: A definition that permits selection of 0 or more options and has a combination used to combine relations when more than one option is selected.
+    - **Multiple**: A definition that permits selection of 0 or more options and has a combination used to combine relations when more than one option is selected.
 
-    - **Exclusive definition**: A definition that permits selection of exactly 1 option and has a default option for when no option has been selected by the user.
+    - **Exclusive**: A definition that permits selection of exactly 1 option and has a default option for when no option has been selected by the user.
 
 - **Collection**: The result of applying a select to a relation
     - **Multiple collection**: A collection resulting from applying the filter(s) from a multiple select along with the combination from a multiple definition
