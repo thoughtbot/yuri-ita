@@ -22,4 +22,21 @@ RSpec.describe Post, type: :model do
       expect(results).to contain_exactly(draft)
     end
   end
+
+  describe "author" do
+    it "is required" do
+      post = Post.new
+
+      post.valid?
+
+      expect(post.errors).to be_added(:author, :blank)
+    end
+
+    it "is a User" do
+      user = User.new
+      post = Post.new(author: user)
+
+      expect(post.author).to eq user
+    end
+  end
 end

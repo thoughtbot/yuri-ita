@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :post do
     title { "A title" }
     body { "A body" }
+    author
 
     trait :published do
       published { true }
@@ -14,6 +15,10 @@ FactoryBot.define do
 
   factory :category do
     name { "Ruby" }
+  end
+
+  factory :author, class: "User" do
+    username { "username" }
   end
 
   sequence(:tmdb_id) { |n| n }
