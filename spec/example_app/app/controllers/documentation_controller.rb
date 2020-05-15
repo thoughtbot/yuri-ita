@@ -3,6 +3,10 @@ class DocumentationController < ApplicationController
     render_documentation_page "README"
   end
 
+  def show
+    render_documentation_page "docs/#{params[:page]}"
+  end
+
   private
 
   def render_documentation_page(name)

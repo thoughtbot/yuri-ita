@@ -5,11 +5,6 @@
 The yuri-ita (揺り板), Japanese for "rocking plate", is a traditional wooden gold
 pan used in Japan.
 
-The goal of this library is to provide developers with a powerful set of tools
-to build expressive user interfaces for filtering, searching, and sorting data
-in Ruby on Rails. It does not provide UI components but instead offers a simple
-interface that allows you to build your own UI.
-
 [Check out a demo application showcasing some of the capabilities of the
 library.][demo]
 
@@ -17,38 +12,59 @@ library.][demo]
 
 ## What is Yuri-ita?
 
-Yuri-ita offers a powerful set of tools to build powerful user interfaces that
-allow users to find exactly what they need while allowing designers and
-developers full control of the UI, filtering, and searching. Powerful primitives
-allow developers to compose the query and sorting behavior while using
-ActiveRecord scopes that already exist in your application.
+The goal of this library is to provide developers and designers with a powerful
+set of tools to build expressive user interfaces for filtering, searching, and
+sorting data in Ruby on Rails. It does not provide UI components but instead
+offers a simple API that allows you to build your own UI.
 
-Yuri-ita allows you to define a "Table" which represents a particular set of
-data, how that data can be filtered and searched, and the current query. Each
-table is created from a flexible configuration of behaviors. Developers define
-collections of filters, sort options, and search fields. For each collection
-they define how each option changes the data, and how options interact with each
-other. Two options may be mutually exclusive and so cannot be selected
-simultaneously. Two other options may be complementary and combine to either
-expand or reduce the filtered data. All of this behavior is chosen by the
-developer or designer within a modest set of constraints.
+Yuri-ita's primary interface is through a text-based query language. This
+provides a means to create behavior as simple or as complex as your needs
+require.
 
-Yuri-ita supports configurable keyword searching in one or more fields. Each
-table defines options for searching and how to combine those options.
 
-Through the configuration an expressive query language is created. Each filter,
-sort, or search option defines a textual representation. This text
-representation can be used directly in a text field to apply filters. Not all
-filters need to have an associated UI component, which allows for each table to
-have powerful advanced search behavior that can be accessed when needed without
-causing visual clutter.
+```
+is:published author:eebs category:rails sort:created-asc "advanced filtering"
+```
+
+Yuri-ita allows you to define what each input means within your application.
+`is:published` may mean different things in different applications, or even in
+different interfaces within the same application. You define what query to run
+for each input and Yuri-ita handles combining all the inputs into a valid result.
+
+You can create static filters that always run the same query:
+
+```ruby
+input = Yuriita::Inputs::Expression.new("is", "published")
+
+Yuriita::ExpressionFilter.new(input: input) do |relation|
+  relation.where(published: true)
+end
+```
+
+You can also define dynamic filters that use the input term in the query itself:
+
+
+```ruby
+Yuriita::DynamicFilter.new(qualifier: "author") do |relation, input|
+  relation.joins(:author).where(users: {username: input.term})
+end
+```
+
+Some inputs can be specified multiple times in the query input and Yuri-ita
+combines them using AND or OR logical expressions depending on how you've
+configured the filter definitions. For example, `category:rails category:ruby`
+could be defined such that it returns posts in either the "rails" *or* "ruby"
+category.
+
+Other features such as searching, sorting, and generating custom UI are possible
+with Yuri-ita.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'yuri-ita'
+gem "yuri-ita"
 ```
 
 And then execute:
@@ -59,66 +75,8 @@ Or install it yourself as:
 
     $ gem install yuri-ita
 
-## Usage
-
-### Creating a Table
-
-- The Base Relation
-- Params
-- Table Configuration
-
-#### Rendering a table
-
-- Options
-- Items
-- Query input
-
-### Table Configuration
-
-- Filtering and Sorting
-  - Exclusive
-  - Multiple
-  - Single
-- Searching
-- Dynamically creating options
-
-### Clearing all filters, searches, and sorts
-
-You may wish to add a means to clear the current filters, searches, and sorts to
-your UI. Yuri-ita does provide an explicit means to reset the filters, but it
-does allow you to query the table to determine if it is currently filtered or
-not.
-
-```ruby
-table = Yuriita::Table.new(param_key: :q, params: { q: "is:published" })
-table.filtered? #=> true
-
-table = Yuriita::Table.new(param_key: :q, params: { q: "" })
-table.filtered? #=> false
-```
-
-You may use this `.fitlered?` method to conditionally render a link to reload
-the page without any query parameters.
-
-```erb
-<% if table.filtered? %>
-  <%= link_to "Clear all", posts_path %>
-<% end %>
-```
-
-This will reload the page without the table's query parameter, effectively
-resetting the table. There is no explicit reset because we want to leave it up
-to you to decide what "resetting" means. Resetting for your application may be
-reloading the page with some other default parameters.
-
-
-```erb
-<% if table.filtered? %>
-  <%= link_to "Clear all", posts_path(list: "mine") %>
-<% end %>
-```
-
-## Examples
+For instructions on how to integrate Yuri-ita with your Rails application,
+[view the Getting Started documentation](docs/getting_started).
 
 ## Contributing
 

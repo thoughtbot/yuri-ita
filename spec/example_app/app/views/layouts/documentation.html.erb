@@ -10,6 +10,21 @@
   </head>
 
   <body data-controller="syntax-highlight">
-    <%= yield %>
+    <div class="sidenav">
+      <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Getting Started", docs_path(page: "getting_started") %></li>
+        <li><%= link_to "Table Configuration", docs_path(page: "table_configuration") %></li>
+        <li><%= link_to "Static Inputs", docs_path(page: "static_inputs") %></li>
+        <li><%= link_to "Dynamic Inputs", docs_path(page: "dynamic_inputs") %></li>
+        <li><%= link_to "Searching", docs_path(page: "searching") %></li>
+        <li><%= link_to "Sorting", docs_path(page: "sorting") %></li>
+        <li><%= link_to "Collection Behaviors", docs_path(page: "collection_behaviors") %></li>
+        <li><%= link_to "Examples", docs_path(page: "examples") %></li>
+      </ul>
+    </div>
+    <div class="main">
+      <%= yield %>
+    </div>
   </body>
 </html>

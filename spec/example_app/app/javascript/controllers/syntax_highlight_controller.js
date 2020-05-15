@@ -6,7 +6,9 @@ hljs.registerLanguage('ruby', ruby);
 
 export default class extends Controller {
   connect() {
-    document.querySelectorAll('pre code').forEach((block) => {
+    const codeSelector = "pre[lang=ruby] code, pre[lang=erb] code"
+
+    document.querySelectorAll(codeSelector).forEach((block) => {
       hljs.highlightBlock(block);
     });
   }

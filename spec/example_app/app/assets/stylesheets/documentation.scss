@@ -1,3 +1,4 @@
+@import "base/normalize";
 @import "base/variables";
 
 @import url('https://fonts.googleapis.com/css?family=Roboto|Fira+Code:300,400,500');
@@ -10,8 +11,24 @@ $code-yellow: #f8d29d;
 $code-red: #b95c56;
 $code-orange: #e36209;
 
+.sidenav {
+  width: 20rem;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  overflow-x: hidden;
+  padding: 8px 0;
 
-body {
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+
+.main {
   color: #566b78;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.5;
