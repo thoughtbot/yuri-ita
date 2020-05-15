@@ -38,4 +38,16 @@ RSpec.describe "user views the movies page" do
     expect(page).to have_content("The Prestige")
     expect(page).to have_content("Pretty Woman")
   end
+
+  scenario "searches for a keyword", js: true do
+    fight_club = create(:movie, :released, title: "Fight Club")
+    the_prestige = create(:movie, :rumored, title: "The Prestige")
+
+    visit movies_path
+    fill_in "Search", with: "Fight in:title"
+    find("#query").send_keys(:enter)
+
+    expect(page).to have_content("Fight Club")
+    expect(page).not_to have_content("The Prestige")
+  end
 end

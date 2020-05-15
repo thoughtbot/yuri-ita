@@ -2,8 +2,9 @@
   <div class="site-header__content">
     <h1>Top Movies</h1>
 
-    <%= form_for table.search, url: movies_path, method: :get, html: { class: "index-search" } do |form| %>
-      <%= form.text_field :query, size: 50, autocomplete: "off" %>
+    <%= form_with url: movies_path, method: :get, local: true, html: { class: "index-search" } do |form| %>
+      <%= form.label :query, "Search" %>
+      <%= form.text_field :query, size: 50, autocomplete: "off", value: table.search.query %>
     <% end %>
   </div>
 </div>
