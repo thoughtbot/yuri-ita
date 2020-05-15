@@ -1,0 +1,66 @@
+@import "base/variables";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto|Fira+Code:300,400,500');
+
+$code-black: #202020;
+$code-white: #e0e0dc;
+$code-green: #b0bf82;
+$code-blue: #8fbdcc;
+$code-yellow: #f8d29d;
+$code-red: #b95c56;
+$code-orange: #e36209;
+
+
+body {
+  color: #566b78;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5;
+  margin: 0 auto;
+  max-width: 50em;
+  padding: 4em 1em;
+}
+
+h2 {
+  margin-top: $spacing-md;
+  margin-bottom: $spacing-sm;
+  padding-bottom: .3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+code,
+pre {
+  background: #f0f0f8;
+}
+
+pre code {
+  display: inline-block;
+}
+
+code {
+  font-family: "Fira Code";
+  font-variant-ligatures: none;
+  padding: 2px 4px;
+
+  &.hljs {
+    .hljs-string { color: $code-green; }
+    .hljs-subst { color: $code-white; }
+    .hljs-constant { color: $code-blue; }
+    .hljs-symbol { color: $code-red; }
+    .hljs-keyword { color: $code-red; }
+
+    .hljs-title,
+    .hljs-parent { color: $code-blue; }
+
+    .hljs-tag { color: $code-yellow; }
+  }
+
+}
+
+pre {
+  padding: 1em;
+  border-left: 2px solid #6931e0;
+}
+
+a {
+  color: #e03131;
+}

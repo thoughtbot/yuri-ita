@@ -15,7 +15,7 @@ library.][demo]
 
 [demo]: https://yuriita-prerelease.herokuapp.com/movies
 
-## Introduction
+## What is Yuri-ita?
 
 Yuri-ita offers a powerful set of tools to build powerful user interfaces that
 allow users to find exactly what they need while allowing designers and

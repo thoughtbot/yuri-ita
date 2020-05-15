@@ -9,6 +9,8 @@ gem "rails"
 
 gem "bootsnap", ">= 1.4.4", require: false
 gem "bourbon"
+gem "commonmarker"
+gem "github-markup", require: "github/markup"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.3"
 gem "sass-rails", ">= 6"

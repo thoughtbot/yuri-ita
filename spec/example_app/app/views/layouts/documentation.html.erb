@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Yuri-ita Documentation</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'documentation', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <body data-controller="syntax-highlight">
+    <%= yield %>
+  </body>
+</html>
