@@ -44,6 +44,17 @@ RSpec.describe Yuriita::Lexer do
       )
     end
 
+    it "recognizes words with non-alpha characters" do
+      expect("email:user.name123@example.com").to produce_tokens(
+        [
+          "WORD(email)",
+          "COLON",
+          "WORD(user.name123@example.com)",
+          "EOS",
+        ]
+      )
+    end
+
     it "recognizes quoted words" do
       expect("\"quoted words\"").to produce_tokens(
         [

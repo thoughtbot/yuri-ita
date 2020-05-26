@@ -8,7 +8,7 @@ RSpec.describe Yuriita do
       relation = double(:relation)
       definition = double(:definition)
 
-      result = Yuriita.filter(relation, "invalid[", definition)
+      result = Yuriita.filter(relation, "invalid::", definition)
 
       expect(result).not_to be_successful
     end
@@ -32,7 +32,7 @@ RSpec.describe Yuriita do
     end
 
     it "raises a ParseError when the input is invalid" do
-      expect { Yuriita.build_query("inavlid[") }.to raise_error(
+      expect { Yuriita.build_query("inavlid::") }.to raise_error(
         Yuriita::ParseError
       )
     end

@@ -2,6 +2,7 @@ require "bundler/setup"
 require "yuriita"
 
 require "support/tokens"
+require "support/matchers/produce_tokens"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
