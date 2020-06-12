@@ -64,7 +64,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
   asking for help. We love helping!
 * Please don't update the Gem version.
 
-[repo]: https://github.com/thoughtbot/yuri-ita/tree/master
+[repo]: https://github.com/thoughtbot/yuri-ita/tree/main
 [fork]: https://help.github.com/articles/fork-a-repo/
 [branch]: https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/
 [pr]: https://help.github.com/articles/using-pull-requests/
