@@ -76,7 +76,7 @@ Or install it yourself as:
     $ gem install yuri-ita
 
 For instructions on how to integrate Yuri-ita with your Rails application,
-[view the Getting Started documentation](docs/getting_started).
+[view the Getting Started documentation](docs/getting_started.md).
 
 ## Contributing
 
