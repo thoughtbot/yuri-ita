@@ -67,5 +67,44 @@ RSpec.describe Yuriita::Lexer do
         ]
       )
     end
+
+    it "recognizes dates" do
+      input = "created:>2020-01-01"
+      expect(input).to produce_tokens(
+        [
+          "WORD(created)",
+          "COLON",
+          "GT",
+          "DATETIME(2020-01-01T00:00:00+00:00)",
+          "EOS",
+        ]
+      )
+    end
+
+    it "recognizes dates with a time and timezone offset" do
+      input = "created:>2020-01-01T15:30:00+03:00"
+      expect(input).to produce_tokens(
+        [
+          "WORD(created)",
+          "COLON",
+          "GT",
+          "DATETIME(2020-01-01T15:30:00+03:00)",
+          "EOS",
+        ]
+      )
+    end
+
+    it "recognizes dates with a time and UTC offset" do
+      input = "created:>2020-01-01T15:30:00Z"
+      expect(input).to produce_tokens(
+        [
+          "WORD(created)",
+          "COLON",
+          "GT",
+          "DATETIME(2020-01-01T15:30:00+00:00)",
+          "EOS",
+        ]
+      )
+    end
   end
 end
