@@ -31,7 +31,7 @@ class MovieDefinition
 
   def title_option
     filter = Yuriita::SearchFilter.new(
-      input: Yuriita::Inputs::Scope.new("in", "title"),
+      input: Yuriita::Inputs::Expression.new("in", "title"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:title, term)
@@ -42,7 +42,7 @@ class MovieDefinition
 
   def tagline_option
     filter = Yuriita::SearchFilter.new(
-      input: Yuriita::Inputs::Scope.new("in", "tagline"),
+      input: Yuriita::Inputs::Expression.new("in", "tagline"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:tagline, term)
@@ -144,7 +144,7 @@ class MovieDefinition
 
   def rating_sort_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Inputs::Sort.new("sort", "default"),
+      input: Yuriita::Inputs::Expression.new("sort", "default"),
     ) do |relation|
       relation.order(vote_average: :desc)
     end
@@ -154,7 +154,7 @@ class MovieDefinition
 
   def title_desc_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Inputs::Sort.new("sort", "title-desc"),
+      input: Yuriita::Inputs::Expression.new("sort", "title-desc"),
     ) do |relation|
       relation.order(title: :desc)
     end
@@ -164,7 +164,7 @@ class MovieDefinition
 
   def title_asc_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Inputs::Sort.new("sort", "title-asc"),
+      input: Yuriita::Inputs::Expression.new("sort", "title-asc"),
     ) do |relation|
       relation.order(title: :asc)
     end

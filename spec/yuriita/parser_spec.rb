@@ -158,44 +158,6 @@ RSpec.describe Yuriita::Parser do
         expression("author", "eebs"),
       )
     end
-
-    it "parses a sort input" do
-      query = parse(tokens(
-        [:SORT], [:COLON], [:WORD, "title"], [:EOS],
-      ))
-      expect(query.inputs).to contain_exactly(
-        sort("sort", "title")
-      )
-    end
-
-    it "parses a scope input" do
-      query = parse(tokens(
-        [:IN], [:COLON], [:WORD, "title"], [:EOS],
-      ))
-
-      expect(query.inputs).to contain_exactly(
-        scope("in", "title")
-      )
-    end
-
-    it "parses a scope_input with keywords" do
-      query = parse(tokens(
-        [:WORD, "awesome"],
-        [:SPACE],
-        [:IN],
-        [:COLON],
-        [:WORD, "title"],
-        [:SPACE],
-        [:WORD, "ideas"],
-        [:EOS],
-      ))
-
-      expect(query.inputs).to contain_exactly(
-        scope("in", "title"),
-        keyword("awesome"),
-        keyword("ideas"),
-      )
-    end
   end
 
   def parse(tokens)
@@ -208,13 +170,5 @@ RSpec.describe Yuriita::Parser do
 
   def keyword(value)
     Yuriita::Inputs::Keyword.new(value)
-  end
-
-  def sort(qualifier, term)
-    Yuriita::Inputs::Sort.new(qualifier, term)
-  end
-
-  def scope(qualifier, term)
-    Yuriita::Inputs::Scope.new(qualifier, term)
   end
 end

@@ -36,7 +36,7 @@ RSpec.describe Yuriita::Lexer do
     it "recognizes words with hyphens" do
       expect("sort:created-desc").to produce_tokens(
         [
-          "SORT",
+          "WORD(sort)",
           "COLON",
           "WORD(created-desc)",
           "EOS",
@@ -63,50 +63,6 @@ RSpec.describe Yuriita::Lexer do
           "SPACE",
           "WORD(words)",
           "QUOTE",
-          "EOS",
-        ]
-      )
-    end
-
-    it "recognizes 'in'" do
-      expect("in:body").to produce_tokens(
-        [
-          "IN",
-          "COLON",
-          "WORD(body)",
-          "EOS",
-        ]
-      )
-    end
-
-    it "does not recognize 'in' within other words" do
-      expect("interrupt:gum").to produce_tokens(
-        [
-          "WORD(interrupt)",
-          "COLON",
-          "WORD(gum)",
-          "EOS",
-        ]
-      )
-    end
-
-    it "recognizes 'sort'" do
-      expect("sort:body").to produce_tokens(
-        [
-          "SORT",
-          "COLON",
-          "WORD(body)",
-          "EOS",
-        ]
-      )
-    end
-
-    it "does not recognize 'sort' within other words" do
-      expect("sorta:gum").to produce_tokens(
-        [
-          "WORD(sorta)",
-          "COLON",
-          "WORD(gum)",
           "EOS",
         ]
       )

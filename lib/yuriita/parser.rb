@@ -18,9 +18,7 @@ module Yuriita
 
     production(:input) do
       clause(".keyword") { |keyword| keyword }
-      clause(".scope") { |scope| scope }
       clause(".expression") { |expression| expression }
-      clause(".sort") { |sort| sort }
     end
 
     production(:keyword) do
@@ -33,18 +31,6 @@ module Yuriita
     production(:expression) do
       clause(".qualifier COLON .term") do |qualifier, term|
         Inputs::Expression.new(qualifier, term)
-      end
-    end
-
-    production(:scope) do
-      clause("IN COLON .scope_field") do |scope|
-        Inputs::Scope.new("in", scope)
-      end
-    end
-
-    production(:sort) do
-      clause("SORT COLON .order") do |order|
-        Inputs::Sort.new("sort", order)
       end
     end
 

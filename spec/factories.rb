@@ -73,24 +73,6 @@ FactoryBot.define do
     initialize_with { new(qualifier, term) }
   end
 
-  factory :scope, class: "Yuriita::Inputs::Scope" do
-    skip_create
-
-    qualifier { "in" }
-    term { "title" }
-
-    initialize_with { new(qualifier, term) }
-  end
-
-  factory :sort, class: "Yuriita::Inputs::Sort" do
-    skip_create
-
-    qualifier { "sort" }
-    term { "created-asc" }
-
-    initialize_with { new(qualifier, term) }
-  end
-
   factory :keyword, class: "Yuriita::Inputs::Keyword" do
     skip_create
 
@@ -120,7 +102,7 @@ FactoryBot.define do
   factory :search_filter, class: "Yuriita::SearchFilter" do
     skip_create
 
-    input { build(:scope) }
+    input { build(:expression, qualifier: "in") }
     combination { Yuriita::AndCombination }
 
     block { ->(relation, term) { relation } }

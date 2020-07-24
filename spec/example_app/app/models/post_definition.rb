@@ -32,7 +32,7 @@ class PostDefinition
 
   def title_option
     filter = Yuriita::SearchFilter.new(
-      input: Yuriita::Inputs::Scope.new("in", "title"),
+      input: Yuriita::Inputs::Expression.new("in", "title"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:title, term)
@@ -43,7 +43,7 @@ class PostDefinition
 
   def body_option
     filter = Yuriita::SearchFilter.new(
-      input: Yuriita::Inputs::Scope.new("in", "body"),
+      input: Yuriita::Inputs::Expression.new("in", "body"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:body, term)
@@ -54,7 +54,7 @@ class PostDefinition
 
   def description_option
     filter = Yuriita::SearchFilter.new(
-      input: Yuriita::Inputs::Scope.new("in", "description"),
+      input: Yuriita::Inputs::Expression.new("in", "description"),
       combination: Yuriita::AndCombination,
     ) do |relation, term|
       relation.search(:description, term)
@@ -127,7 +127,7 @@ class PostDefinition
 
   def title_desc_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Inputs::Sort.new("sort", "title-desc"),
+      input: Yuriita::Inputs::Expression.new("sort", "title-desc"),
     ) do |relation|
       relation.order(title: :desc)
     end
@@ -137,7 +137,7 @@ class PostDefinition
 
   def title_asc_option
     filter = Yuriita::ExpressionFilter.new(
-      input: Yuriita::Inputs::Sort.new("sort", "title-asc"),
+      input: Yuriita::Inputs::Expression.new("sort", "title-asc"),
     ) do |relation|
       relation.order(title: :asc)
     end
