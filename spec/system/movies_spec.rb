@@ -30,8 +30,7 @@ RSpec.describe "user views the movies page" do
     the_prestige = create(:movie, :rumored, title: "The Prestige")
     pretty_woman = create(:movie, :cancelled, title: "Pretty Woman")
 
-    visit movies_path
-    click_link "Released"
+    visit movies_path(query: "is:released")
     click_link "Clear current search, filters, and sort"
 
     expect(page).to have_content("Fight Club")

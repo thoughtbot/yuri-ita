@@ -39,11 +39,6 @@ module Yuriita
       end
     end
 
-    def options_for(key)
-      definition = configuration.find_definition(key)
-      definition.view_options(query: query, param_key: param_key)
-    end
-
     def items
       Runner.new(relation: relation, configuration: configuration).run(query)
     end

@@ -14,13 +14,7 @@ module Yuriita
         Clauses::Filter.new(filters: [filter], combination: combination)
       end
 
-      def view_options(query:, param_key:)
-        ExclusiveCollection.new(
-          definition: self,
-          query: query,
-          formatter: Yuriita::QueryFormatter.new(param_key: param_key),
-        ).view_options
-      end
+      private
 
       def combination
         AndCombination
