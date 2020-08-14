@@ -18,14 +18,6 @@ module Yuriita
         end
       end
 
-      def view_options(query:, param_key:)
-        MultipleCollection.new(
-          definition: self,
-          query: query,
-          formatter: Yuriita::QueryFormatter.new(param_key: param_key),
-        ).view_options
-      end
-
       private
 
       def selected_filters(query)
