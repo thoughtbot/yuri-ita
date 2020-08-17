@@ -87,7 +87,7 @@ GEM
     coderay (1.1.2)
     commonmarker (0.21.0)
       ruby-enum (~> 0.5)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     crass (1.0.6)
     diff-lcs (1.3)
     domain_name (0.5.20190701)
@@ -112,7 +112,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -259,7 +259,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (>= 3.0, < 4.0)
-    webpacker (5.1.1)
+    webpacker (5.2.1)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -298,7 +298,7 @@ DEPENDENCIES
   themoviedb-api
   web-console (>= 3.3.0)
   webdrivers
-  webpacker (~> 5.x)
+  webpacker (~> 5)
   yuri-ita!
 
 RUBY VERSION
