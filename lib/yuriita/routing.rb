@@ -1,6 +1,6 @@
 module Yuriita
   module Routing
-    extend ActiveSupport::Concern
+    extend ::ActiveSupport::Concern
 
     included do
       cattr_accessor :router, default: Yuriita::Router.new
