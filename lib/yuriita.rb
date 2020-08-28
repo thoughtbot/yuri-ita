@@ -17,5 +17,3 @@ module Yuriita
     QueryBuilder.build(input)
   end
 end
-
-loader.eager_load
