@@ -104,7 +104,7 @@ GEM
       railties (>= 5.0.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
-    ffi (1.12.2)
+    ffi (1.13.1)
     filigree (0.4.1)
     github-markup (3.0.4)
     globalid (0.4.2)
@@ -114,7 +114,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    listen (3.2.1)
+    listen (3.3.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.7.0)
@@ -179,7 +179,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
     rake (13.0.1)
-    rb-fsevent (0.10.3)
+    rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.7.1)
@@ -284,7 +284,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   github-markup
-  listen (>= 3.0.5, < 3.3)
+  listen (>= 3.0.5, < 3.4)
   pg (>= 0.18, < 2.0)
   pry-rails
   puma (~> 5.0)
