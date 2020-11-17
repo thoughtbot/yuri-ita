@@ -106,7 +106,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
     filigree (0.4.1)
-    github-markup (3.0.4)
+    github-markup (3.0.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     http-accept (1.7.0)
