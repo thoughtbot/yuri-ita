@@ -43,7 +43,7 @@ RSpec.describe "user views the movies page" do
     the_prestige = create(:movie, :rumored, title: "The Prestige")
 
     visit movies_path
-    fill_in "Search", with: "Fight in:title"
+    fill_in "Query", with: "Fight in:title"
     find("#query").send_keys(:enter)
 
     expect(page).to have_content("Fight Club")

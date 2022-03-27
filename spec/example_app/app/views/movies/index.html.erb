@@ -1,8 +1,11 @@
 <h3>Top Movies</h3>
 
-<%= form_for "", url: movies_path, method: :get, class: "flex gap-2 mb-4" do |f| %>
-  <%= f.text_field :query, size: 50, autocomplete: "off", value: @table.search.query, class: "border border-black p-2 rounded w-full" %>
-  <%= f.submit "Search", class: "bg-gray-200 border border-black rounded px-4 py-2" %>
+<%= form_for "", url: movies_path, method: :get, class: "mb-4" do |f| %>
+  <%= f.label :query, "Query", class: "block" %>
+  <div class="flex gap-2">
+    <%= f.text_field :query, size: 50, autocomplete: "off", value: @table.search.query, class: "border border-black p-2 rounded w-full" %>
+    <%= f.submit "Search", class: "bg-gray-200 border border-black rounded px-4 py-2" %>
+  </div>
 <% end %>
 
 <% if @table.filtered? %>
