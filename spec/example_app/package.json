@@ -1,12 +1,10 @@
 {
   "license": "MIT",
-  "dependencies": {
-    "@rails/ujs": "^6.0.3",
-    "@rails/webpacker": "5.2.1",
-    "highlight.js": "^10.4.1",
-    "stimulus": "^1.1.1"
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
   },
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
+  "dependencies": {
+    "@tailwindcss/typography": "*"
   }
 }

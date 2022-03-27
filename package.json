@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "autoprefixer": "^10.4.4",
+    "esbuild": "^0.14.28",
+    "postcss": "^8.4.12",
+    "sass": "^1.49.9",
+    "tailwindcss": "^3.0.23"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
+  }
+}

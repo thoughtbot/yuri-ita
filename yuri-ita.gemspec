@@ -23,14 +23,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rltk"
-  spec.add_dependency "activesupport", ">= 4.2"
-  spec.add_dependency "activerecord", ">= 4.2"
-  spec.add_dependency "activemodel", ">= 4.2"
+  spec.add_dependency "rails", ">= 7"
   spec.add_dependency "zeitwerk"
 
-  spec.add_development_dependency "bundler", "~> 1.17"
+  spec.add_development_dependency "bundler", "~> 2.3"
   spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rspec_junit_formatter", "~> 0.4"
+  spec.add_development_dependency "rspec", "~> 3.11"
+  spec.add_development_dependency "rspec_junit_formatter", "~> 0.5"
   spec.add_development_dependency "pry-rails"
 end

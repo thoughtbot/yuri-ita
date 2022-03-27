@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ExampleApp</title>
+    <title>Yuri-ita Example Application: Movies search</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application" %>
   </head>
 
-  <body>
+  <body class="mx-auto max-w-xl p-8 prose">
+    <h1>Yuri-ita Example Application</h1>
+    <h2>Movies search</h2>
     <%= yield %>
   </body>
 </html>
