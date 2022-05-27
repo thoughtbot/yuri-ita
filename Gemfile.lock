@@ -128,7 +128,9 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
-    mimemagic (0.3.5)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.2)
@@ -147,7 +149,7 @@ GEM
     public_suffix (4.0.6)
     puma (5.0.4)
       nio4r (~> 2.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
