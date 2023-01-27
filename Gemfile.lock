@@ -86,7 +86,7 @@ GEM
     childprocess (3.0.0)
     coderay (1.1.2)
     commonmarker (0.23.7)
-    concurrent-ruby (1.1.10)
+    concurrent-ruby (1.2.0)
     crass (1.0.6)
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
@@ -106,8 +106,8 @@ GEM
     ffi (1.13.1)
     filigree (0.4.1)
     github-markup (3.0.5)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
+    globalid (1.1.0)
+      activesupport (>= 5.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -132,7 +132,7 @@ GEM
       rake
     mini_mime (1.0.2)
     mini_portile2 (2.8.0)
-    minitest (5.14.2)
+    minitest (5.17.0)
     msgpack (1.3.3)
     multipart-post (2.1.1)
     netrc (0.11.0)
@@ -270,7 +270,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.4.1)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
