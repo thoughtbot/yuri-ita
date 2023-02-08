@@ -142,6 +142,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.1)
     minitest (5.15.0)
     msgpack (1.4.5)
     multi_xml (0.6.0)
@@ -162,7 +163,8 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.13.3-x86_64-darwin)
+    nokogiri (1.13.3)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     pg (1.3.4)
     propshaft (0.6.4)
@@ -282,6 +284,7 @@ GEM
     zeitwerk (2.5.4)
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-darwin-21
 
 DEPENDENCIES
@@ -313,7 +316,7 @@ DEPENDENCIES
   yuri-ita!
 
 RUBY VERSION
-   ruby 3.1.1p18
+   ruby 3.2.0p0
 
 BUNDLED WITH
    2.3.4

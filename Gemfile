@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Specify your gem"s dependencies in yuri-ita.gemspec
 gemspec
 
-ruby File.read(".ruby-version").strip
+ruby "3.2.0"
 
 gem "rails"
 
