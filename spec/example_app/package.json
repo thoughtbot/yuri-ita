@@ -1,12 +1,14 @@
 {
   "license": "MIT",
   "dependencies": {
-    "@rails/ujs": "^7.0.4",
-    "@rails/webpacker": "5.4.3",
-    "highlight.js": "^11.7.0",
-    "stimulus": "^3.2.1"
+    "@rails/ujs": "*",
+    "@tailwindcss/typography": "*",
+    "esbuild": "*",
+    "stimulus": "*",
+    "tailwindcss": "*"
   },
-  "devDependencies": {
-    "webpack-dev-server": "^4.11.1"
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
   }
 }

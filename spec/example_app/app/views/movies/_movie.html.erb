@@ -1,11 +1,7 @@
-<li class="movie-card">
-  <div class="movie-card__title">
-    <%= movie.title %>
-  </div>
-  <div class="movie-card__tagline">
-    <%= movie.tagline %>
-  </div>
-  <div class="movie-card__status">
+<div class="mb-4 border-l-2 pl-4">
+  <h4><%= movie.title %></h4>
+  <div><%= movie.tagline %></div>
+  <div class="text-gray-500">
     <%= movie.status %>
   </div>
-</li>
+</div>

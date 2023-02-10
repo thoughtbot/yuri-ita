@@ -1,23 +1,19 @@
-<div class="site-header">
-  <div class="site-header__content">
-    <h1>Top Movies</h1>
+<h3>Top Movies</h3>
 
-    <%= form_with url: movies_path, method: :get, local: true, html: { class: "index-search" } do |form| %>
-      <%= form.label :query, "Search" %>
-      <%= form.text_field :query, size: 50, autocomplete: "off", value: table.search.query %>
-    <% end %>
+<%= form_for "", url: movies_path, method: :get, class: "mb-4" do |f| %>
+  <%= f.label :query, "Query", class: "block" %>
+  <div class="flex gap-2">
+    <%= f.text_field :query, size: 50, autocomplete: "off", value: @table.search.query, class: "border border-black p-2 rounded w-full" %>
+    <%= f.submit "Search", class: "bg-gray-200 border border-black rounded px-4 py-2" %>
   </div>
-</div>
+<% end %>
 
-<div class="site-body">
-  <div class="site-body__content">
-    <div class="movie-list">
-      <% if table.filtered? %>
-        <%= link_to "Clear current search, filters, and sort", movies_path, class: "clear-filter-link"  %>
-      <% end %>
-      <ul>
-        <%= render(table.items) || render("empty_index") %>
-      </ul>
-    </div>
-  </div>
-</div>
+<% if @table.filtered? %>
+  <p><%= link_to "Clear current search, filters, and sort", movies_path %></p>
+<% end %>
+
+<% if @table.items.any? %>
+  <%= render @table.items %>
+<% else %>
+  <p>No movies to display</p>
+<% end %>

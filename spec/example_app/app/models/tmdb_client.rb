@@ -1,45 +1,50 @@
 class TmdbClient
+  MIN_PAGE = 1
+  MAX_PAGE = 10
+
+  attr_reader :access_token
+
   def initialize
-    Tmdb::Api.key(ENV["TMDB_API_KEY"])
+    @access_token = ENV.fetch("TMDB_ACCESS_TOKEN")
   end
 
   def top_rated
-    data.map do |movie_data|
+    get_movies.map do |movie|
       {
-        tmdb_id: movie_data.id,
-        title: movie_data.title,
-        original_title: movie_data.original_title,
-        tagline: movie_data.tagline,
-        overview: movie_data.overview,
-        adult: movie_data.adult,
-        status: movie_data.status,
-        revenue: movie_data.revenue,
-        runtime: movie_data.runtime,
-        vote_count: movie_data.vote_count,
-        budget: movie_data.budget,
-        vote_average: movie_data.vote_average,
-        popularity: movie_data.popularity,
-        release_date: movie_data.release_date,
-        created_at: Time.now,
-        updated_at: Time.now,
+        tmdb_id: movie.id,
+        title: movie.title,
+        original_title: movie.original_title,
+        tagline: movie.tagline,
+        overview: movie.overview,
+        adult: movie.adult,
+        status: movie.status,
+        revenue: movie.revenue,
+        runtime: movie.runtime,
+        vote_count: movie.vote_count,
+        budget: movie.budget,
+        vote_average: movie.vote_average,
+        popularity: movie.popularity,
+        release_date: movie.release_date,
+        created_at: Time.zone.now,
+        updated_at: Time.zone.now,
       }
     end
   end
 
   def genres
-    genre_data.map do |genre|
+    get_genres.map do |genre|
       {
         tmdb_id: genre.id,
         name: genre.name,
-        created_at: Time.now,
-        updated_at: Time.now,
+        created_at: Time.zone.now,
+        updated_at: Time.zone.now,
       }
     end
   end
 
   def movie_genres
-    data.map do |movie|
-      movie_id = Movie.find_by(tmdb_id: movie.id).id
+    get_movies.map do |movie|
+      movie_id = Movie.find_by!(tmdb_id: movie.id).id
       genres_for(movie).map do |genre|
         {
           movie_id: movie_id,
@@ -51,35 +56,40 @@ class TmdbClient
     end.flatten
   end
 
-  private
+  def get_movies
+    @movies ||= pages.map { |page| get_movies_for_page(page) }.sum
+  end
 
-  def data
-    @data ||= pages.reduce([]) do |list, page|
-      list + movies_for(page)
+  def get_movies_for_page(page)
+    get("/movie/top_rated", page: page).results.map do |movie|
+      get_movie(movie.id)
     end
   end
 
-  def genre_data
-    Tmdb::Genre.movie_list
+  def get_movie(id)
+    get("/movie/#{id}")
+  end
+
+  def pages
+    MIN_PAGE..MAX_PAGE
+  end
+
+  def get(url, **query)
+    puts "Requesting #{url}#{query.present? ? "?" : ""}#{query.to_query}"
+    HTTParty.get(
+      "https://api.themoviedb.org/3/#{url}",
+      query: query,
+      headers: { Authorization: "Bearer #{access_token}" }
+    ).to_deep_struct
+  end
+
+  def get_genres
+    get("/genre/movie/list").genres
   end
 
   def genres_for(movie)
     movie.genres.map do |genre|
-      Genre.find_by(tmdb_id: genre.id).id
+      Genre.find_by!(tmdb_id: genre.id).id
     end
-  end
-
-  def movies_for(page)
-    movie_ids_on_page(page).map do |tmdb_id|
-      Tmdb::Movie.detail(tmdb_id)
-    end
-  end
-
-  def movie_ids_on_page(page)
-    Tmdb::Movie.top_rated(page: page).results.map(&:id)
-  end
-
-  def pages
-    1..5
   end
 end
