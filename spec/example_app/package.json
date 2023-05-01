@@ -3,7 +3,7 @@
   "dependencies": {
     "@rails/ujs": "^7.0.4",
     "@rails/webpacker": "5.4.3",
-    "highlight.js": "^11.7.0",
+    "highlight.js": "^11.8.0",
     "stimulus": "^3.2.1"
   },
   "devDependencies": {
