@@ -41,7 +41,7 @@ table = Yuriita::Table.new(param_key: :q, params: { q: "" })
 table.filtered? #=> false
 ```
 
-You may use this `.fitlered?` method to conditionally render a link to reload
+You may use this `.filtered?` method to conditionally render a link to reload
 the page without any query parameters.
 
 ```erb
