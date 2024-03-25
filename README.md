@@ -94,4 +94,5 @@ under the terms specified in the [LICENSE] file.
 [LICENSE]: /LICENSE
 
 <!-- START /templates/footer.md -->
+
 <!-- END /templates/footer.md -->
