@@ -7,6 +7,7 @@
     "stimulus": "^3.2.1"
   },
   "devDependencies": {
+    "@webpack-cli/serve": "^2.0.5",
     "webpack-dev-server": "^4.11.1"
   }
 }
