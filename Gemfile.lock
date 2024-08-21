@@ -334,6 +334,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   bourbon
+  bundler (~> 2.3)
   byebug
   capybara (>= 3.26)
   commonmarker
