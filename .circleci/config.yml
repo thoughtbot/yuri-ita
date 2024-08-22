@@ -21,7 +21,9 @@ jobs:
       - run:
           name: Create symlink for package.json
           command: ln -s ./spec/example_app/package.json ./package.json
-
+      - run:
+          name: Create symlink for webpack.config.js
+          command: ln -s ./spec/example_app/config/webpack/webpack.config.js ./config/webpack/webpack.config.js
       - restore_cache:
           keys:
           - yuriita-bundle-{{ checksum "Gemfile.lock" }}
