@@ -16,9 +16,11 @@ jobs:
           POSTGRES_DB: example_app_test
           POSTGRES_USER: root
 
-    working_directory: ~/spec/example_app
     steps:
       - checkout
+      - run:
+          name: Create symlink for package.json
+          command: ln -s ./spec/example_app/package.json ./package.json
 
       - restore_cache:
           keys:
