@@ -190,8 +190,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.7)
-    rack-proxy (0.7.7)
-      rack
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -286,7 +284,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    semantic_range (3.0.0)
     sentry-raven (3.1.2)
       faraday (>= 1.0)
     sprockets (4.2.1)
@@ -316,11 +313,6 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0, < 4.11)
-    webpacker (5.4.4)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     webrick (1.8.1)
     websocket (1.2.11)
     websocket-driver (0.7.6)
@@ -358,7 +350,6 @@ DEPENDENCIES
   themoviedb-api
   web-console (>= 3.3.0)
   webdrivers
-  webpacker (~> 5)
   yuri-ita!
 
 RUBY VERSION

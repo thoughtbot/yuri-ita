@@ -17,7 +17,6 @@ gem "puma", "~> 6.0"
 gem "sass-rails", ">= 6"
 gem "sentry-raven"
 gem "themoviedb-api"
-gem "webpacker", '~> 5'
 
 group :test, :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
