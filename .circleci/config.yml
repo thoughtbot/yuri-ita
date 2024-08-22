@@ -11,7 +11,7 @@ jobs:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-      - image: circleci/postgres:11.4-alpine
+      - image: cimg/postgres:12.20
         environment:
           POSTGRES_DB: example_app_test
           POSTGRES_USER: root
