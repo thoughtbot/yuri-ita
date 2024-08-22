@@ -42,7 +42,7 @@ jobs:
 
       - run:
           name: Yarn Install
-          command: bin/yarn install --frozen-lockfile --cache-folder ~/.cache/yarn --modules-folder spec/example_app/node_modules
+          command: bin/yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
 
       - save_cache:
           key: yuriita-yarn-{{ checksum "spec/example_app/yarn.lock" }}
