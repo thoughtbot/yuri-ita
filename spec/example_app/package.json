@@ -11,6 +11,6 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "build": "webpack --config config/webpack/webpack.config.js"
+    "build": "webpack --config spec/example_app/config/webpack/webpack.config.js"
   }
 }
