@@ -16,6 +16,7 @@ jobs:
           POSTGRES_DB: example_app_test
           POSTGRES_USER: root
 
+    working_directory: ~/spec/example_app
     steps:
       - checkout
 
