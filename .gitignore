@@ -14,3 +14,4 @@ spec/example_app/.env
 spec/example_app/log/*
 spec/example_app/tmp/*
 spec/example_app/public/assets
+spec/example_app/node_modules
