@@ -3,16 +3,16 @@ source "https://rubygems.org"
 # Specify your gem"s dependencies in yuri-ita.gemspec
 gemspec
 
-ruby "2.6.5"
+ruby "3.1.6"
 
 gem "rails"
 
 gem "bootsnap", ">= 1.4.4", require: false
 gem "bourbon"
-gem "commonmarker"
+gem "commonmarker", "< 1.0"
 gem "github-markup", require: "github/markup"
 gem "pg", ">= 0.18", "< 2.0"
-gem "puma", "~> 5.0"
+gem "puma", "~> 6.0"
 gem "sass-rails", ">= 6"
 gem "sentry-raven"
 gem "themoviedb-api"
@@ -27,7 +27,7 @@ end
 
 group :development do
   gem "web-console", ">= 3.3.0"
-  gem "listen", ">= 3.0.5", "< 3.4"
+  gem "listen", ">= 3.0.5"
 end
 
 group :test do

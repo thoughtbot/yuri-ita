@@ -61,7 +61,7 @@ FactoryBot.define do
 
     inputs { [] }
 
-    initialize_with { new(attributes) }
+    initialize_with { new(inputs:) }
   end
 
   factory :expression, class: "Yuriita::Inputs::Expression" do
@@ -87,7 +87,7 @@ FactoryBot.define do
     name { "Option Name" }
     filter { build(:expression_filter) }
 
-    initialize_with { new(attributes) }
+    initialize_with { new(name:, filter:) }
   end
 
   factory :expression_filter, class: "Yuriita::ExpressionFilter" do
