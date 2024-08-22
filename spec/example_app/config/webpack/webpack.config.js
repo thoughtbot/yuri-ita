@@ -5,7 +5,7 @@ const webpack = require("webpack")
 module.exports = {
   mode,
   entry: {
-    application: "./app/javascript/application.js"
+    application: "./spec/example_app/app/javascript/application.js"
   },
   optimization: {
     moduleIds: "deterministic",
