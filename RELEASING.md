@@ -11,8 +11,8 @@
 1. Push changes: `git push --tags`
 1. Build and publish:
     ```bash
-    gem build project-name.gemspec
-    gem push project-name-*.gem
+    gem build yuri-ita.gemspec
+    gem push yuri-ita-*.gem
     ```
 1. Add a new GitHub release using the recent `NEWS.md` as the content. Sample
    URL: https://github.com/thoughtbot/yuri-ita/releases/new?tag=vVERSION

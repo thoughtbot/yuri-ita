@@ -10,6 +10,18 @@ The format is loosely based on [Keep a Changelog] and this project adheres to
 
 ## [Unreleased]
 
+## [0.2.0] - 2024-08-23
+### Update
+- Rails version to 7.2.1
+- Ruby version to 3.3.4
+- Node to 22.6.0
+- Other dependencies
+- bin/setup
+
+### Fix
+- example_app hosting issues
+- all open security notices
+
 ### Added
 
 - Basic lexer and parser
