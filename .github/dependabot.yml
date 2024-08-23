@@ -38,9 +38,6 @@ updates:
   - dependency-name: commonmarker
     versions:
     - 0.21.1
-  - dependency-name: webdrivers
-    versions:
-    - 4.5.0
   registries:
   - rubygems-server-gems-graphql-pro
 - package-ecosystem: npm
