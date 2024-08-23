@@ -1,10 +1,4 @@
 version: 2
-registries:
-  rubygems-server-gems-graphql-pro:
-    type: rubygems-server
-    url: https://gems.graphql.pro
-    username: "${{secrets.RUBYGEMS_SERVER_GEMS_GRAPHQL_PRO_USERNAME}}"
-    password: "${{secrets.RUBYGEMS_SERVER_GEMS_GRAPHQL_PRO_PASSWORD}}"
 
 updates:
 - package-ecosystem: bundler
