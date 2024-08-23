@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Specify your gem"s dependencies in yuri-ita.gemspec
 gemspec
 
-ruby "3.1.6"
+ruby "3.3.3"
 
 gem "rails"
 
