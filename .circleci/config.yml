@@ -11,14 +11,16 @@ jobs:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-      - image: circleci/postgres:11.4-alpine
+      - image: cimg/postgres:12.20
         environment:
           POSTGRES_DB: example_app_test
           POSTGRES_USER: root
 
     steps:
       - checkout
-
+      - run:
+          name: Create symlink for package.json
+          command: ln -s ./spec/example_app/package.json ./package.json
       - restore_cache:
           keys:
           - yuriita-bundle-{{ checksum "Gemfile.lock" }}
