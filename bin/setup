@@ -30,4 +30,10 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Removing old logs and tempfiles =="
   system! "bin/rails log:clear tmp:clear"
+
+  puts "\n== Tips =="
+  puts "- To seed the database, run `rails db:seed`. You must have the TMDB_API_KEY environment variable set."
+  puts "- To run the example_app server, run `rails s`."
+
+  puts
 end
