@@ -9,11 +9,11 @@ gem "rails"
 
 gem "bootsnap", ">= 1.4.4", require: false
 gem "bourbon"
-gem "commonmarker", "< 1.0"
 gem "github-markup", require: "github/markup"
 gem "jsbundling-rails"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 6.0"
+gem "redcarpet"
 gem "sass-rails", ">= 6"
 gem "sentry-raven"
 gem "themoviedb-api"
