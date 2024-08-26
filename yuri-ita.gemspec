@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/thoughtbot/yuri-ita"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["changelog_uri"] = "https://github.com/thoughtbot/yuri-ita/CHANGELOG.md"
+  spec.metadata["changelog_uri"] = "https://github.com/thoughtbot/yuri-ita/blob/main/NEWS.md"
 
   # Specify which files should be added to the gem when it is released.
   spec.files         = Dir["{lib}/**/*", "LICENSE"]
