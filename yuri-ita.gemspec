@@ -5,7 +5,7 @@ require "yuriita/version"
 Gem::Specification.new do |spec|
   spec.name          = "yuri-ita"
   spec.version       = Yuriita::VERSION
-  spec.authors       = ["Louis Antonopoulos", "Eebs Kobeissi", "Sally Hall"]
+  spec.authors       = ["Louis Antonopoulos", "Sally Hall", "Eebs Kobeissi"]
   spec.email         = ["louis@thoughtbot.com"]
 
   spec.summary       = %q{Filter and search using an expressive, user defined, query language}
@@ -24,9 +24,9 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = "~> 3.1"
 
   spec.add_dependency "rltk", "~> 3.0"
-  spec.add_dependency "activesupport", "~> 7.0"
-  spec.add_dependency "activerecord", "~> 7.0"
-  spec.add_dependency "activemodel", "~> 7.0"
+  spec.add_dependency "activesupport", "~> 6.0"
+  spec.add_dependency "activerecord", "~> 6.0"
+  spec.add_dependency "activemodel", "~> 6.0"
   spec.add_dependency "zeitwerk", "~> 2.6"
 
   spec.add_development_dependency "bundler", "~> 2.3"
