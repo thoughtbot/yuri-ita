@@ -10,6 +10,10 @@ The format is loosely based on [Keep a Changelog] and this project adheres to
 
 ## [Unreleased]
 
+## [0.2.1] - 2024-08-26
+### Update
+- Gemspec requirements and information
+
 ## [0.2.0] - 2024-08-23
 ### Update
 - Rails version to 7.2.1
