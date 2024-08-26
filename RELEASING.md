@@ -1,23 +1,28 @@
 # Releasing
 
-1. Update version file accordingly.
+## Prepare
+1. Update the version number in `lib/yuriita/version.rb`.
 1. Update `NEWS.md` to reflect the changes since last release.
-1. Commit changes.
-   There shouldn't be code changes,
-   and thus CI doesn't need to run,
-   you can then add "[ci skip]" to the commit message.
-1. Tag the release: `git tag -s vVERSION`
-    - We recommend the [_quick guide on how to sign a release_] from git ready.
-1. Push changes: `git push --tags`
+1. Open and merge a PR with the changes.
+
+## Tag
+1. Tag and sign the release:   `git tag -s vVERSION`
+   [notes on signing]
+1. Verify the signed tag:      `git tag -v vVERSION`
+1. Push changes:               `git push --tags`
+
+## Publish
 1. Build and publish:
     ```bash
     gem build yuri-ita.gemspec
     gem push yuri-ita-*.gem
     ```
+
+## Announce
 1. Add a new GitHub release using the recent `NEWS.md` as the content. Sample
    URL: https://github.com/thoughtbot/yuri-ita/releases/new?tag=vVERSION
 1. Announce the new release,
    making sure to say "thank you" to the contributors
    who helped shape this version!
 
-[_quick guide on how to sign a release_]: http://gitready.com/advanced/2014/11/02/gpg-sign-releases.html
+[notes on signing]: http://gitready.com/advanced/2014/11/02/gpg-sign-releases.html
