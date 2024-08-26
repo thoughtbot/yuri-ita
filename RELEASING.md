@@ -6,11 +6,10 @@
 1. Open and merge a PR with the changes.
 
 ## Tag
-1. Tag the release:       `git tag -s vVERSION`
-1. Sign the release:      `git tag -s vVERSION -m "the best version yet"`
-   [notes on signing releases]
-1. Verify the signed tag: `git tag --verify vVERSION`
-1. Push changes: `git push --tags`
+1. Tag and sign the release:   `git tag -s vVERSION`
+   [notes on signing]
+1. Verify the signed tag:      `git tag -v vVERSION`
+1. Push changes:               `git push --tags`
 
 ## Publish
 1. Build and publish:
@@ -26,4 +25,4 @@
    making sure to say "thank you" to the contributors
    who helped shape this version!
 
-[notes on signing releases]: http://gitready.com/advanced/2014/11/02/gpg-sign-releases.html
+[notes on signing]: http://gitready.com/advanced/2014/11/02/gpg-sign-releases.html
