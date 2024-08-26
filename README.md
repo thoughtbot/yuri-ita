@@ -78,6 +78,11 @@ Or install it yourself as:
 For instructions on how to integrate Yuri-ita with your Rails application,
 [view the Getting Started documentation](docs/getting_started.md).
 
+## Releases
+
+Releases are signed by louis@thoughtbot.com.
+The fingerprint is `7B3B 5C4E C777 3530 7E65  EF2B D728 8DAC CCC8 0A03`.
+
 ## Contributing
 
 See the [CONTRIBUTING] document. Thank you, [contributors]!
