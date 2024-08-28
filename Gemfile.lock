@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    yuri-ita (0.1.0)
+    yuri-ita (0.2.1)
       activemodel (~> 7.0)
       activerecord (~> 7.0)
       activesupport (~> 7.0)
