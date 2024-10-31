@@ -34,7 +34,7 @@ module Yuriita
     def process(action, *)
       action = action.to_s
 
-      unless method_name = find_method_name(action)
+      unless (method_name = find_method_name(action))
         raise ActionNotFound.new("The action '#{action}' could not be found for #{self.class.name}", self, action)
       end
 
