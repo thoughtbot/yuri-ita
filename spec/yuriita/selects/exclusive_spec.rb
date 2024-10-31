@@ -14,7 +14,7 @@ RSpec.describe Yuriita::Selects::Exclusive do
         selector = described_class.new(
           options: [active_option, hidden_option],
           default: active_option,
-          query:,
+          query:
         )
 
         expect(selector.filter).to eq active_filter
@@ -32,13 +32,13 @@ RSpec.describe Yuriita::Selects::Exclusive do
 
         query = build(
           :query,
-          inputs: [build(:expression, qualifier: "is", term: "active")],
+          inputs: [build(:expression, qualifier: "is", term: "active")]
         )
 
         selector = described_class.new(
           options: [active_option, hidden_option],
           default: hidden_option,
-          query:,
+          query:
         )
 
         expect(selector.filter).to eq active_filter
@@ -57,7 +57,7 @@ RSpec.describe Yuriita::Selects::Exclusive do
         selector = described_class.new(
           options: [active_option, hidden_option],
           default: active_option,
-          query:,
+          query:
         )
 
         result = selector.selected?(active_option)
@@ -74,7 +74,7 @@ RSpec.describe Yuriita::Selects::Exclusive do
         selector = described_class.new(
           options: [active_option, hidden_option],
           default: active_option,
-          query:,
+          query:
         )
 
         result = selector.selected?(hidden_option)
@@ -90,13 +90,13 @@ RSpec.describe Yuriita::Selects::Exclusive do
 
         query = build(
           :query,
-          inputs: [build(:expression, qualifier: "is", term: "active")],
+          inputs: [build(:expression, qualifier: "is", term: "active")]
         )
 
         selector = described_class.new(
           options: [active_option, hidden_option],
           default: hidden_option,
-          query:,
+          query:
         )
 
         result = selector.selected?(active_option)
@@ -114,14 +114,14 @@ RSpec.describe Yuriita::Selects::Exclusive do
           :query,
           inputs: [
             build(:expression, qualifier: "is", term: "hidden"),
-            build(:expression, qualifier: "is", term: "active"),
-          ],
+            build(:expression, qualifier: "is", term: "active")
+          ]
         )
 
         selector = described_class.new(
           options: [active_option, hidden_option],
           default: hidden_option,
-          query:,
+          query:
         )
 
         active_selected = selector.selected?(active_option)

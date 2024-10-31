@@ -16,7 +16,7 @@ module Yuriita
           Clauses::Search.new(
             filters:,
             keywords:,
-            combination:,
+            combination:
           )
         else
           Clauses::Identity.new

@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Movie, type: :model do
   describe ".rumored" do
     it "returns movies with the rumored status" do
       rumored = create(:movie, :rumored)
-      post_production = create(:movie, :post_production)
+      create(:movie, :post_production)
 
       results = Movie.rumored
 
@@ -15,7 +15,7 @@ RSpec.describe Movie, type: :model do
   describe ".post_production" do
     it "returns movies with the rumored status" do
       post_production = create(:movie, :post_production)
-      released = create(:movie, :released)
+      create(:movie, :released)
 
       results = Movie.post_production
 
@@ -26,7 +26,7 @@ RSpec.describe Movie, type: :model do
   describe ".released" do
     it "returns movies with the rumored status" do
       released = create(:movie, :released)
-      cancelled = create(:movie, :cancelled)
+      create(:movie, :cancelled)
 
       results = Movie.released
 
@@ -37,7 +37,7 @@ RSpec.describe Movie, type: :model do
   describe ".cancelled" do
     it "returns movies with the rumored status" do
       cancelled = create(:movie, :cancelled)
-      rumored = create(:movie, :rumored)
+      create(:movie, :rumored)
 
       results = Movie.cancelled
 
@@ -48,7 +48,7 @@ RSpec.describe Movie, type: :model do
   describe ".search" do
     it "searches the given field for the term" do
       duck_movie = create(:movie, title: "Mighty Ducks")
-      not_ducks_movie = create(:movie, title: "Cats", tagline: "Cats not ducks")
+      create(:movie, title: "Cats", tagline: "Cats not ducks")
 
       results = Movie.search(:title, "ducks")
 

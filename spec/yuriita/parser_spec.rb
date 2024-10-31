@@ -1,5 +1,5 @@
 RSpec.describe Yuriita::Parser do
-  describe '#parse' do
+  describe "#parse" do
     it "parses an empty string" do
       query = parse(tokens([:EOS]))
 
@@ -17,12 +17,12 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "hello"],
         [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "bug"],
-        [:EOS],
+        [:EOS]
       ))
 
       expect(query.inputs).to contain_exactly(
         expression("label", "bug"),
-        keyword("hello"),
+        keyword("hello")
       )
     end
 
@@ -31,7 +31,7 @@ RSpec.describe Yuriita::Parser do
         [:QUOTE],
         [:WORD, "hello"], [:SPACE], [:WORD, "world"],
         [:QUOTE],
-        [:EOS],
+        [:EOS]
       ))
 
       expect(query.inputs).to eq [keyword("hello world")]
@@ -44,13 +44,13 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON], [:WORD, "bug"],
         [:SPACE],
         [:WORD, "world"],
-        [:EOS],
+        [:EOS]
       ))
 
       expect(query.inputs).to contain_exactly(
         expression("label", "bug"),
         keyword("hello"),
-        keyword("world"),
+        keyword("world")
       )
     end
 
@@ -63,14 +63,14 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "world"],
         [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "security"],
-        [:EOS],
+        [:EOS]
       ))
 
       expect(query.inputs).to contain_exactly(
         expression("label", "bug"),
         expression("label", "security"),
         keyword("hello"),
-        keyword("world"),
+        keyword("world")
       )
     end
 
@@ -89,7 +89,7 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON], [:WORD, "green"],
         [:SPACE],
         [:WORD, "term"],
-        [:EOS],
+        [:EOS]
       ))
 
       expect(query.inputs).to contain_exactly(
@@ -99,7 +99,7 @@ RSpec.describe Yuriita::Parser do
         keyword("hello"),
         keyword("world"),
         keyword("search"),
-        keyword("term"),
+        keyword("term")
       )
     end
 
@@ -107,28 +107,28 @@ RSpec.describe Yuriita::Parser do
       query = parse(tokens([:WORD, "is"], [:COLON], [:WORD, "active"], [:EOS]))
 
       expect(query.inputs).to contain_exactly(
-        expression("is", "active"),
+        expression("is", "active")
       )
     end
 
     it "parses an expression input with a quoted word" do
       query = parse(tokens(
-        [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:QUOTE], [:EOS],
+        [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:QUOTE], [:EOS]
       ))
 
       expect(query.inputs).to contain_exactly(
-        expression("label", "bug"),
+        expression("label", "bug")
       )
     end
 
     it "parses an expression input with a quoted phrase" do
       query = parse(tokens(
         [:WORD, "label"], [:COLON], [:QUOTE], [:WORD, "bug"], [:SPACE],
-        [:WORD, "report"], [:QUOTE], [:EOS],
+        [:WORD, "report"], [:QUOTE], [:EOS]
       ))
 
       expect(query.inputs).to contain_exactly(
-        expression("label", "bug report"),
+        expression("label", "bug report")
       )
     end
 
@@ -137,11 +137,11 @@ RSpec.describe Yuriita::Parser do
         [:WORD, "label"], [:COLON],
         [:QUOTE],
         [:SPACE], [:WORD, "bug"], [:SPACE], [:WORD, "report"], [:SPACE],
-        [:QUOTE], [:EOS],
+        [:QUOTE], [:EOS]
       ))
 
       expect(query.inputs).to contain_exactly(
-        expression("label", "bug report"),
+        expression("label", "bug report")
       )
     end
 
@@ -149,13 +149,13 @@ RSpec.describe Yuriita::Parser do
       query = parse(tokens(
         [:WORD, "label"], [:COLON], [:WORD, "bug"], [:SPACE],
         [:WORD, "label"], [:COLON], [:WORD, "security"], [:SPACE],
-        [:WORD, "author"], [:COLON], [:WORD, "eebs"], [:EOS],
+        [:WORD, "author"], [:COLON], [:WORD, "eebs"], [:EOS]
       ))
 
       expect(query.inputs).to contain_exactly(
         expression("label", "bug"),
         expression("label", "security"),
-        expression("author", "eebs"),
+        expression("author", "eebs")
       )
     end
   end

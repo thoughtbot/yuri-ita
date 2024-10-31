@@ -24,7 +24,7 @@ module Yuriita
         Selects::Exclusive.new(
           options:,
           default:,
-          query:,
+          query:
         ).filter
       end
     end

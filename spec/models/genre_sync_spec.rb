@@ -7,13 +7,13 @@ RSpec.describe GenreSync do
         :genre,
         name: "Comedy",
         created_at: Time.now,
-        updated_at: Time.now,
+        updated_at: Time.now
       )
       drama = attributes_for(
         :genre,
         name: "Drama",
         created_at: Time.now,
-        updated_at: Time.now,
+        updated_at: Time.now
       )
       client = double(:client, genres: [comedy, drama])
 

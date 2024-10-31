@@ -30,6 +30,6 @@ class DocumentationController < ApplicationController
   end
 
   def render_not_found
-    raise ActionController::RoutingError, 'Not Found'
+    raise ActionController::RoutingError, "Not Found"
   end
 end

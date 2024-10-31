@@ -20,4 +20,3 @@ module Yuriita
     end
   end
 end
-

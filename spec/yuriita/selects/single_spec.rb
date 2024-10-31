@@ -11,12 +11,12 @@ RSpec.describe Yuriita::Selects::Single do
 
         query = build(
           :query,
-          inputs: [build(:expression, qualifier: "author", term: "eebs")],
+          inputs: [build(:expression, qualifier: "author", term: "eebs")]
         )
 
         selector = described_class.new(
           options: [active_option, hidden_option],
-          query:,
+          query:
         )
 
         expect(selector.filter).to be nil
@@ -34,12 +34,12 @@ RSpec.describe Yuriita::Selects::Single do
 
         query = build(
           :query,
-          inputs: [build(:expression, qualifier: "is", term: "active")],
+          inputs: [build(:expression, qualifier: "is", term: "active")]
         )
 
         selector = described_class.new(
           options: [active_option, hidden_option],
-          query:,
+          query:
         )
 
         expect(selector.filter).to eq active_filter
@@ -57,7 +57,7 @@ RSpec.describe Yuriita::Selects::Single do
 
         selector = described_class.new(
           options: [active_option, hidden_option],
-          query:,
+          query:
         )
 
         result = selector.selected?(active_option)
@@ -73,12 +73,12 @@ RSpec.describe Yuriita::Selects::Single do
 
         query = build(
           :query,
-          inputs: [build(:expression, qualifier: "is", term: "active")],
+          inputs: [build(:expression, qualifier: "is", term: "active")]
         )
 
         selector = described_class.new(
           options: [active_option, hidden_option],
-          query:,
+          query:
         )
 
         result = selector.selected?(active_option)
@@ -96,13 +96,13 @@ RSpec.describe Yuriita::Selects::Single do
           :query,
           inputs: [
             build(:expression, qualifier: "is", term: "hidden"),
-            build(:expression, qualifier: "is", term: "active"),
-          ],
+            build(:expression, qualifier: "is", term: "active")
+          ]
         )
 
         selector = described_class.new(
           options: [active_option, hidden_option],
-          query:,
+          query:
         )
 
         active_selected = selector.selected?(active_option)

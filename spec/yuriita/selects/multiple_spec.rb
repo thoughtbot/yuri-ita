@@ -10,12 +10,12 @@ RSpec.describe Yuriita::Selects::Multiple do
 
       query = build(
         :query,
-        inputs: [build(:expression, qualifier: "is", term: "active")],
+        inputs: [build(:expression, qualifier: "is", term: "active")]
       )
 
       selector = described_class.new(
         options: [active_option, hidden_option],
-        query:,
+        query:
       )
 
       expect(selector.filters).to eq [active_filter]
@@ -29,12 +29,12 @@ RSpec.describe Yuriita::Selects::Multiple do
 
       query = build(
         :query,
-        inputs: [build(:expression, qualifier: "is", term: "active")],
+        inputs: [build(:expression, qualifier: "is", term: "active")]
       )
 
       selector = described_class.new(
         options: [active_option, hidden_option],
-        query:,
+        query:
       )
 
       result = selector.selected?(active_option)
@@ -48,12 +48,12 @@ RSpec.describe Yuriita::Selects::Multiple do
 
       query = build(
         :query,
-        inputs: [build(:expression, qualifier: "is", term: "active")],
+        inputs: [build(:expression, qualifier: "is", term: "active")]
       )
 
       selector = described_class.new(
         options: [active_option, hidden_option],
-        query:,
+        query:
       )
 
       result = selector.selected?(hidden_option)
@@ -67,7 +67,7 @@ RSpec.describe Yuriita::Selects::Multiple do
     build(
       :option,
       name:,
-      filter: build(:expression_filter, input: expression),
+      filter: build(:expression_filter, input: expression)
     )
   end
 end

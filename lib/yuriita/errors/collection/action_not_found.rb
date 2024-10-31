@@ -8,7 +8,6 @@ module Yuriita
         @action = action
         super(message)
       end
-
     end
   end
 end

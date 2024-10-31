@@ -8,19 +8,19 @@ RSpec.describe Yuriita::Clauses::Filter do
 
       published_filter = build(
         :expression_filter,
-        block: ->(relation) { relation.published },
+        block: ->(relation) { relation.published }
       )
 
       draft_filter = build(
         :expression_filter,
-        block: ->(relation) { relation.draft },
+        block: ->(relation) { relation.draft }
       )
 
       filters = [published_filter, draft_filter]
 
       clause = described_class.new(
         filters:,
-        combination: Yuriita::OrCombination,
+        combination: Yuriita::OrCombination
       )
 
       result = clause.apply(Post.all)

@@ -4,7 +4,7 @@ RSpec.describe Yuriita::Table do
       table = described_class.new(
         relation: double(:relation),
         configuration: double(:configuration, default_input: "is:published"),
-        params: {},
+        params: {}
       )
 
       expect(table.q).to eq "is:published "
@@ -14,7 +14,7 @@ RSpec.describe Yuriita::Table do
       table = described_class.new(
         relation: double(:relation),
         configuration: double(:configuration, default_input: "is:published"),
-        params: { q: "" },
+        params: {q: ""}
       )
 
       expect(table.q).to eq ""
@@ -27,7 +27,7 @@ RSpec.describe Yuriita::Table do
         relation: double(:relation),
         configuration: double(:configuration, default_input: "is:published"),
         param_key: :query,
-        params: {query: "is:published"},
+        params: {query: "is:published"}
       )
 
       expect(table.search.query).to eq "is:published "
@@ -39,7 +39,7 @@ RSpec.describe Yuriita::Table do
       table = described_class.new(
         relation: double(:relation),
         configuration: double(:configuration, default_input: "is:published"),
-        params: { q: "is:draft" },
+        params: {q: "is:draft"}
       )
 
       expect(table.filtered?).to be true
@@ -49,7 +49,7 @@ RSpec.describe Yuriita::Table do
       table = described_class.new(
         relation: double(:relation),
         configuration: double(:configuration, default_input: "author:eebs is:draft"),
-        params: { q: "is:draft author:eebs" },
+        params: {q: "is:draft author:eebs"}
       )
 
       expect(table.filtered?).to be true
@@ -59,7 +59,7 @@ RSpec.describe Yuriita::Table do
       table = described_class.new(
         relation: double(:relation),
         configuration: double(:configuration, default_input: "is:published"),
-        params: { q: "is:published" },
+        params: {q: "is:published"}
       )
 
       expect(table.filtered?).to be false
@@ -69,7 +69,7 @@ RSpec.describe Yuriita::Table do
       table = described_class.new(
         relation: double(:relation),
         configuration: double(:configuration, default_input: "is:released"),
-        params: {},
+        params: {}
       )
 
       expect(table.filtered?).to be false

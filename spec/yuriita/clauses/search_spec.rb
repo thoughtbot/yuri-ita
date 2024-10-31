@@ -8,12 +8,12 @@ RSpec.describe Yuriita::Clauses::Search do
 
       title_filter = build(
         :search_filter,
-        block: ->(relation, term) { relation.search(:title, term) },
+        block: ->(relation, term) { relation.search(:title, term) }
       )
 
       description_filter = build(
         :search_filter,
-        block: ->(relation, term) { relation.search(:description, term) },
+        block: ->(relation, term) { relation.search(:description, term) }
       )
 
       filters = [title_filter, description_filter]
@@ -22,7 +22,7 @@ RSpec.describe Yuriita::Clauses::Search do
       clause = described_class.new(
         filters:,
         keywords: [keyword],
-        combination: Yuriita::OrCombination,
+        combination: Yuriita::OrCombination
       )
 
       result = clause.apply(Post.all)

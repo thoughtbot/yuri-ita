@@ -15,7 +15,7 @@ module Yuriita
 
       combination.new(
         base_relation: relation,
-        relations: relations,
+        relations: relations
       ).combine
     end
 

@@ -13,7 +13,7 @@ module Yuriita
     end
 
     def keywords
-      inputs.select{ |input| input.is_a?(Yuriita::Inputs::Keyword) }
+      inputs.select { |input| input.is_a?(Yuriita::Inputs::Keyword) }
     end
 
     def each(&block)
@@ -26,7 +26,7 @@ module Yuriita
       inputs << input
       self
     end
-    alias << add_input
+    alias_method :<<, :add_input
 
     def delete(input)
       inputs.delete(input)
@@ -42,7 +42,7 @@ module Yuriita
     def size
       inputs.size
     end
-    alias length size
+    alias_method :length, :size
 
     def initialize_dup(original)
       super
