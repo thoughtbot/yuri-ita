@@ -9,7 +9,6 @@ gem "rails"
 
 gem "bootsnap", ">= 1.4.4", require: false
 gem "bourbon"
-gem "github-markup", require: "github/markup"
 gem "jsbundling-rails"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 6.4"
