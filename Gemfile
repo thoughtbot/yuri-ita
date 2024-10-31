@@ -15,7 +15,6 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 6.4"
 gem "redcarpet"
 gem "sass-rails", ">= 6"
-gem "sentry-raven"
 gem "themoviedb-api"
 
 group :test, :development do
