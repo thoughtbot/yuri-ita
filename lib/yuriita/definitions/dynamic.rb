@@ -9,7 +9,7 @@ module Yuriita
         input = select_input(query)
 
         if input.present?
-          Clauses::Dynamic.new(filter: filter, input: input)
+          Clauses::Dynamic.new(filter:, input:)
         else
           Clauses::Identity.new
         end

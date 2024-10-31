@@ -36,7 +36,7 @@ You can create static filters that always run the same query:
 ```ruby
 input = Yuriita::Inputs::Expression.new("is", "published")
 
-Yuriita::ExpressionFilter.new(input: input) do |relation|
+Yuriita::ExpressionFilter.new(input:) do |relation|
   relation.where(published: true)
 end
 ```

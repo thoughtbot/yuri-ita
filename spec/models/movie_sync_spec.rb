@@ -9,15 +9,17 @@ RSpec.describe MovieSync do
         created_at: Time.now,
         updated_at: Time.now,
       )
+
       the_prestige = attributes_for(
         :movie,
         title: "The Prestige",
         created_at: Time.now,
         updated_at: Time.now,
       )
+
       client = double(:client, top_rated: [fight_club, the_prestige], movie_genres: [])
 
-      MovieSync.new(client: client).run
+      MovieSync.new(client:).run
 
       titles = Movie.all.map(&:title)
       expect(titles).to contain_exactly("Fight Club", "The Prestige")

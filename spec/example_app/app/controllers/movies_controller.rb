@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   def index
     table = build_table
-    render locals: { table: table }
+    render locals: { table: }
   end
 
   private

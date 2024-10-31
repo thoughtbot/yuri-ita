@@ -37,7 +37,7 @@ class MovieDefinition
       relation.search(:title, term)
     end
 
-    Yuriita::Option.new(name: "In Title", filter: filter)
+    Yuriita::Option.new(name: "In Title", filter:)
   end
 
   def tagline_option
@@ -48,7 +48,7 @@ class MovieDefinition
       relation.search(:tagline, term)
     end
 
-    Yuriita::Option.new(name: "In Tagline", filter: filter)
+    Yuriita::Option.new(name: "In Tagline", filter:)
   end
 
   def status_definition
@@ -74,7 +74,7 @@ class MovieDefinition
       relation.rumored
     end
 
-    Yuriita::Option.new(name: "Rumored", filter: filter)
+    Yuriita::Option.new(name: "Rumored", filter:)
   end
 
   def released_option
@@ -84,7 +84,7 @@ class MovieDefinition
       relation.released
     end
 
-    Yuriita::Option.new(name: "Released", filter: filter)
+    Yuriita::Option.new(name: "Released", filter:)
   end
 
   def post_production_option
@@ -94,7 +94,7 @@ class MovieDefinition
       relation.post_production
     end
 
-    Yuriita::Option.new(name: "Post Production", filter: filter)
+    Yuriita::Option.new(name: "Post Production", filter:)
   end
 
   def cancelled_option
@@ -104,7 +104,7 @@ class MovieDefinition
       relation.cancelled
     end
 
-    Yuriita::Option.new(name: "Cancelled", filter: filter)
+    Yuriita::Option.new(name: "Cancelled", filter:)
   end
 
   def adult_definition
@@ -118,7 +118,7 @@ class MovieDefinition
       relation.where(adult: true)
     end
 
-    Yuriita::Option.new(name: "Adult", filter: filter)
+    Yuriita::Option.new(name: "Adult", filter:)
   end
 
   def safe_option
@@ -128,7 +128,7 @@ class MovieDefinition
       relation.where(adult: false)
     end
 
-    Yuriita::Option.new(name: "Safe", filter: filter)
+    Yuriita::Option.new(name: "Safe", filter:)
   end
 
   def sort_definition
@@ -149,7 +149,7 @@ class MovieDefinition
       relation.order(vote_average: :desc)
     end
 
-    Yuriita::Option.new(name: "Rating", filter: filter)
+    Yuriita::Option.new(name: "Rating", filter:)
   end
 
   def title_desc_option
@@ -159,7 +159,7 @@ class MovieDefinition
       relation.order(title: :desc)
     end
 
-    Yuriita::Option.new(name: "Title Desc", filter: filter)
+    Yuriita::Option.new(name: "Title Desc", filter:)
   end
 
   def title_asc_option
@@ -169,6 +169,6 @@ class MovieDefinition
       relation.order(title: :asc)
     end
 
-    Yuriita::Option.new(name: "Title Asc", filter: filter)
+    Yuriita::Option.new(name: "Title Asc", filter:)
   end
 end

@@ -38,7 +38,7 @@ class PostDefinition
       relation.search(:title, term)
     end
 
-    Yuriita::Option.new(name: "In Title", filter: filter)
+    Yuriita::Option.new(name: "In Title", filter:)
   end
 
   def body_option
@@ -49,7 +49,7 @@ class PostDefinition
       relation.search(:body, term)
     end
 
-    Yuriita::Option.new(name: "In Body", filter: filter)
+    Yuriita::Option.new(name: "In Body", filter:)
   end
 
   def description_option
@@ -60,7 +60,7 @@ class PostDefinition
       relation.search(:description, term)
     end
 
-    Yuriita::Option.new(name: "In Description", filter: filter)
+    Yuriita::Option.new(name: "In Description", filter:)
   end
 
   def published_definition
@@ -81,7 +81,7 @@ class PostDefinition
       relation.published
     end
 
-    Yuriita::Option.new(name: "Published", filter: filter)
+    Yuriita::Option.new(name: "Published", filter:)
   end
 
   def draft_option
@@ -91,7 +91,7 @@ class PostDefinition
       relation.draft
     end
 
-    Yuriita::Option.new(name: "Draft", filter: filter)
+    Yuriita::Option.new(name: "Draft", filter:)
   end
 
   def category_definition
@@ -107,10 +107,10 @@ class PostDefinition
       filter = Yuriita::ExpressionFilter.new(
         input: Yuriita::Inputs::Expression.new("category", name),
       ) do |relation|
-        relation.joins(:categories).where(categories: { name: name })
+        relation.joins(:categories).where(categories: { name: })
       end
 
-      Yuriita::Option.new(name: name, filter: filter)
+      Yuriita::Option.new(name:, filter:)
     end
   end
 
@@ -132,7 +132,7 @@ class PostDefinition
       relation.order(title: :desc)
     end
 
-    Yuriita::Option.new(name: "Title Desc", filter: filter)
+    Yuriita::Option.new(name: "Title Desc", filter:)
   end
 
   def title_asc_option
@@ -142,7 +142,7 @@ class PostDefinition
       relation.order(title: :asc)
     end
 
-    Yuriita::Option.new(name: "Title Asc", filter: filter)
+    Yuriita::Option.new(name: "Title Asc", filter:)
   end
 
   def author_definition
@@ -150,6 +150,6 @@ class PostDefinition
       relation.authored_by(input.term)
     end
 
-    Yuriita::Definitions::Dynamic.new(filter: filter)
+    Yuriita::Definitions::Dynamic.new(filter:)
   end
 end

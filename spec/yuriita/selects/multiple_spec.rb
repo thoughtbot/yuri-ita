@@ -15,7 +15,7 @@ RSpec.describe Yuriita::Selects::Multiple do
 
       selector = described_class.new(
         options: [active_option, hidden_option],
-        query: query,
+        query:,
       )
 
       expect(selector.filters).to eq [active_filter]
@@ -26,6 +26,7 @@ RSpec.describe Yuriita::Selects::Multiple do
     it "returns true if the given option's input is in the query" do
       active_option = build_option("Active", "is", "active")
       hidden_option = build_option("Hidden", "is", "hidden")
+
       query = build(
         :query,
         inputs: [build(:expression, qualifier: "is", term: "active")],
@@ -33,8 +34,9 @@ RSpec.describe Yuriita::Selects::Multiple do
 
       selector = described_class.new(
         options: [active_option, hidden_option],
-        query: query,
+        query:,
       )
+
       result = selector.selected?(active_option)
 
       expect(result).to be true
@@ -43,6 +45,7 @@ RSpec.describe Yuriita::Selects::Multiple do
     it "returns false if the given option's input is not in the query" do
       active_option = build_option("Active", "is", "active")
       hidden_option = build_option("Hidden", "is", "hidden")
+
       query = build(
         :query,
         inputs: [build(:expression, qualifier: "is", term: "active")],
@@ -50,8 +53,9 @@ RSpec.describe Yuriita::Selects::Multiple do
 
       selector = described_class.new(
         options: [active_option, hidden_option],
-        query: query,
+        query:,
       )
+
       result = selector.selected?(hidden_option)
 
       expect(result).to be false
@@ -59,10 +63,10 @@ RSpec.describe Yuriita::Selects::Multiple do
   end
 
   def build_option(name, qualifier, term)
-    expression = build(:expression, qualifier: qualifier, term: term)
+    expression = build(:expression, qualifier:, term:)
     build(
       :option,
-      name: name,
+      name:,
       filter: build(:expression_filter, input: expression),
     )
   end
