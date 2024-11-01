@@ -173,6 +173,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    ostruct (0.6.0)
     pg (1.5.9)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -326,6 +327,7 @@ DEPENDENCIES
   factory_bot_rails
   jsbundling-rails
   listen (>= 3.0.5)
+  ostruct
   pg (>= 0.18, < 2.0)
   pry-rails (~> 0.3.7)
   puma (~> 6.4)
