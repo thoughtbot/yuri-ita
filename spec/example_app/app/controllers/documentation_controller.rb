@@ -15,7 +15,7 @@ class DocumentationController < ApplicationController
     if File.exist?(path)
       html = File.read(path)
       renderer = Redcarpet::Render::HTML.new
-      markdown = Redcarpet::Markdown.new(renderer, extensions = {fenced_code_blocks: true})
+      markdown = Redcarpet::Markdown.new(renderer, {fenced_code_blocks: true})
       rendered_markdown = markdown.render(html)
 
       render layout: "documentation", html: rendered_markdown.html_safe
