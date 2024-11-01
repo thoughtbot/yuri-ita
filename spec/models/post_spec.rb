@@ -4,7 +4,7 @@ RSpec.describe Post, type: :model do
   describe ".published" do
     it "returns published posts" do
       published = create(:post, :published)
-      draft = create(:post, :draft)
+      create(:post, :draft)
 
       results = Post.published
 
@@ -14,7 +14,7 @@ RSpec.describe Post, type: :model do
 
   describe ".draft" do
     it "returns draft posts" do
-      published = create(:post, :published)
+      create(:post, :published)
       draft = create(:post, :draft)
 
       results = Post.draft

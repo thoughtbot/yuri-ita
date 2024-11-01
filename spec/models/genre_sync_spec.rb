@@ -7,17 +7,17 @@ RSpec.describe GenreSync do
         :genre,
         name: "Comedy",
         created_at: Time.now,
-        updated_at: Time.now,
+        updated_at: Time.now
       )
       drama = attributes_for(
         :genre,
         name: "Drama",
         created_at: Time.now,
-        updated_at: Time.now,
+        updated_at: Time.now
       )
       client = double(:client, genres: [comedy, drama])
 
-      GenreSync.new(client: client).run
+      GenreSync.new(client:).run
 
       names = Genre.all.map(&:name)
       expect(names).to contain_exactly("Comedy", "Drama")

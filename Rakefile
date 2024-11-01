@@ -1,7 +1,6 @@
-require File.expand_path('../spec/example_app/config/application', __FILE__)
+require File.expand_path("../spec/example_app/config/application", __FILE__)
 
 Bundler::GemHelper.install_tasks
-
 
 Rails.application.load_tasks
 
@@ -15,4 +14,4 @@ if defined? RSpec
   end
 end
 
-task :default => :spec
+task default: :spec

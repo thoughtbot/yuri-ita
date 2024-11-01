@@ -8,7 +8,7 @@ module Yuriita
 
       def apply(relation)
         relations = filters.map { |filter| filter.apply(relation) }
-        combination.new(base_relation: relation, relations: relations).combine
+        combination.new(base_relation: relation, relations:).combine
       end
 
       private

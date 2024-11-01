@@ -31,21 +31,20 @@ module Yuriita
 
     private
 
-    def process(action, *args)
+    def process(action, *)
       action = action.to_s
 
-      unless method_name = find_method_name(action)
+      unless (method_name = find_method_name(action))
         raise ActionNotFound.new("The action '#{action}' could not be found for #{self.class.name}", self, action)
       end
 
-      process_action(method_name, *args)
+      process_action(method_name, *)
     end
 
-    def process_action(method_name, *args)
-      send_action(method_name, *args)
+    def process_action(method_name, *)
+      send_action(method_name, *)
     end
-    alias send_action send
-
+    alias_method :send_action, :send
 
     def find_method_name(action)
       if action_method?(action)

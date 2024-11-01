@@ -5,9 +5,9 @@ require File.expand_path("../../spec/example_app/config/environment", __FILE__)
 require "rspec/rails"
 require "capybara/rails"
 require "capybara/rspec"
-require 'pry'
+require "pry"
 
-Dir[File.expand_path('../support/**/*.rb', __FILE__)].each do |path|
+Dir[File.expand_path("../support/**/*.rb", __FILE__)].each do |path|
   require path
 end
 

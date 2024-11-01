@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe Yuriita::Collection do
   describe ".routing" do
-
   end
 
   describe ".route" do

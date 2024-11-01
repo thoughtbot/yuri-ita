@@ -11,7 +11,7 @@ module Yuriita
         filter = selected_filter(query)
 
         if filter.present?
-          Clauses::Filter.new(filters: [filter], combination: combination)
+          Clauses::Filter.new(filters: [filter], combination:)
         else
           Clauses::Identity.new
         end
@@ -24,7 +24,7 @@ module Yuriita
       end
 
       def selected_filter(query)
-        Selects::Single.new(options: options, query: query).filter
+        Selects::Single.new(options:, query:).filter
       end
     end
   end

@@ -8,4 +8,3 @@ RSpec.describe "viewing documentation" do
     expect(page).to have_content "Installation"
   end
 end
-

@@ -11,7 +11,7 @@ module Yuriita
       def apply(query:)
         filter = selected_filter(query)
 
-        Clauses::Filter.new(filters: [filter], combination: combination)
+        Clauses::Filter.new(filters: [filter], combination:)
       end
 
       private
@@ -22,9 +22,9 @@ module Yuriita
 
       def selected_filter(query)
         Selects::Exclusive.new(
-          options: options,
-          default: default,
-          query: query,
+          options:,
+          default:,
+          query:
         ).filter
       end
     end

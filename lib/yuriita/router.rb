@@ -9,7 +9,7 @@ module Yuriita
     end
 
     def route(input, relation)
-      if route = match_for(input)
+      if (route = match_for(input))
         collection = route.collection
         collection.dispatch(route.action, input, relation)
       end

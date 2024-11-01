@@ -8,7 +8,7 @@ module Yuriita
 
     def build(query)
       configuration.map do |definition|
-        definition.apply(query: query)
+        definition.apply(query:)
       end
     end
   end

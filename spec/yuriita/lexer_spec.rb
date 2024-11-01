@@ -6,7 +6,7 @@ RSpec.describe Yuriita::Lexer do
           "WORD(is)",
           "COLON",
           "WORD(active)",
-          "EOS",
+          "EOS"
         ]
       )
     end
@@ -17,7 +17,7 @@ RSpec.describe Yuriita::Lexer do
           "WORD(first)",
           "SPACE",
           "WORD(last)",
-          "EOS",
+          "EOS"
         ]
       )
     end
@@ -28,7 +28,7 @@ RSpec.describe Yuriita::Lexer do
           "WORD(created_by)",
           "COLON",
           "WORD(eebs)",
-          "EOS",
+          "EOS"
         ]
       )
     end
@@ -39,7 +39,7 @@ RSpec.describe Yuriita::Lexer do
           "WORD(sort)",
           "COLON",
           "WORD(created-desc)",
-          "EOS",
+          "EOS"
         ]
       )
     end
@@ -50,7 +50,7 @@ RSpec.describe Yuriita::Lexer do
           "WORD(email)",
           "COLON",
           "WORD(user.name123@example.com)",
-          "EOS",
+          "EOS"
         ]
       )
     end
@@ -63,7 +63,7 @@ RSpec.describe Yuriita::Lexer do
           "SPACE",
           "WORD(words)",
           "QUOTE",
-          "EOS",
+          "EOS"
         ]
       )
     end
@@ -76,7 +76,7 @@ RSpec.describe Yuriita::Lexer do
           "COLON",
           "GT",
           "DATETIME(2020-01-01T00:00:00+00:00)",
-          "EOS",
+          "EOS"
         ]
       )
     end
@@ -89,7 +89,7 @@ RSpec.describe Yuriita::Lexer do
           "COLON",
           "GT",
           "DATETIME(2020-01-01T15:30:00+03:00)",
-          "EOS",
+          "EOS"
         ]
       )
     end
@@ -102,7 +102,7 @@ RSpec.describe Yuriita::Lexer do
           "COLON",
           "GT",
           "DATETIME(2020-01-01T15:30:00+00:00)",
-          "EOS",
+          "EOS"
         ]
       )
     end

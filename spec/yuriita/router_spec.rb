@@ -20,7 +20,7 @@ RSpec.describe Yuriita::Router do
       router.append_route(
         collection,
         ->(input) { input.term == "published" },
-        to: :published,
+        to: :published
       )
       input = expression("is", "published")
 

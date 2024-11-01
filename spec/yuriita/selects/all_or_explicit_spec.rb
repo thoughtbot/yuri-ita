@@ -13,7 +13,7 @@ RSpec.describe Yuriita::Selects::AllOrExplicit do
 
         selector = described_class.new(
           options: [title_option, tagline_option],
-          query: query,
+          query:
         )
 
         expect(selector.filters).to eq [title_filter, tagline_filter]
@@ -36,13 +36,13 @@ RSpec.describe Yuriita::Selects::AllOrExplicit do
           :query,
           inputs: [
             build(:expression, qualifier: "in", term: "title"),
-            build(:expression, qualifier: "in", term: "note"),
-          ],
+            build(:expression, qualifier: "in", term: "note")
+          ]
         )
 
         selector = described_class.new(
           options: [title_option, tagline_option, note_option],
-          query: query,
+          query:
         )
 
         expect(selector.filters).to eq [title_filter, note_filter]
@@ -51,7 +51,7 @@ RSpec.describe Yuriita::Selects::AllOrExplicit do
   end
 
   def build_option(name, qualifier, term)
-    input = build(:expression, qualifier: qualifier, term: term)
-    build(:option, name: name, filter: build(:search_filter, input: input))
+    input = build(:expression, qualifier:, term:)
+    build(:option, name:, filter: build(:search_filter, input:))
   end
 end

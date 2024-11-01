@@ -14,9 +14,9 @@ module Yuriita
 
         if keywords.present?
           Clauses::Search.new(
-            filters: filters,
-            keywords: keywords,
-            combination: combination,
+            filters:,
+            keywords:,
+            combination:
           )
         else
           Clauses::Identity.new
@@ -26,7 +26,7 @@ module Yuriita
       private
 
       def selected_filters(query)
-        Selects::AllOrExplicit.new(options: options, query: query).filters
+        Selects::AllOrExplicit.new(options:, query:).filters
       end
     end
   end

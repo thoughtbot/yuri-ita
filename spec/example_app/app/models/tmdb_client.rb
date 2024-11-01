@@ -21,7 +21,7 @@ class TmdbClient
         popularity: movie_data.popularity,
         release_date: movie_data.release_date,
         created_at: Time.now,
-        updated_at: Time.now,
+        updated_at: Time.now
       }
     end
   end
@@ -32,7 +32,7 @@ class TmdbClient
         tmdb_id: genre.id,
         name: genre.name,
         created_at: Time.now,
-        updated_at: Time.now,
+        updated_at: Time.now
       }
     end
   end
@@ -45,7 +45,7 @@ class TmdbClient
           movie_id: movie_id,
           genre_id: genre,
           created_at: Time.now,
-          updated_at: Time.now,
+          updated_at: Time.now
         }
       end
     end.flatten

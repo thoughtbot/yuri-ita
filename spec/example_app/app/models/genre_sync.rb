@@ -1,6 +1,6 @@
 class GenreSync
   def self.run(client:)
-    new(client: client).run
+    new(client:).run
   end
 
   def initialize(client:)

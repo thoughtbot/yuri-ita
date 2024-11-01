@@ -96,7 +96,7 @@ FactoryBot.define do
     input { build(:expression) }
     block { ->(relation) { relation } }
 
-    initialize_with { new(input: input, &block) }
+    initialize_with { new(input:, &block) }
   end
 
   factory :search_filter, class: "Yuriita::SearchFilter" do
@@ -107,7 +107,7 @@ FactoryBot.define do
 
     block { ->(relation, term) { relation } }
 
-    initialize_with { new(input: input, combination: combination, &block) }
+    initialize_with { new(input:, combination:, &block) }
   end
 
   factory :genre do
