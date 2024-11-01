@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.3.4-browsers
+      - image: cimg/ruby:3.3.5-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
