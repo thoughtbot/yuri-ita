@@ -13,8 +13,12 @@ class DocumentationController < ApplicationController
     path = full_page_path(name)
 
     if File.exist?(path)
-      html = parse_document(path)
-      render layout: "documentation", html: html.html_safe
+      html = File.read(path)
+      renderer = Redcarpet::Render::HTML.new
+      markdown = Redcarpet::Markdown.new(renderer, {fenced_code_blocks: true})
+      rendered_markdown = markdown.render(html)
+
+      render layout: "documentation", html: rendered_markdown.html_safe
     else
       render_not_found
     end
@@ -22,11 +26,6 @@ class DocumentationController < ApplicationController
 
   def full_page_path(page)
     Rails.root + "../../#{page}.md"
-  end
-
-  def parse_document(path)
-    file = path.to_s
-    GitHub::Markup.render(file, File.read(file))
   end
 
   def render_not_found

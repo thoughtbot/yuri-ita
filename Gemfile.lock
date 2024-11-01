@@ -124,7 +124,6 @@ GEM
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     filigree (0.4.1)
-    github-markup (5.0.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     http-accept (1.7.0)
@@ -325,7 +324,6 @@ DEPENDENCIES
   capybara (>= 3.26)
   dotenv-rails
   factory_bot_rails
-  github-markup
   jsbundling-rails
   listen (>= 3.0.5)
   pg (>= 0.18, < 2.0)
