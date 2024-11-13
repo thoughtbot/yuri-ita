@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Specify your gem"s dependencies in yuri-ita.gemspec
 gemspec
 
-ruby "3.3.4"
+ruby "3.3.5"
 
 gem "rails"
 
@@ -20,6 +20,7 @@ group :test, :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "dotenv-rails"
   gem "factory_bot_rails"
+  gem "ostruct"
   gem "rspec-rails"
 end
 
