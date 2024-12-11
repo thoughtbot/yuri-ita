@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rltk", "~> 3.0"
   spec.add_dependency "activesupport", "~> 7.0"
-  spec.add_dependency "activerecord", "~> 7.0"
+  spec.add_dependency "activerecord", ">= 7", "< 9"
   spec.add_dependency "activemodel", "~> 7.0"
   spec.add_dependency "zeitwerk", "~> 2.6"
 
