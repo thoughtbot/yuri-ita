@@ -11,7 +11,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "bourbon"
 gem "jsbundling-rails"
 gem "pg", ">= 0.18", "< 2.0"
-gem "puma", "~> 6.5"
+gem "puma", "~> 6.6"
 gem "redcarpet"
 gem "sass-rails", ">= 6"
 gem "themoviedb-api"
